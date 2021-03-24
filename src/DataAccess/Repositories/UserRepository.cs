@@ -4,17 +4,17 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    public class UserRepository : Repository<int, User>
+    public class UserRepository : Repository, IRead<int, User>
     {
-        public UserRepository() : base() { }
+        //public UserRepository() : base() { }
 
-        public override User GetById(int key) =>
+        public User GetById(int key) =>
             QueryFactory.Query("users").WhereColumns("users.id", "=", key.ToString()).First<User>();
 
         public User GetByEmailAddress(string emailAddress) =>
             QueryFactory.Query("users").WhereColumns("users.emailaddress", "=", emailAddress).First<User>();
 
-        public override IEnumerable<User> GetAll() =>
+        public IEnumerable<User> GetAll() =>
             QueryFactory.Query("users").Get<User>();
     }
 }

@@ -6,13 +6,15 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    public interface IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
+    public interface IRepository { }
+
+    public interface IRead<TKey, TEntity> where TEntity : IEntity<TKey>
     {
         TEntity GetById(TKey key);
         IEnumerable<TEntity> GetAll();
     }
 
-    public abstract class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
+    public abstract class Repository : IRepository
     {
         protected QueryFactory QueryFactory { get; } 
         
@@ -25,8 +27,5 @@ namespace HiddenLove.DataAccess.Repositories
 
             QueryFactory = new QueryFactory(connection, new PostgresCompiler());
         }
-
-        public abstract TEntity GetById(TKey key);
-        public abstract IEnumerable<TEntity> GetAll();
     }
 }

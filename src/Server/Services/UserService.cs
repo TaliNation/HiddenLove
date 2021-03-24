@@ -56,7 +56,8 @@ namespace HiddenLove.Server.Services
             _dataAccess.GetById(id);
 
         private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
-            userCredentials != null && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials.PasswordHash);
+            userCredentials != null 
+            && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials.PasswordHash);
 
         private string GerenateJwtToken(User user)
         {

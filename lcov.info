@@ -1,0 +1,552 @@
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Client\Program.cs
+FN:19,System.Net.Http.HttpClient HiddenLove.Client.Program/<>c__DisplayClass0_0::<Main>b__0(System.IServiceProvider)
+FNDA:0,System.Net.Http.HttpClient HiddenLove.Client.Program/<>c__DisplayClass0_0::<Main>b__0(System.IServiceProvider)
+DA:20,0
+FN:15,System.Void HiddenLove.Client.Program/<Main>d__0::MoveNext()
+FNDA:0,System.Void HiddenLove.Client.Program/<Main>d__0::MoveNext()
+DA:16,0
+DA:17,0
+DA:18,0
+DA:22,0
+DA:23,0
+LF:6
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Client\Shared\SurveyPrompt.razor
+FN:14,System.String HiddenLove.Client.Shared.SurveyPrompt::get_Title()
+FNDA:0,System.String HiddenLove.Client.Shared.SurveyPrompt::get_Title()
+DA:15,0
+LF:1
+LH:0
+BRF:0
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Client\Shared\NavMenu.razor
+FN:30,System.String HiddenLove.Client.Shared.NavMenu::get_NavMenuCssClass()
+FNDA:0,System.String HiddenLove.Client.Shared.NavMenu::get_NavMenuCssClass()
+DA:31,0
+BRDA:31,6,0,0
+BRDA:31,6,1,0
+FN:33,System.Void HiddenLove.Client.Shared.NavMenu::ToggleNavMenu()
+FNDA:0,System.Void HiddenLove.Client.Shared.NavMenu::ToggleNavMenu()
+DA:34,0
+DA:35,0
+DA:36,0
+FN:28,System.Void HiddenLove.Client.Shared.NavMenu::.ctor()
+FNDA:0,System.Void HiddenLove.Client.Shared.NavMenu::.ctor()
+DA:29,0
+LF:5
+LH:0
+BRF:2
+BRH:0
+FNF:3
+FNH:0
+end_of_record
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Client\Pages\Counter.razor
+FN:12,System.Void HiddenLove.Client.Pages.Counter::IncrementCount()
+FNDA:0,System.Void HiddenLove.Client.Pages.Counter::IncrementCount()
+DA:13,0
+DA:14,0
+DA:15,0
+FN:9,System.Void HiddenLove.Client.Pages.Counter::.ctor()
+FNDA:0,System.Void HiddenLove.Client.Pages.Counter::.ctor()
+DA:10,0
+LF:4
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Client\Pages\FetchData.razor
+FN:8,System.Void HiddenLove.Client.Pages.FetchData::BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+FNDA:0,System.Void HiddenLove.Client.Pages.FetchData::BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+DA:9,0
+DA:10,0
+DA:12,0
+DA:14,0
+DA:25,0
+DA:26,0
+DA:33,0
+DA:36,0
+BRDA:9,38,0,0
+BRDA:9,38,1,0
+BRDA:25,371,1,0
+BRDA:25,371,0,0
+FN:41,System.Void HiddenLove.Client.Pages.FetchData/<OnInitializedAsync>d__2::MoveNext()
+FNDA:0,System.Void HiddenLove.Client.Pages.FetchData/<OnInitializedAsync>d__2::MoveNext()
+DA:42,0
+DA:43,0
+DA:44,0
+LF:11
+LH:0
+BRF:4
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\DataAccess\Repositories\Repository.cs
+FN:20,SqlKata.Execution.QueryFactory HiddenLove.DataAccess.Repositories.Repository::get_QueryFactory()
+FNDA:0,SqlKata.Execution.QueryFactory HiddenLove.DataAccess.Repositories.Repository::get_QueryFactory()
+DA:21,0
+FN:22,System.Void HiddenLove.DataAccess.Repositories.Repository::.ctor()
+FNDA:3,System.Void HiddenLove.DataAccess.Repositories.Repository::.ctor()
+DA:23,3
+DA:24,3
+DA:27,3
+DA:28,3
+DA:30,3
+DA:32,3
+DA:33,3
+LF:8
+LH:7
+BRF:0
+BRH:0
+FNF:2
+FNH:1
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\DataAccess\Repositories\UserRepository.cs
+FN:11,HiddenLove.DataAccess.Entities.User HiddenLove.DataAccess.Repositories.UserRepository::GetById(System.Int32)
+FNDA:0,HiddenLove.DataAccess.Entities.User HiddenLove.DataAccess.Repositories.UserRepository::GetById(System.Int32)
+DA:12,0
+FN:14,HiddenLove.DataAccess.Entities.User HiddenLove.DataAccess.Repositories.UserRepository::GetByEmailAddress(System.String)
+FNDA:0,HiddenLove.DataAccess.Entities.User HiddenLove.DataAccess.Repositories.UserRepository::GetByEmailAddress(System.String)
+DA:15,0
+FN:17,System.Collections.Generic.IEnumerable`1<HiddenLove.DataAccess.Entities.User> HiddenLove.DataAccess.Repositories.UserRepository::GetAll()
+FNDA:0,System.Collections.Generic.IEnumerable`1<HiddenLove.DataAccess.Entities.User> HiddenLove.DataAccess.Repositories.UserRepository::GetAll()
+DA:18,0
+LF:3
+LH:0
+BRF:0
+BRH:0
+FNF:3
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\DataAccess\Entities\User.cs
+FN:4,System.Int32 HiddenLove.DataAccess.Entities.User::get_Id()
+FNDA:10,System.Int32 HiddenLove.DataAccess.Entities.User::get_Id()
+DA:5,10
+FN:5,System.String HiddenLove.DataAccess.Entities.User::get_EmailAddress()
+FNDA:8,System.String HiddenLove.DataAccess.Entities.User::get_EmailAddress()
+DA:6,8
+FN:6,System.String HiddenLove.DataAccess.Entities.User::get_UserName()
+FNDA:0,System.String HiddenLove.DataAccess.Entities.User::get_UserName()
+DA:7,0
+FN:7,System.String HiddenLove.DataAccess.Entities.User::get_FullUserName()
+FNDA:0,System.String HiddenLove.DataAccess.Entities.User::get_FullUserName()
+DA:8,0
+FN:8,System.String HiddenLove.DataAccess.Entities.User::get_PasswordHash()
+FNDA:0,System.String HiddenLove.DataAccess.Entities.User::get_PasswordHash()
+DA:9,0
+FN:9,System.Nullable`1<System.Int64> HiddenLove.DataAccess.Entities.User::get_IdOffer()
+FNDA:0,System.Nullable`1<System.Int64> HiddenLove.DataAccess.Entities.User::get_IdOffer()
+DA:10,0
+FN:10,System.Nullable`1<System.Int64> HiddenLove.DataAccess.Entities.User::get_IdPrivilege()
+FNDA:0,System.Nullable`1<System.Int64> HiddenLove.DataAccess.Entities.User::get_IdPrivilege()
+DA:11,0
+LF:7
+LH:2
+BRF:0
+BRH:0
+FNF:7
+FNH:2
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Program.cs
+FN:14,System.Void HiddenLove.Server.Program::Main(System.String[])
+FNDA:0,System.Void HiddenLove.Server.Program::Main(System.String[])
+DA:15,0
+DA:16,0
+DA:17,0
+FN:19,Microsoft.Extensions.Hosting.IHostBuilder HiddenLove.Server.Program::CreateHostBuilder(System.String[])
+FNDA:0,Microsoft.Extensions.Hosting.IHostBuilder HiddenLove.Server.Program::CreateHostBuilder(System.String[])
+DA:20,0
+DA:21,0
+DA:22,0
+DA:23,0
+DA:24,0
+LF:8
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Startup.cs
+FN:18,Microsoft.Extensions.Configuration.IConfiguration HiddenLove.Server.Startup::get_Configuration()
+FNDA:0,Microsoft.Extensions.Configuration.IConfiguration HiddenLove.Server.Startup::get_Configuration()
+DA:19,0
+FN:23,System.Void HiddenLove.Server.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+FNDA:0,System.Void HiddenLove.Server.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+DA:24,0
+DA:26,0
+DA:27,0
+DA:28,0
+FN:31,System.Void HiddenLove.Server.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)
+FNDA:0,System.Void HiddenLove.Server.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)
+DA:32,0
+DA:33,0
+DA:34,0
+DA:35,0
+DA:36,0
+DA:37,0
+DA:39,0
+DA:40,0
+DA:42,0
+DA:43,0
+DA:45,0
+DA:46,0
+DA:47,0
+DA:49,0
+DA:51,0
+DA:52,0
+DA:53,0
+DA:54,0
+DA:55,0
+DA:56,0
+DA:57,0
+BRDA:33,9,0,0
+BRDA:33,9,1,0
+FN:13,System.Void HiddenLove.Server.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)
+FNDA:0,System.Void HiddenLove.Server.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)
+DA:14,0
+DA:15,0
+DA:16,0
+DA:17,0
+LF:30
+LH:0
+BRF:2
+BRH:0
+FNF:4
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Services\UserService.cs
+FN:25,HiddenLove.DataAccess.Repositories.UserRepository HiddenLove.Server.Services.UserService::get__dataAccess()
+FNDA:3,HiddenLove.DataAccess.Repositories.UserRepository HiddenLove.Server.Services.UserService::get__dataAccess()
+DA:26,3
+FN:36,HiddenLove.Server.Models.AuthenticationResponse HiddenLove.Server.Services.UserService::Authenticate(HiddenLove.Server.Models.AuthenticationRequest)
+FNDA:0,HiddenLove.Server.Models.AuthenticationResponse HiddenLove.Server.Services.UserService::Authenticate(HiddenLove.Server.Models.AuthenticationRequest)
+DA:37,0
+DA:38,0
+DA:40,0
+DA:41,0
+DA:42,0
+DA:45,0
+DA:47,0
+DA:49,0
+DA:50,0
+BRDA:40,32,0,0
+BRDA:40,32,1,0
+FN:52,System.Collections.Generic.IEnumerable`1<HiddenLove.DataAccess.Entities.User> HiddenLove.Server.Services.UserService::GetAll()
+FNDA:1,System.Collections.Generic.IEnumerable`1<HiddenLove.DataAccess.Entities.User> HiddenLove.Server.Services.UserService::GetAll()
+DA:53,1
+FN:55,HiddenLove.DataAccess.Entities.User HiddenLove.Server.Services.UserService::GetById(System.Int32)
+FNDA:2,HiddenLove.DataAccess.Entities.User HiddenLove.Server.Services.UserService::GetById(System.Int32)
+DA:56,2
+FN:58,System.Boolean HiddenLove.Server.Services.UserService::IsUserValid(HiddenLove.DataAccess.Entities.User,HiddenLove.Server.Models.AuthenticationRequest)
+FNDA:0,System.Boolean HiddenLove.Server.Services.UserService::IsUserValid(HiddenLove.DataAccess.Entities.User,HiddenLove.Server.Models.AuthenticationRequest)
+DA:59,0
+DA:60,0
+BRDA:59,1,0,0
+BRDA:59,1,1,0
+FN:62,System.String HiddenLove.Server.Services.UserService::GerenateJwtToken(HiddenLove.DataAccess.Entities.User)
+FNDA:0,System.String HiddenLove.Server.Services.UserService::GerenateJwtToken(HiddenLove.DataAccess.Entities.User)
+DA:63,0
+DA:64,0
+DA:65,0
+DA:66,0
+DA:67,0
+DA:68,0
+DA:69,0
+DA:70,0
+DA:71,0
+DA:72,0
+DA:73,0
+DA:74,0
+FN:29,System.Void HiddenLove.Server.Services.UserService::.ctor(HiddenLove.DataAccess.Repositories.UserRepository,Microsoft.Extensions.Options.IOptions`1<HiddenLove.Server.Helpers.AppSettings>)
+FNDA:3,System.Void HiddenLove.Server.Services.UserService::.ctor(HiddenLove.DataAccess.Repositories.UserRepository,Microsoft.Extensions.Options.IOptions`1<HiddenLove.Server.Helpers.AppSettings>)
+DA:30,3
+DA:31,3
+DA:32,3
+DA:33,3
+DA:34,3
+LF:31
+LH:8
+BRF:4
+BRH:0
+FNF:7
+FNH:4
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Pages\Error.cshtml.cs
+FN:15,System.String HiddenLove.Server.Pages.ErrorModel::get_RequestId()
+FNDA:0,System.String HiddenLove.Server.Pages.ErrorModel::get_RequestId()
+DA:16,0
+FN:17,System.Boolean HiddenLove.Server.Pages.ErrorModel::get_ShowRequestId()
+FNDA:0,System.Boolean HiddenLove.Server.Pages.ErrorModel::get_ShowRequestId()
+DA:18,0
+FN:27,System.Void HiddenLove.Server.Pages.ErrorModel::OnGet()
+FNDA:0,System.Void HiddenLove.Server.Pages.ErrorModel::OnGet()
+DA:28,0
+DA:29,0
+DA:30,0
+BRDA:29,8,0,0
+BRDA:29,8,1,0
+BRDA:29,20,0,0
+BRDA:29,20,1,0
+FN:21,System.Void HiddenLove.Server.Pages.ErrorModel::.ctor(Microsoft.Extensions.Logging.ILogger`1<HiddenLove.Server.Pages.ErrorModel>)
+FNDA:0,System.Void HiddenLove.Server.Pages.ErrorModel::.ctor(Microsoft.Extensions.Logging.ILogger`1<HiddenLove.Server.Pages.ErrorModel>)
+DA:22,0
+DA:23,0
+DA:24,0
+DA:25,0
+LF:9
+LH:0
+BRF:4
+BRH:0
+FNF:4
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Models\AuthenticationRequest.cs
+FN:7,System.String HiddenLove.Server.Models.AuthenticationRequest::get_EmailAddress()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationRequest::get_EmailAddress()
+DA:8,0
+FN:10,System.String HiddenLove.Server.Models.AuthenticationRequest::get_Password()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationRequest::get_Password()
+DA:11,0
+LF:2
+LH:0
+BRF:0
+BRH:0
+FNF:2
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Models\AuthenticationResponse.cs
+FN:6,System.Int64 HiddenLove.Server.Models.AuthenticationResponse::get_Id()
+FNDA:0,System.Int64 HiddenLove.Server.Models.AuthenticationResponse::get_Id()
+DA:7,0
+FN:7,System.String HiddenLove.Server.Models.AuthenticationResponse::get_EmailAddress()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationResponse::get_EmailAddress()
+DA:8,0
+FN:8,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_EmailAddressConfirmed()
+FNDA:0,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_EmailAddressConfirmed()
+DA:9,0
+FN:9,System.String HiddenLove.Server.Models.AuthenticationResponse::get_UserName()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationResponse::get_UserName()
+DA:10,0
+FN:10,System.String HiddenLove.Server.Models.AuthenticationResponse::get_FullUserName()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationResponse::get_FullUserName()
+DA:11,0
+FN:11,System.String HiddenLove.Server.Models.AuthenticationResponse::get_PasswordHash()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationResponse::get_PasswordHash()
+DA:12,0
+FN:12,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_IdOffer()
+FNDA:0,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_IdOffer()
+DA:13,0
+FN:13,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_IdPrivilege()
+FNDA:0,System.Nullable`1<System.Int64> HiddenLove.Server.Models.AuthenticationResponse::get_IdPrivilege()
+DA:14,0
+FN:14,System.String HiddenLove.Server.Models.AuthenticationResponse::get_Token()
+FNDA:0,System.String HiddenLove.Server.Models.AuthenticationResponse::get_Token()
+DA:15,0
+FN:16,System.Void HiddenLove.Server.Models.AuthenticationResponse::.ctor(HiddenLove.DataAccess.Entities.User,System.String)
+FNDA:0,System.Void HiddenLove.Server.Models.AuthenticationResponse::.ctor(HiddenLove.DataAccess.Entities.User,System.String)
+DA:17,0
+DA:18,0
+DA:19,0
+DA:20,0
+DA:21,0
+DA:22,0
+DA:23,0
+DA:24,0
+DA:25,0
+DA:26,0
+DA:27,0
+LF:20
+LH:0
+BRF:0
+BRH:0
+FNF:10
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Helpers\AppSettings.cs
+FN:4,System.String HiddenLove.Server.Helpers.AppSettings::get_Secret()
+FNDA:0,System.String HiddenLove.Server.Helpers.AppSettings::get_Secret()
+DA:5,0
+LF:1
+LH:0
+BRF:0
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Helpers\AuthorizeAttribute.cs
+FN:12,System.Void HiddenLove.Server.Helpers.AuthorizeAttribute::OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
+FNDA:0,System.Void HiddenLove.Server.Helpers.AuthorizeAttribute::OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
+DA:13,0
+DA:14,0
+DA:15,0
+DA:16,0
+DA:18,0
+DA:19,0
+DA:20,0
+BRDA:15,34,0,0
+BRDA:15,34,1,0
+LF:7
+LH:0
+BRF:2
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Helpers\JwtMiddleware.cs
+FN:34,System.Void HiddenLove.Server.Helpers.JwtMiddleware::AttachUserToContext(Microsoft.AspNetCore.Http.HttpContext,HiddenLove.Server.Services.IUserService,System.String)
+FNDA:0,System.Void HiddenLove.Server.Helpers.JwtMiddleware::AttachUserToContext(Microsoft.AspNetCore.Http.HttpContext,HiddenLove.Server.Services.IUserService,System.String)
+DA:35,0
+DA:37,0
+DA:38,0
+DA:39,0
+DA:40,0
+DA:41,0
+DA:42,0
+DA:43,0
+DA:44,0
+DA:45,0
+DA:46,0
+DA:47,0
+DA:49,0
+DA:50,0
+DA:52,0
+DA:53,0
+DA:54,0
+DA:55,0
+DA:57,0
+DA:58,0
+FN:17,System.Void HiddenLove.Server.Helpers.JwtMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions`1<HiddenLove.Server.Helpers.AppSettings>)
+FNDA:0,System.Void HiddenLove.Server.Helpers.JwtMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions`1<HiddenLove.Server.Helpers.AppSettings>)
+DA:18,0
+DA:19,0
+DA:20,0
+DA:21,0
+DA:22,0
+FN:24,System.Void HiddenLove.Server.Helpers.JwtMiddleware/<Invoke>d__3::MoveNext()
+FNDA:0,System.Void HiddenLove.Server.Helpers.JwtMiddleware/<Invoke>d__3::MoveNext()
+DA:25,0
+DA:26,0
+DA:28,0
+DA:29,0
+DA:31,0
+DA:32,0
+BRDA:26,56,0,0
+BRDA:26,56,1,0
+BRDA:28,94,0,0
+BRDA:28,94,1,0
+LF:31
+LH:0
+BRF:4
+BRH:0
+FNF:3
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Controllers\UsersController.cs
+FN:20,Microsoft.AspNetCore.Mvc.IActionResult HiddenLove.Server.Controllers.UsersController::Authenticate(HiddenLove.Server.Models.AuthenticationRequest)
+FNDA:0,Microsoft.AspNetCore.Mvc.IActionResult HiddenLove.Server.Controllers.UsersController::Authenticate(HiddenLove.Server.Models.AuthenticationRequest)
+DA:21,0
+DA:22,0
+DA:24,0
+DA:25,0
+DA:27,0
+DA:28,0
+BRDA:24,20,0,0
+BRDA:24,20,1,0
+FN:32,Microsoft.AspNetCore.Mvc.IActionResult HiddenLove.Server.Controllers.UsersController::GetAll()
+FNDA:0,Microsoft.AspNetCore.Mvc.IActionResult HiddenLove.Server.Controllers.UsersController::GetAll()
+DA:33,0
+DA:34,0
+DA:35,0
+DA:36,0
+FN:13,System.Void HiddenLove.Server.Controllers.UsersController::.ctor(HiddenLove.Server.Services.IUserService)
+FNDA:0,System.Void HiddenLove.Server.Controllers.UsersController::.ctor(HiddenLove.Server.Services.IUserService)
+DA:14,0
+DA:15,0
+DA:16,0
+DA:17,0
+LF:14
+LH:0
+BRF:2
+BRH:0
+FNF:3
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Controllers\WeatherForecastController.cs
+FN:28,System.Collections.Generic.IEnumerable`1<HiddenLove.Shared.WeatherForecast> HiddenLove.Server.Controllers.WeatherForecastController::Get()
+FNDA:0,System.Collections.Generic.IEnumerable`1<HiddenLove.Shared.WeatherForecast> HiddenLove.Server.Controllers.WeatherForecastController::Get()
+DA:29,0
+DA:30,0
+DA:31,0
+DA:32,0
+DA:33,0
+DA:34,0
+DA:35,0
+DA:36,0
+DA:37,0
+DA:38,0
+FN:21,System.Void HiddenLove.Server.Controllers.WeatherForecastController::.ctor(Microsoft.Extensions.Logging.ILogger`1<HiddenLove.Server.Controllers.WeatherForecastController>)
+FNDA:0,System.Void HiddenLove.Server.Controllers.WeatherForecastController::.ctor(Microsoft.Extensions.Logging.ILogger`1<HiddenLove.Server.Controllers.WeatherForecastController>)
+DA:22,0
+DA:23,0
+DA:24,0
+DA:25,0
+FN:14,System.Void HiddenLove.Server.Controllers.WeatherForecastController::.cctor()
+FNDA:0,System.Void HiddenLove.Server.Controllers.WeatherForecastController::.cctor()
+DA:15,0
+DA:16,0
+DA:17,0
+DA:18,0
+LF:18
+LH:0
+BRF:0
+BRH:0
+FNF:3
+FNH:0
+end_of_record
+SF:d:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Server\Pages\Error.cshtml
+FN:20,System.Void AspNetCore.Pages_Error/<<ExecuteAsync>b__12_1>d::MoveNext()
+FNDA:0,System.Void AspNetCore.Pages_Error/<<ExecuteAsync>b__12_1>d::MoveNext()
+DA:21,0
+DA:22,0
+DA:24,0
+DA:26,0
+BRDA:21,43,0,0
+BRDA:21,43,1,0
+LF:4
+LH:0
+BRF:2
+BRH:0
+FNF:1
+FNH:0
+end_of_record
+SF:D:\Users\Ordi\Documents\Programmes et Projets\C#\HiddenLove\src\Shared\WeatherForecast.cs
+FN:8,System.DateTime HiddenLove.Shared.WeatherForecast::get_Date()
+FNDA:0,System.DateTime HiddenLove.Shared.WeatherForecast::get_Date()
+DA:9,0
+FN:10,System.Int32 HiddenLove.Shared.WeatherForecast::get_TemperatureC()
+FNDA:0,System.Int32 HiddenLove.Shared.WeatherForecast::get_TemperatureC()
+DA:11,0
+FN:12,System.String HiddenLove.Shared.WeatherForecast::get_Summary()
+FNDA:0,System.String HiddenLove.Shared.WeatherForecast::get_Summary()
+DA:13,0
+FN:14,System.Int32 HiddenLove.Shared.WeatherForecast::get_TemperatureF()
+FNDA:0,System.Int32 HiddenLove.Shared.WeatherForecast::get_TemperatureF()
+DA:15,0
+LF:4
+LH:0
+BRF:0
+BRH:0
+FNF:4
+FNH:0
+end_of_record

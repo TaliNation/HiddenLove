@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using HiddenLove.DataAccess.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace HiddenLove.DataAccess.Repositories
 {
@@ -20,9 +22,11 @@ namespace HiddenLove.DataAccess.Repositories
         
         public Repository()
         {
-            string connectionString = "User ID=postgres;Password=root;Host=localhost;Port=5432;Database=hiddenlove_dev;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime=0;";
-            SqlConnection connection = new SqlConnection(connectionString);
+            // string connectionString = "User ID=postgres;Password=root;Host=localhost;Port=5432;Database=hiddenlove_dev;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime=0;";
 
+            string connectionString = "Server=127.0.0.1;Port=5432;Database=hiddenlove_dev;User Id=postgres;Password=;";
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            
             var queryCompiler = new PostgresCompiler(); 
 
             QueryFactory = new QueryFactory(connection, new PostgresCompiler());

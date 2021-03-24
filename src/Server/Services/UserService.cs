@@ -7,10 +7,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using HiddenLove.DataAccess.Entities;
-using HiddenLove.DataAccess.Queries;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Server.Models;
 using BCrypt.Net;
+using HiddenLove.DataAccess.Repositories;
 
 namespace HiddenLove.Server.Services
 {
@@ -23,26 +23,26 @@ namespace HiddenLove.Server.Services
 
     public class UserService : IUserService
     {
-        private UserQuery _dataAccess { get; } 
+        private UserRepository _dataAccess { get; } 
 
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings, UserQuery dataAccess)
+        public UserService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _dataAccess = dataAccess;
+            _dataAccess = new UserRepository();
         }
 
         public AuthenticationResponse Authenticate(AuthenticationRequest model)
         {
-            UserCredentials userCredentials = _dataAccess.GetUserByEmailAddress(model.EmailAddress);
+            User userCredentials = _dataAccess.GetByEmailAddress(model.EmailAddress);
             
             if(!IsUserValid(userCredentials, model))
             {
                 return null;
             }
 
-            User user = _dataAccess.GetUserById(userCredentials.Id);
+            User user = _dataAccess.GetById(userCredentials.Id);
 
             string token = GerenateJwtToken(user);
 
@@ -50,12 +50,12 @@ namespace HiddenLove.Server.Services
         } 
 
         public IEnumerable<User> GetAll() =>
-            _dataAccess.GetUsers();
+            _dataAccess.GetAll();
 
         public User GetById(int id) =>
-            _dataAccess.GetUserById(id);
+            _dataAccess.GetById(id);
 
-        private bool IsUserValid(UserCredentials userCredentials, AuthenticationRequest model) =>
+        private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
             userCredentials != null && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials.PasswordHash);
 
         private string GerenateJwtToken(User user)

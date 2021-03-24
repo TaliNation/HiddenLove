@@ -18,7 +18,6 @@ namespace HiddenLove.Server.Models
         {
             Id = user.Id;
             EmailAddress = user.EmailAddress;
-            EmailAddressConfirmed = user.EmailAddressConfirmed;
             UserName = user.UserName;
             FullUserName = user.FullUserName;
             PasswordHash = user.PasswordHash;

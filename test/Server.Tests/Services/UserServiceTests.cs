@@ -11,6 +11,7 @@ using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;
 using FluentAssertions;
+using HiddenLove.Server.Models;
 
 namespace HiddenLove.Tests.Server.Services
 {
@@ -26,8 +27,8 @@ namespace HiddenLove.Tests.Server.Services
         {
             UsersInMemoryDb = new List<User>
             {
-                new User { Id = 1, EmailAddress = "jean.valjean@mail.com" },
-                new User { Id = 2, EmailAddress = "tommy.mclagen@orange.fr" }
+                new User { Id = 1, EmailAddress = "jean.valjean@mail.com", PasswordHash = "$2y$10$OU4W/aqtaHqt/yO302Qf6euq6gPAp7dA4ZyJCmExEVh/2MyrcFW2W" },  // marvel123
+                new User { Id = 2, EmailAddress = "tommy.mclagen@orange.fr", PasswordHash = "$2y$10$ZZfuPOUpxjg6rvxQnL9HTOwy/EnkvG8vzj.WGvjMlVT0a1UruL46e" }   // Leroileo78*
             };
 
             RepositoryMock = new Mock<UserRepository>();
@@ -36,6 +37,9 @@ namespace HiddenLove.Tests.Server.Services
 
             RepositoryMock.Setup(x => x.GetAll())
                 .Returns(UsersInMemoryDb);
+
+            RepositoryMock.Setup(x => x.GetByEmailAddress(It.IsAny<string>()))
+                .Returns((string s) => UsersInMemoryDb.Single(x => x.EmailAddress == s));
 
             var someOptions = Options.Create(new AppSettings());
             TestSubject = new UserService(RepositoryMock.Object, someOptions);
@@ -61,6 +65,18 @@ namespace HiddenLove.Tests.Server.Services
             actual.Should().Equal(expected);
         }
 
+        [Test]
+        [TestCase("jean.valjean@mail.com", "marvel123", 1)]
+        [TestCase("tommy.mclagen@orange.fr", "Leroileo78*", 2)]
+        [TestCase("jean.valjean@fakeaddress.com", "marvel123", null)]
+        [TestCase("tommy.mclagen@orange.fr", "Leroilucas93-", null)]
+        public void Authenticate_Success(string emailAddress, string password, int? expected)
+        {
+            var authenticationRequest = new AuthenticationRequest { EmailAddress = emailAddress, Password = password };
+            
+            AuthenticationResponse actual = TestSubject.Authenticate(authenticationRequest);
 
+            Assert.AreEqual(expected, actual?.Id);
+        }
     }
 }

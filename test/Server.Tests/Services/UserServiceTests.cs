@@ -21,6 +21,7 @@ namespace HiddenLove.Tests.Server.Services
         private UserService TestSubject;
         private Mock<UserRepository> RepositoryMock;
         private IEnumerable<User> UsersInMemoryDb;
+        private IOptions<AppSettings> AppSettings;
 
         [SetUp]
         public void SetUp()
@@ -33,16 +34,16 @@ namespace HiddenLove.Tests.Server.Services
 
             RepositoryMock = new Mock<UserRepository>();
             RepositoryMock.Setup(x => x.GetById(It.IsAny<int>()))
-                .Returns((int i) => UsersInMemoryDb.Single(x => x.Id == i));
+                .Returns((int i) => UsersInMemoryDb.FirstOrDefault(x => x.Id == i));
 
             RepositoryMock.Setup(x => x.GetAll())
                 .Returns(UsersInMemoryDb);
 
             RepositoryMock.Setup(x => x.GetByEmailAddress(It.IsAny<string>()))
-                .Returns((string s) => UsersInMemoryDb.Single(x => x.EmailAddress == s));
+                .Returns((string s) => UsersInMemoryDb.FirstOrDefault(x => x.EmailAddress == s));
 
-            var someOptions = Options.Create(new AppSettings());
-            TestSubject = new UserService(RepositoryMock.Object, someOptions);
+            AppSettings = Options.Create(new AppSettings { Secret = "secretsecretsecret" });
+            TestSubject = new UserService(RepositoryMock.Object, AppSettings);
         }
 
         [Test]
@@ -70,6 +71,8 @@ namespace HiddenLove.Tests.Server.Services
         [TestCase("tommy.mclagen@orange.fr", "Leroileo78*", 2)]
         [TestCase("jean.valjean@fakeaddress.com", "marvel123", null)]
         [TestCase("tommy.mclagen@orange.fr", "Leroilucas93-", null)]
+        [TestCase(null, "Leroileo78*", null)]
+        [TestCase("tommy.mclagen@orange.fr", null, null)]
         public void Authenticate_Success(string emailAddress, string password, int? expected)
         {
             var authenticationRequest = new AuthenticationRequest { EmailAddress = emailAddress, Password = password };

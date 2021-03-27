@@ -43,7 +43,7 @@ namespace HiddenLove.Tests.Server.Services
                 .Returns((string s) => UsersInMemoryDb.FirstOrDefault(x => x.EmailAddress == s));
 
             AppSettings = Options.Create(new AppSettings { Secret = "secretsecretsecret" });
-            TestSubject = new UserService(RepositoryMock.Object, AppSettings);
+            TestSubject = new UserService(AppSettings, RepositoryMock.Object);
         }
 
         [Test]

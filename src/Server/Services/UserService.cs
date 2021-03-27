@@ -27,10 +27,16 @@ namespace HiddenLove.Server.Services
 
         private readonly AppSettings _appSettings;
 
-        public UserService(UserRepository dataAccess, IOptions<AppSettings> appSettings)
+        public UserService(IOptions<AppSettings> appSettings, UserRepository dataAccess)
         {
             _appSettings = appSettings.Value;
             _dataAccess = dataAccess;
+        }
+
+        public UserService(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+            _dataAccess = new UserRepository();
         }
 
         public AuthenticationResponse Authenticate(AuthenticationRequest model)

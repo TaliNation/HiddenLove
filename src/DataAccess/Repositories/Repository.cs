@@ -24,7 +24,7 @@ namespace HiddenLove.DataAccess.Repositories
         {
             // string connectionString = "User ID=postgres;Password=root;Host=localhost;Port=5432;Database=hiddenlove_dev;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime=0;";
 
-            string connectionString = "Server=127.0.0.1;Port=5432;Database=hiddenlove_dev;User Id=postgres;Password=;";
+            string connectionString = "Server=127.0.0.1;Port=5432;Database=hiddenlove_dev;User Id=postgres;Password=root;";
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             
             var queryCompiler = new PostgresCompiler(); 

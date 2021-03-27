@@ -9,10 +9,10 @@ namespace HiddenLove.DataAccess.Repositories
         //public UserRepository() : base() { }
 
         public virtual User GetById(int key) =>
-            QueryFactory.Query("users").WhereColumns("users.id", "=", key.ToString()).First<User>();
+            QueryFactory.Query("users").Where("users.id", "=", key).First<User>();
 
         public virtual User GetByEmailAddress(string emailAddress) =>
-            QueryFactory.Query("users").WhereColumns("users.emailaddress", "=", emailAddress).First<User>();
+            QueryFactory.Query("users").Where("users.emailaddress", "=", emailAddress).First<User>();
 
         public virtual IEnumerable<User> GetAll() =>
             QueryFactory.Query("users").Get<User>();

@@ -26,5 +26,7 @@
     <ProjectReference Include="..\DataAccess\HiddenLove.DataAccess.csproj" />
   </ItemGroup>
 
-
+  <PropertyGroup>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
 </Project>

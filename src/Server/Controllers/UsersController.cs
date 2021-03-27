@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using HiddenLove.Shared.Models.Authentication;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
+using System;
+using System.Diagnostics;
+using HiddenLove.DataAccess.Entities;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -31,8 +34,16 @@ namespace HiddenLove.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            Debug.WriteLine(((User)HttpContext.Items["User"]).FullUserName);
             var users = UserService.GetAll();
             return Ok(users);
+        }
+
+        [Authorize]
+        [HttpGet("currentuser")]
+        public IActionResult GetCurrentUser()
+        {
+            return Ok((User)HttpContext.Items["User"]);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HiddenLove.Server.Models
+namespace HiddenLove.Shared.Models.Authentication
 {
     public class AuthenticationRequest
     {

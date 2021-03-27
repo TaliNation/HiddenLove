@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using HiddenLove.Server.Models;
+using HiddenLove.Shared.Models.Authentication;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 

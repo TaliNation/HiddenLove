@@ -1,0 +1,23 @@
+@page "/login"
+@using HiddenLove.Shared
+@inject HttpClient Http
+
+<h1>Login</h1>
+
+<div class="row">
+    <div class="col-4">
+        <input class="form-control" type="text" name="EmailAddress" id="#emailAddressInput" placeholder="Email Address" />
+    </div>
+    <div class="col-4">
+        <input class="form-control" type="text" name="Password" id="#passwordInput" placeholder="Password" />
+    </div>
+    <div class="col-4">
+        <button class="btn btn-primary full-width">Submit</button>
+    </div>
+</div>
+
+@* @code {
+    private AuthenticationResponse loginResponse;
+
+    protected 
+} *@

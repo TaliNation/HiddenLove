@@ -11,7 +11,7 @@ using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;
 using FluentAssertions;
-using HiddenLove.Server.Models;
+using HiddenLove.Shared.Models.Authentication;
 
 namespace HiddenLove.Tests.Server.Services
 {

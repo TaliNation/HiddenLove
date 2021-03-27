@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using HiddenLove.DataAccess.Entities;
 using HiddenLove.Server.Helpers;
-using HiddenLove.Server.Models;
+using HiddenLove.Shared.Models.Authentication;
 using BCrypt.Net;
 using HiddenLove.DataAccess.Repositories;
 
@@ -52,7 +52,17 @@ namespace HiddenLove.Server.Services
 
             string token = GerenateJwtToken(user);
 
-            return new AuthenticationResponse(user, token);
+            return new AuthenticationResponse
+            {
+                Id = user.Id,
+                EmailAddress = user.EmailAddress,
+                UserName = user.UserName,
+                FullUserName = user.FullUserName,
+                PasswordHash = user.PasswordHash,
+                IdOffer = user.IdOffer,
+                IdPrivilege = user.IdPrivilege,
+                Token = token
+            };
         } 
 
         public IEnumerable<User> GetAll() =>
@@ -64,6 +74,7 @@ namespace HiddenLove.Server.Services
         private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
             userCredentials != null
             && userCredentials.PasswordHash != null
+            && model.Password != null
             && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials?.PasswordHash);
 
         private string GerenateJwtToken(User user)

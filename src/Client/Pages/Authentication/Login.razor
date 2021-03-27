@@ -1,23 +1,45 @@
 @page "/login"
-@using HiddenLove.Shared
-@inject HttpClient Http
+@using HiddenLove.Shared.Models.Authentication
+@inject Http Http
 
 <h1>Login</h1>
 
 <div class="row">
     <div class="col-4">
-        <input class="form-control" type="text" name="EmailAddress" id="#emailAddressInput" placeholder="Email Address" />
+        <input class="form-control" type="text" name="EmailAddress" id="#emailAddressInput" placeholder="Email Address" @bind="EmailAddressBinding" />
     </div>
     <div class="col-4">
-        <input class="form-control" type="text" name="Password" id="#passwordInput" placeholder="Password" />
+        <input class="form-control" type="text" name="Password" id="#passwordInput" placeholder="Password" @bind="PasswordBinding" />
     </div>
     <div class="col-4">
-        <button class="btn btn-primary full-width">Submit</button>
+        <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
     </div>
 </div>
+<div class="row">
+    <p>@LoginResponse.Token</p>
+    <br />
+    <p>@LoginResponse.FullUserName</p>
+</div>
 
-@* @code {
-    private AuthenticationResponse loginResponse;
+@code {
+    private AuthenticationResponse LoginResponse;
 
-    protected 
-} *@
+    private string EmailAddressBinding;
+    private string PasswordBinding;
+
+    protected override void OnInitialized()
+    {
+        LoginResponse = new AuthenticationResponse();
+    }
+
+    private async void LogUser()
+    {
+        var request = new AuthenticationRequest 
+        { 
+            EmailAddress = EmailAddressBinding,
+            Password = PasswordBinding
+        };
+
+        LoginResponse = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
+    } 
+}

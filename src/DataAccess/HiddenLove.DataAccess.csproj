@@ -11,4 +11,7 @@
     <PackageReference Include="SqlKata.Execution" Version="2.3.2" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
 </Project>

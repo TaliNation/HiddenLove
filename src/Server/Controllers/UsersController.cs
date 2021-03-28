@@ -4,7 +4,7 @@ using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using System;
 using System.Diagnostics;
-using HiddenLove.DataAccess.Entities;
+using HiddenLove.Shared.Entities;
 using System.Collections.Generic;
 
 namespace HiddenLove.Server.Controllers

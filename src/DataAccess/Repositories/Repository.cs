@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using HiddenLove.DataAccess.Entities;
+using HiddenLove.Shared.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using Microsoft.Extensions.Configuration;

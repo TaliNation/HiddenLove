@@ -1,6 +1,6 @@
-namespace HiddenLove.DataAccess.Entities
+namespace HiddenLove.Shared.Entities
 {
-    public class User : IEntity<int>
+    public record User : IEntity<int>
     {
         public int Id { get; set; }
         public string EmailAddress { get; set; }

@@ -1,6 +1,7 @@
 @page "/login"
 @using HiddenLove.Shared.Models.Authentication
-@inject Http Http
+@inject HttpHelper Http
+@inject CookieHelper Cookie
 
 <h1>Login</h1>
 
@@ -16,16 +17,20 @@
     </div>
 </div>
 <div class="row">
-    <p>@LoginResponse.Token</p>
-    <br />
-    <p>@LoginResponse.FullUserName</p>
+    <p>@CookieTokenValue</p>
 </div>
+
 
 @code {
     private AuthenticationResponse LoginResponse;
 
     private string EmailAddressBinding;
     private string PasswordBinding;
+
+    private string CookieTokenValue;
+
+
+    //private User CurrentUser
 
     protected override void OnInitialized()
     {
@@ -41,5 +46,18 @@
         };
 
         LoginResponse = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
-    } 
+
+        Http.AddAuthorizationHeader(LoginResponse.Token);
+        
+        Cookie.WriteCookie("token", LoginResponse.Token, 60);
+        CookieTokenValue = await Cookie.ReadCookie("token");
+        StateHasChanged();
+    }
+
+    /*
+    private async void GetAllUsers()
+    {
+        return await Http.Get<AuthenticationRequest, AuthenticationResponse>("Users/authenticate");
+    }
+    */
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using HiddenLove.DataAccess.Entities;
+using HiddenLove.Shared.Entities;
 using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories

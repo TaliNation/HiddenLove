@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using HiddenLove.DataAccess.Entities;
+using HiddenLove.Shared.Entities;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models.Authentication;
 using BCrypt.Net;

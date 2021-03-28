@@ -11,6 +11,10 @@
     <PackageReference Include="SqlKata.Execution" Version="2.3.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\HiddenLove.Shared.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <DebugType>portable</DebugType>
   </PropertyGroup>

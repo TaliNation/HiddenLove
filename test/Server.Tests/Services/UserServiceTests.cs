@@ -6,7 +6,7 @@ using System.Text;
 using HiddenLove.DataAccess.Repositories;
 using NUnit.Framework;
 using Moq;
-using HiddenLove.DataAccess.Entities;
+using HiddenLove.Shared.Entities;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;

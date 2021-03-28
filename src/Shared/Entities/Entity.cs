@@ -1,4 +1,4 @@
-namespace HiddenLove.DataAccess.Entities
+namespace HiddenLove.Shared.Entities
 {
     public interface IEntity<TKey> { }
 }

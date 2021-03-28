@@ -5,6 +5,7 @@ using HiddenLove.Server.Helpers;
 using System;
 using System.Diagnostics;
 using HiddenLove.DataAccess.Entities;
+using System.Collections.Generic;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -32,18 +33,17 @@ namespace HiddenLove.Server.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetAll()
+        public IEnumerable<User> GetAll()
         {
-            Debug.WriteLine(((User)HttpContext.Items["User"]).FullUserName);
-            var users = UserService.GetAll();
-            return Ok(users);
+            // ((User)HttpContext.Items["User"]).FullUserName;
+            return UserService.GetAll();
         }
 
         [Authorize]
         [HttpGet("currentuser")]
-        public IActionResult GetCurrentUser()
+        public User GetCurrentUser()
         {
-            return Ok((User)HttpContext.Items["User"]);
+            return (User)HttpContext.Items["User"];
         }
     }
 }

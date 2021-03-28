@@ -1,16 +1,22 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace HiddenLove.Client.Helpers
 {
-    public class Http
+    public class HttpHelper
     {
-        HttpClient HttpClient;
+        private HttpClient HttpClient;
 
-        public Http()
+        public HttpHelper(HttpClient httpClient)
         {
-            HttpClient = new HttpClient();
+            HttpClient = httpClient;
+        }
+
+        public void AddAuthorizationHeader(string token) 
+        {
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest data)

@@ -1,0 +1,84 @@
+@page "/register"
+@inject HttpHelper Http
+@inject NavigationManager NavManager
+
+<h1>Register</h1>
+
+<div class="row">
+    <div class="col-4">
+        <input class="form-control" type="text" placeholder="Email Address" @bind="EmailAddressBinding" />
+    </div>
+    <div class="col-4">
+        <input class="form-control" type="password" placeholder="Password" @bind="PasswordBinding" />
+    </div>
+    <div class="col-4">
+        <input class="form-control" type="password" placeholder="Password" @bind="ConfirmedPasswordBinding" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <input class="form-control" type="text" id="emailAddressInput" placeholder="Email Address" @bind="UserNameBinding" />
+    </div>
+    <div class="col-2">
+        <input class="form-control" type="checkbox" id="passwordInput" placeholder="Password" @bind="TermsOfServiceAcceptedBinding" />
+    </div>
+    <div class="col-2">
+        <input class="form-control" type="checkbox" id="passwordInput" placeholder="Password" @bind="PrivacyPoliciesAcceptedBinding" />
+    </div>
+    <div class="col-2">
+        <button class="btn btn-primary full-width" @onclick="RegisterUser">Submit</button>
+    </div>
+</div>
+<div class="row">
+    <p>@Message</p>
+</div>
+
+@code {
+    private string EmailAddressBinding;
+    private string PasswordBinding;
+    private string ConfirmedPasswordBinding;
+    private string UserNameBinding;
+    private bool TermsOfServiceAcceptedBinding;
+    private bool PrivacyPoliciesAcceptedBinding;
+
+    private string Message;
+
+    protected override void OnInitialized()
+    {
+        EmailAddressBinding = "";
+        PasswordBinding = "";
+        ConfirmedPasswordBinding = "";
+        UserNameBinding = "";
+        TermsOfServiceAcceptedBinding = false;
+        PrivacyPoliciesAcceptedBinding = false;
+        Message = "";
+    }
+
+    private async void RegisterUser()
+    {
+        if(!TermsOfServiceAcceptedBinding || !PrivacyPoliciesAcceptedBinding)
+        {
+            Message = "You must accept the terms of services and the privacy policy to register.";
+            return;
+        }
+
+        if(PasswordBinding != ConfirmedPasswordBinding)
+        {
+            Message = "Password and confirmation are not identical;";
+            return;
+        }
+
+        var registerRequest = new RegisterRequest
+        {
+            EmailAddress = EmailAddressBinding,
+            UserName = UserNameBinding,
+            Password = PasswordBinding
+        };
+
+        AuthenticationResponse loginToken = await Http.PostAsync<RegisterRequest, AuthenticationResponse>("Users/register", registerRequest);
+
+        Http.AddAuthorizationHeader(loginToken.Token);
+
+        NavManager.NavigateTo("/");
+    }
+}

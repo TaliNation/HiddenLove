@@ -1,5 +1,4 @@
 @page "/login"
-@using HiddenLove.Shared.Models.Authentication
 @inject HttpHelper Http
 @inject CookieHelper Cookie
 @inject NavigationManager NavManager
@@ -14,7 +13,7 @@
         <input class="form-control" type="text" id="passwordInput" placeholder="Password" @bind="PasswordBinding" />
     </div>
     <div class="col-3">
-        <input class="form-control" type="checkbox" id="passwordInput" placeholder="Password" @bind="KeepConnectionAlive" />
+        <input class="form-control" type="checkbox" @bind="StayConnectedBinding" />
     </div>
     <div class="col-3">
         <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
@@ -22,11 +21,11 @@
 </div>
 
 @code {
-    private AuthenticationResponse LoginResponse;
+    private AuthenticationResponse LoginToken;
 
     private string EmailAddressBinding;
     private string PasswordBinding;
-    private bool KeepConnectionAlive;
+    private bool StayConnectedBinding;
 
     private string CookieTokenValue;
 
@@ -34,8 +33,7 @@
     {
         EmailAddressBinding = "";
         PasswordBinding = "";
-        KeepConnectionAlive = false;
-        LoginResponse = new AuthenticationResponse();
+        StayConnectedBinding = false;
     }
 
     private async void LogUser()
@@ -46,13 +44,13 @@
             Password = PasswordBinding
         };
 
-        LoginResponse = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
+        LoginToken = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
 
-        Http.AddAuthorizationHeader(LoginResponse.Token);
+        Http.AddAuthorizationHeader(LoginToken.Token);
         
-        if(KeepConnectionAlive)
+        if(StayConnectedBinding)
         {
-            Cookie.WriteCookie("token", LoginResponse.Token, 60 * 60 * 24 * 7);
+            Cookie.WriteCookie("token", LoginToken.Token, 60 * 60 * 24 * 7);
         }
 
         NavManager.NavigateTo("/");

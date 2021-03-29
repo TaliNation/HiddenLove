@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using HiddenLove.Shared.Models.Authentication;
+using HiddenLove.Shared.Models;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using System;
@@ -23,11 +23,22 @@ namespace HiddenLove.Server.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticationRequest model)
         {
-            var response = UserService.Authenticate(model);
+            AuthenticationResponse response = UserService.Authenticate(model);
 
             if(response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
+            return Ok(response);
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register(RegisterRequest model)
+        {
+            var response = UserService.Register(model);
+
+            if(response == null)
+                throw new Exception("Erreur");
+                
             return Ok(response);
         }
 

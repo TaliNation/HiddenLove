@@ -1,0 +1,5 @@
+CREATE TABLE offers 
+(
+    id SERIAL PRIMARY KEY,
+    designation VARCHAR(255) NOT NULL UNIQUE
+)

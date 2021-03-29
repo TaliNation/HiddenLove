@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace HiddenLove.Client.Helpers
 {
@@ -21,28 +22,16 @@ namespace HiddenLove.Client.Helpers
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(string uri, TRequest data)
         {
-            var res = await HttpClient.PostAsJsonAsync<TRequest>(uri, data);
+            HttpResponseMessage res = await HttpClient.PostAsJsonAsync<TRequest>(uri, data);
+            CheckStatusCode(res);
             return await res.Content.ReadAsAsync<TResponse>();
-        }
-
-        public TResponse Post<TRequest, TResponse>(string uri, TRequest data)
-        {
-            var res = HttpClient.PostAsJsonAsync<TRequest>(uri, data).Result;
-            return res.Content.ReadAsAsync<TResponse>().Result;
-        }
-
-        public TResponse Get<TResponse>(string uri, params string[] parameters)
-        {
-            string request = ConcatUriAndParameters(uri, parameters);
-
-            return HttpClient.GetFromJsonAsync<TResponse>("Users/authenticate").Result;
         }
 
         public async Task<TResponse> GetAsync<TResponse>(string uri, params string[] parameters)
         {
             string request = ConcatUriAndParameters(uri, parameters);
 
-            return await HttpClient.GetFromJsonAsync<TResponse>("Users/authenticate");
+            return await HttpClient.GetFromJsonAsync<TResponse>(request);
         }
 
         private string ConcatUriAndParameters(string uri, params string[] parameters)
@@ -51,6 +40,12 @@ namespace HiddenLove.Client.Helpers
                 uri += "/" + parameter;
 
             return uri;
+        }
+
+        private void CheckStatusCode(HttpResponseMessage response)
+        {
+            if((int)response.StatusCode >= (int)HttpStatusCode.BadRequest)
+                throw new HttpRequestException(response.ReasonPhrase);
         }
     }
 }

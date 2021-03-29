@@ -1,7 +1,28 @@
 ﻿@page "/"
+@inject HttpHelper Http
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="row">
+    <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
+</div>
+<div class="row">
+    <p>@CurrentUser.FullUserName</p>
+</div>
+
+@code {
+    private User CurrentUser;
+
+    protected override void OnInitialized()
+    {
+        CurrentUser = new User();
+    }
+    
+    private async void GetAllUsers()
+    {
+        CurrentUser = await Http.GetAsync<User>("Users/currentuser");
+        StateHasChanged();
+    }
+}

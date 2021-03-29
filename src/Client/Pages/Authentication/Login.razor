@@ -2,41 +2,39 @@
 @using HiddenLove.Shared.Models.Authentication
 @inject HttpHelper Http
 @inject CookieHelper Cookie
+@inject NavigationManager NavManager
 
 <h1>Login</h1>
 
 <div class="row">
-    <div class="col-4">
-        <input class="form-control" type="text" name="EmailAddress" id="#emailAddressInput" placeholder="Email Address" @bind="EmailAddressBinding" />
+    <div class="col-3">
+        <input class="form-control" type="text" id="emailAddressInput" placeholder="Email Address" @bind="EmailAddressBinding" />
     </div>
-    <div class="col-4">
-        <input class="form-control" type="text" name="Password" id="#passwordInput" placeholder="Password" @bind="PasswordBinding" />
+    <div class="col-3">
+        <input class="form-control" type="text" id="passwordInput" placeholder="Password" @bind="PasswordBinding" />
     </div>
-    <div class="col-4">
+    <div class="col-3">
+        <input class="form-control" type="checkbox" id="passwordInput" placeholder="Password" @bind="KeepConnectionAlive" />
+    </div>
+    <div class="col-3">
         <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
     </div>
 </div>
-@* <div class="row">
-    <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
-</div> *@
-<div class="row">
-    <p>@CookieTokenValue</p>
-</div>
-
 
 @code {
     private AuthenticationResponse LoginResponse;
 
     private string EmailAddressBinding;
     private string PasswordBinding;
+    private bool KeepConnectionAlive;
 
     private string CookieTokenValue;
 
-
-    //private User CurrentUser
-
     protected override void OnInitialized()
     {
+        EmailAddressBinding = "";
+        PasswordBinding = "";
+        KeepConnectionAlive = false;
         LoginResponse = new AuthenticationResponse();
     }
 
@@ -52,15 +50,11 @@
 
         Http.AddAuthorizationHeader(LoginResponse.Token);
         
-        Cookie.WriteCookie("token", LoginResponse.Token, 60);
-        CookieTokenValue = await Cookie.ReadCookie("token");
-        StateHasChanged();
-    }
+        if(KeepConnectionAlive)
+        {
+            Cookie.WriteCookie("token", LoginResponse.Token, 60 * 60 * 24 * 7);
+        }
 
-    /*
-    private async void GetAllUsers()
-    {
-        return await Http.Get<AuthenticationRequest, AuthenticationResponse>("Users/authenticate");
+        NavManager.NavigateTo("/");
     }
-    */
 }

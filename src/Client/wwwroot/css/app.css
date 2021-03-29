@@ -52,4 +52,22 @@ a, .btn-link {
   width: 100%;
 }
 
+.card .card-body {
+  padding: 10px;
+}
+
+.card-scenario {
+  margin: auto;
+  width: 100%;
+  max-width: 200px;
+}
+
+.padding-top {
+  padding-top: 10px;
+}
+
+.padding-bottom {
+  padding-bottom: 10px;
+}
+
 /*# sourceMappingURL=app.css.map */

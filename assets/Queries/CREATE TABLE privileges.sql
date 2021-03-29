@@ -1,0 +1,4 @@
+CREATE TABLE privileges(
+    id SERIAL PRIMARY KEY,
+    designation VARCHAR(255) NOT NULL UNIQUE
+);

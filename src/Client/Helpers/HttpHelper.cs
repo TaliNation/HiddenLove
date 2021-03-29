@@ -45,7 +45,7 @@ namespace HiddenLove.Client.Helpers
         private void CheckStatusCode(HttpResponseMessage response)
         {
             if((int)response.StatusCode >= (int)HttpStatusCode.BadRequest)
-                throw new HttpRequestException(response.ReasonPhrase);
+                throw new HttpRequestException(response.ReasonPhrase + " : " + response.RequestMessage);
         }
     }
 }

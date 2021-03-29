@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using HiddenLove.Shared.Entities;
 using HiddenLove.Server.Helpers;
-using HiddenLove.Shared.Models.Authentication;
+using HiddenLove.Shared.Models;
 using BCrypt.Net;
 using HiddenLove.DataAccess.Repositories;
 
@@ -19,6 +19,7 @@ namespace HiddenLove.Server.Services
         AuthenticationResponse Authenticate(AuthenticationRequest model);
         IEnumerable<User> GetAll();
         User GetById(int id);
+        AuthenticationResponse Register(RegisterRequest model);
     }
 
     public class UserService : IUserService
@@ -55,12 +56,6 @@ namespace HiddenLove.Server.Services
             return new AuthenticationResponse
             {
                 Id = user.Id,
-                EmailAddress = user.EmailAddress,
-                UserName = user.UserName,
-                FullUserName = user.FullUserName,
-                PasswordHash = user.PasswordHash,
-                IdOffer = user.IdOffer,
-                IdPrivilege = user.IdPrivilege,
                 Token = token
             };
         } 
@@ -89,6 +84,42 @@ namespace HiddenLove.Server.Services
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public AuthenticationResponse Register(RegisterRequest model)
+        {
+            var random = new Random();
+
+            var user = new User 
+            {
+                EmailAddress = model.EmailAddress,
+                UserName = model.UserName,
+                FullUserName = model.UserName + "#" + random.Next(0, 10000),
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password)
+            };
+
+            if(UserExists(user.EmailAddress))
+                return null;
+
+            _dataAccess.Insert(user);
+
+            var authenticationRequest = new AuthenticationRequest
+            {
+                EmailAddress = model.EmailAddress,
+                Password = model.Password
+            };
+
+            return Authenticate(authenticationRequest);
+        }
+
+        private bool UserExists(string userEmailAddress)
+        {
+            User user = _dataAccess.GetByEmailAddress(userEmailAddress);
+
+            if(user == null)
+                return false;
+            else
+                return true;
         }
     }
 }

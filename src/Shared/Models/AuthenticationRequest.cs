@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HiddenLove.Shared.Models.Authentication
+namespace HiddenLove.Shared.Models
 {
-    public class AuthenticationRequest
+    public record AuthenticationRequest
     {
         [Required]
         public string EmailAddress { get; set; }

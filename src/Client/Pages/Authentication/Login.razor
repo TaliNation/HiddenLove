@@ -1,4 +1,4 @@
-@page "/login"
+@page "/"
 @inject HttpHelper Http
 @inject CookieHelper Cookie
 @inject NavigationManager NavManager
@@ -10,12 +10,10 @@
         <Textbox Placeholder="Email Address" OnChange="SetEmailAddress" />
     </div>
     <div class="col-3">
-        <Textbox Placeholder="Password" OnChange="SetPassword" />
-
-        @* <input class="form-control" type="text" id="passwordInput" placeholder="Password" @bind="Password" /> *@
+        <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
     </div>
     <div class="col-3">
-        <input class="form-control" type="checkbox" @bind="StayConnectedBinding" />
+        <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
     </div>
     <div class="col-3">
         <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
@@ -30,13 +28,14 @@
 
     private string EmailAddress { get; set; } = "";
     private string Password { get; set; } = "";
-    private bool StayConnectedBinding { get; set; } = false;
+    private bool StayConnected { get; set; } = false;
 
     private string CookieTokenValue { get; set; } = "";
     private string Message { get; set; } = "";
 
     public void SetEmailAddress(string s) => EmailAddress = s;
-    public void SetPassword(string s) => EmailAddress = s;
+    public void SetPassword(string s) => Password = s;
+    public void SetStayConnected(bool b) => StayConnected = b;
 
     private async void LogUser()
     {
@@ -59,7 +58,7 @@
 
         Http.AddAuthorizationHeader(LoginToken.Token);
         
-        if(StayConnectedBinding)
+        if(StayConnected)
         {
             Cookie.WriteCookie("token", LoginToken.Token, 60 * 60 * 24 * 7);
         }

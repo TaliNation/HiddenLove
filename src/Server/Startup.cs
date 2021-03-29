@@ -8,6 +8,10 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Server.Services;
+using HiddenLove.Server.Extensions; 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using HiddenLove.Shared;
 
 namespace HiddenLove.Server
 {
@@ -24,7 +28,9 @@ namespace HiddenLove.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(x => {
+                x.UseGeneralRoutePrefix(GlobalVariables.ApiRootUrl);
+            });
             services.AddRazorPages();
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));

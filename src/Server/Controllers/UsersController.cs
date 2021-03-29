@@ -33,17 +33,16 @@ namespace HiddenLove.Server.Controllers
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<User> GetAll()
+        public IActionResult GetAll()
         {
-            // ((User)HttpContext.Items["User"]).FullUserName;
-            return UserService.GetAll();
+            return Ok(UserService.GetAll());
         }
 
         [Authorize]
         [HttpGet("currentuser")]
-        public User GetCurrentUser()
+        public IActionResult GetCurrentUser()
         {
-            return (User)HttpContext.Items["User"];
+            return Ok((User)HttpContext.Items["User"]);
         }
     }
 }

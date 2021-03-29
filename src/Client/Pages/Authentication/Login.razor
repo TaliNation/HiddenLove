@@ -7,10 +7,12 @@
 
 <div class="row">
     <div class="col-3">
-        <input class="form-control" type="text" id="emailAddressInput" placeholder="Email Address" @bind="EmailAddressBinding" />
+        <Textbox Placeholder="Email Address" OnChange="SetEmailAddress" />
     </div>
     <div class="col-3">
-        <input class="form-control" type="text" id="passwordInput" placeholder="Password" @bind="PasswordBinding" />
+        <Textbox Placeholder="Password" OnChange="SetPassword" />
+
+        @* <input class="form-control" type="text" id="passwordInput" placeholder="Password" @bind="Password" /> *@
     </div>
     <div class="col-3">
         <input class="form-control" type="checkbox" @bind="StayConnectedBinding" />
@@ -19,32 +21,41 @@
         <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
     </div>
 </div>
+<div class="row">
+    <p>@Message</p>
+</div>
 
 @code {
     private AuthenticationResponse LoginToken;
 
-    private string EmailAddressBinding;
-    private string PasswordBinding;
-    private bool StayConnectedBinding;
+    private string EmailAddress { get; set; } = "";
+    private string Password { get; set; } = "";
+    private bool StayConnectedBinding { get; set; } = false;
 
-    private string CookieTokenValue;
+    private string CookieTokenValue { get; set; } = "";
+    private string Message { get; set; } = "";
 
-    protected override void OnInitialized()
-    {
-        EmailAddressBinding = "";
-        PasswordBinding = "";
-        StayConnectedBinding = false;
-    }
+    public void SetEmailAddress(string s) => EmailAddress = s;
+    public void SetPassword(string s) => EmailAddress = s;
 
     private async void LogUser()
     {
         var request = new AuthenticationRequest 
         { 
-            EmailAddress = EmailAddressBinding,
-            Password = PasswordBinding
+            EmailAddress = EmailAddress,
+            Password = Password
         };
 
-        LoginToken = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
+        try 
+        {
+            LoginToken = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
+        }
+        catch(HttpRequestException)
+        {
+            Message = "Incorrect username or password.";
+            StateHasChanged();
+            return;
+        }
 
         Http.AddAuthorizationHeader(LoginToken.Token);
         

@@ -1,0 +1,17 @@
+<div class="card card-scenario" title="@Description" >
+    <div class="card-body">
+        <img class="mx-auto d-block" src="img/@Image" width="100%" />
+        <div class="padding-top">Titre</div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Titre { get; set; } = "";
+
+    [Parameter]
+    public string Description { get; set; } = "";
+
+    [Parameter]
+    public string Image { get; set; } = "";
+}

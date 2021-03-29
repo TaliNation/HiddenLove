@@ -71,7 +71,16 @@
             Password = Password
         };
 
-        AuthenticationResponse loginToken = await Http.PostAsync<RegisterRequest, AuthenticationResponse>("Users/register", registerRequest);
+        AuthenticationResponse loginToken;
+
+        try
+        {
+            loginToken = await Http.PostAsync<RegisterRequest, AuthenticationResponse>("Users/register", registerRequest);
+        }
+        catch(HttpRequestException ex)
+        {
+            throw ex;
+        }
 
         Http.AddAuthorizationHeader(loginToken.Token);
 

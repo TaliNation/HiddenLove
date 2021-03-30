@@ -1,11 +1,13 @@
-<input 
-    class="form-control" 
-    type="@(IsPassword ? "password" : "text")" 
-    id="@Id" 
-    name="@Id" 
-    placeholder="@Placeholder" 
-    value="@DefaultValue"
-    @onchange="OnChangeCallback" />
+<div class="form-group">
+    <input 
+        class="form-control" 
+        type="@(IsPassword ? "password" : "text")" 
+        id="@Id" 
+        name="@Id" 
+        placeholder="@Placeholder" 
+        value="@DefaultValue"
+        @onchange="OnChangeCallback" />
+</div>
 
 @code {
     [Parameter]

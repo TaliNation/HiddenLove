@@ -1,27 +1,21 @@
-@page "/"
+@page "/login"
 @inject HttpHelper Http
 @inject CookieHelper Cookie
 @inject NavigationManager NavManager
 
-<h1>Login</h1>
-
-<div class="row">
-    <div class="col-3">
-        <Textbox Placeholder="Email Address" OnChange="SetEmailAddress" />
+<div class="login-clean">
+    <div class="illustration">
+        <img src="img/logo.png" />
     </div>
-    <div class="col-3">
-        <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
+    <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
+    <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
+    <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
+    <div class="form-group">
+        <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
     </div>
-    <div class="col-3">
-        <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
-    </div>
-    <div class="col-3">
-        <button class="btn btn-primary full-width" @onclick="LogUser">Submit</button>
-    </div>
-</div>
-<div class="row">
     <p>@Message</p>
 </div>
+
 
 @code {
     private AuthenticationResponse LoginToken;

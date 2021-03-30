@@ -4,16 +4,18 @@
 @inject NavigationManager NavManager
 
 <div class="login-clean">
-    <div class="illustration">
-        <img src="img/logo.png" />
-    </div>
-    <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
-    <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
-    <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
-    <div class="form-group">
-        <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
-    </div>
-    <p>@Message</p>
+    <form>
+        <div class="illustration">
+            <img src="img/logo.png" />
+        </div>
+        <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
+        <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
+        <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
+        </div>
+        <p>@Message</p>
+    </form>
 </div>
 
 

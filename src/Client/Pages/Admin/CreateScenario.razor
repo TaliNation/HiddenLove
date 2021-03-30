@@ -1,0 +1,25 @@
+@page "/admin/createscenario"
+@inject HttpHelper Http
+
+<div class="container">
+    @foreach (string step in Steps)
+    {
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2"><i class=""></i></div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary">J'ai Terminé !</button>
+    </div>
+</div>
+
+@code {
+    private List<string> Steps = new List<string>();
+
+    
+}

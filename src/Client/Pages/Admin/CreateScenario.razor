@@ -2,16 +2,22 @@
 @inject HttpHelper Http
 
 <div class="container">
-    @foreach (string step in Steps)
+    @* @foreach (string step in Steps)
     {
         <div class="row">
-            <div class="col-10"></div>
-            <div class="col-2"><i class=""></i></div>
+            <div class="col-10">
+
+            </div>
+            <div class="col-2">
+                <i class="fas fa-minus-circle"></i>
+            </div>
         </div>
-    }
+    } *@
     <div class="row">
         <div class="col-10"></div>
-        <div class="col-2"></div>
+        <div class="col-2">
+            <i class="fas fa-plus-circle" @onclick="AddStep"></i>
+        </div>
     </div>
     <div class="row">
         <button class="btn btn-primary">J'ai Terminé !</button>
@@ -19,7 +25,12 @@
 </div>
 
 @code {
-    private List<string> Steps = new List<string>();
+    private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
 
-    
+    private void AddStep()
+    {
+        Steps.Add(new ScenarioCreationStep());
+    }
+
+
 }

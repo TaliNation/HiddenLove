@@ -1,8 +1,7 @@
 CREATE TABLE scenarios
 (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description VARCHAR(3000),
+    eventdate DATE NOT NULL,
     id_user INTEGER NOT NULL,
     id_scenariotemplate INTEGER NOT NULL,
     FOREIGN KEY (id_user)

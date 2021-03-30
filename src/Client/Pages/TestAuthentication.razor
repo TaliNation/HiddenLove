@@ -1,5 +1,5 @@
 ﻿@page "/test"
-@inject HttpHelper Http
+@inject HttpClient Http
 
 <div class="row">
     <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
@@ -18,15 +18,7 @@
     
     private async void GetAllUsers()
     {
-        try
-        {
-            CurrentUser = await Http.GetAsync<User>("Users/currentuser");
-        }
-        catch(HttpRequestException ex)
-        {
-            throw ex;
-        }
-
+        CurrentUser = await Http.GetFromJsonAsync<User>("Users/currentuser");
         StateHasChanged();
     }
 }

@@ -1,5 +1,5 @@
 @page "/admin/createscenario"
-@inject HttpHelper Http
+@inject HttpClient Http
 
 <div class="container">
     @* @foreach (string step in Steps)
@@ -26,7 +26,6 @@
 
 @code {
     private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
-
     private void AddStep()
     {
         Steps.Add(new ScenarioCreationStep());

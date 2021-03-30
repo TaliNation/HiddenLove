@@ -32,3 +32,9 @@ window.blazorCookies = {
         return "";
     }
 }
+
+window.blazorLogger = {
+    log: (obj) => { console.log(obj); },
+    
+    error: (obj) => { console.error(obj); }
+}

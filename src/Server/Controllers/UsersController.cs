@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using HiddenLove.Shared.Entities;
 using System.Collections.Generic;
+using System.Net;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -26,7 +27,7 @@ namespace HiddenLove.Server.Controllers
             AuthenticationResponse response = UserService.Authenticate(model);
 
             if(response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new HttpError("Wrong username or password.", HttpStatusCode.BadRequest));
 
             return Ok(response);
         }
@@ -37,7 +38,7 @@ namespace HiddenLove.Server.Controllers
             var response = UserService.Register(model);
 
             if(response == null)
-                throw new Exception("Erreur");
+                return BadRequest(new HttpError("Server error"));
                 
             return Ok(response);
         }

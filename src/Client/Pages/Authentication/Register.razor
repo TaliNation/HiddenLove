@@ -1,5 +1,6 @@
 @page "/register"
-@inject HttpHelper Http
+@inject HttpClient Http
+@inject JsHelper Js
 @inject NavigationManager NavManager
 
 <h1>Register</h1>
@@ -34,6 +35,8 @@
 </div>
 
 @code {
+    private AuthenticationResponse LoginToken;
+
     private string EmailAddress { get; set; } = "";
     private string Password { get; set; } = "";
     private string ConfirmedPassword { get; set; } = "";
@@ -71,18 +74,16 @@
             Password = Password
         };
 
-        AuthenticationResponse loginToken;
-
-        try
+        var res = await Http.PostAsJsonAsync<RegisterRequest>("Users/register", registerRequest);
+        if(!res.IsSuccessStatusCode)
         {
-            loginToken = await Http.PostAsync<RegisterRequest, AuthenticationResponse>("Users/register", registerRequest);
+            HttpError error = await res.Content.ReadAsAsync<HttpError>();
+            Js.LogError(error);
+            return;
         }
-        catch(HttpRequestException ex)
-        {
-            throw ex;
-        }
+        LoginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
 
-        Http.AddAuthorizationHeader(loginToken.Token);
+        Http.AddJwtAuthentication(LoginToken.Token);
 
         NavManager.NavigateTo("/");
     }

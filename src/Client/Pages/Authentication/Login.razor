@@ -1,10 +1,10 @@
 @page "/login"
-@inject HttpHelper Http
-@inject CookieHelper Cookie
+@inject HttpClient Http
+@inject JsHelper Js
 @inject NavigationManager NavManager
 
 <div class="login-clean">
-    <form>
+    <div class="login-form">
         <div class="illustration">
             <img src="img/logo.png" />
         </div>
@@ -15,13 +15,11 @@
             <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
         </div>
         <p>@Message</p>
-    </form>
+    </div>
 </div>
 
 
 @code {
-    private AuthenticationResponse LoginToken;
-
     private string EmailAddress { get; set; } = "";
     private string Password { get; set; } = "";
     private bool StayConnected { get; set; } = false;
@@ -40,23 +38,21 @@
             EmailAddress = EmailAddress,
             Password = Password
         };
-
-        try 
+        
+        HttpResponseMessage res = await Http.PostAsJsonAsync<AuthenticationRequest>("Users/authenticate", request);
+        if(!res.IsSuccessStatusCode)
         {
-            LoginToken = await Http.PostAsync<AuthenticationRequest, AuthenticationResponse>("Users/authenticate", request);
-        }
-        catch(HttpRequestException)
-        {
-            Message = "Incorrect username or password.";
-            StateHasChanged();
+            HttpError error = await res.Content.ReadAsAsync<HttpError>();
+            Js.LogError(error);
             return;
         }
+        AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
 
-        Http.AddAuthorizationHeader(LoginToken.Token);
+        Http.AddJwtAuthentication(loginToken.Token);
         
         if(StayConnected)
         {
-            Cookie.WriteCookie("token", LoginToken.Token, 60 * 60 * 24 * 7);
+            Js.WriteCookie("token", loginToken.Token, 60 * 60 * 24 * 7);
         }
 
         NavManager.NavigateTo("/");

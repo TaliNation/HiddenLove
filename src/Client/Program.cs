@@ -19,10 +19,10 @@ namespace HiddenLove.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
+            builder.Services.AddTransient<HttpClient>(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
 
-            builder.Services.AddTransient<HttpHelper>();
-            builder.Services.AddTransient<CookieHelper>();
+            //builder.Services.AddTransient<HttpHelper>();
+            builder.Services.AddTransient<JsHelper>();
 
             await builder.Build().RunAsync();
         }

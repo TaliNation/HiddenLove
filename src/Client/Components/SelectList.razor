@@ -1,0 +1,36 @@
+<div class="form-group">
+	@if (Label != null)
+	{
+	 <label for="@Id">@Label</label>
+	}
+	<select class="form-control" id="@Id" @onchange="OnChangeCallback">
+		@if(HasDefaultItem)
+		{
+			<option></option>
+		}
+		@foreach (KeyValuePair<int, string> item in Items)
+		{
+			<option value="@item.Key">@item.Value</option>
+		}
+	</select>
+</div>
+
+@code {
+	[Parameter]
+	public string Id { get; set; } = "";
+
+	[Parameter]
+	public string Label { get; set; } = null;
+
+	[Parameter]
+	public IEnumerable<KeyValuePair<int, string>> Items { get; set; } = new List<KeyValuePair<int, string>>();
+
+	[Parameter]
+	public bool HasDefaultItem { get; set; } = false;
+
+	[Parameter]
+	public EventCallback<string> OnChange { get; set; }
+
+	private void OnChangeCallback(ChangeEventArgs e) =>
+		OnChange.InvokeAsync((string)e.Value);
+}

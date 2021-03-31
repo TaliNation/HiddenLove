@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using HiddenLove.Client.Helpers.HttpTypeFormatters;
+using HiddenLove.Shared;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using Newtonsoft.Json;
 
 namespace HiddenLove.Client.Helpers
 {
@@ -11,19 +15,26 @@ namespace HiddenLove.Client.Helpers
     {
         public HttpClient Client;
 
-        private List<MediaTypeFormatter> _mediaTypeFormatters;
-
         public HttpWrapper(HttpClient client, JsHelper js)
         {
             Client = client;
-
-            _mediaTypeFormatters = new List<MediaTypeFormatter>();
-            _mediaTypeFormatters.Add(new JsonMediaTypeFormatter());
-            _mediaTypeFormatters.Add(new TextMediaTypeFormatter());
         }
 
-        public void AddJwtAuthentication(string token) =>
+        public async void Authenticate(JsHelper js, NavigationManager navManager)
+        {
+            string res = await js.ReadCookie(GlobalVariables.TokenCookieName);
+            if(!AddJwtAuthentication(res))
+                navManager.NavigateTo("/login");
+        }
+
+        public bool AddJwtAuthentication(string token)
+        {
+            if(token == null || token == "")
+                return false;
+
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            return true;
+        }
 
         public async Task<HttpResponseMessage> PostAsync<T>(string uri, T body) =>
             await Client.PostAsJsonAsync<T>(uri, body);
@@ -38,13 +49,15 @@ namespace HiddenLove.Client.Helpers
         {
             HttpResponseMessage res = await PostAsync<TRequest>(uri, body);
 
-            return await res.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+            return JsonConvert.DeserializeObject<TResult>(
+                await res.Content.ReadAsStringAsync());
         }
 
         public async Task<TResult> GetResultAsync<TResult>(string uri, params string[] parameters)
         {
             HttpResponseMessage	res = await GetAsync(uri, parameters);
-            return await res.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
+            return JsonConvert.DeserializeObject<TResult>(
+                await res.Content.ReadAsStringAsync());
         }
 
         private string ConcatUriAndParameters(string uri, params string[] parameters)

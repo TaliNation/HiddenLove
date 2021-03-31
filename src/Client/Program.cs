@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using HiddenLove.Client.Helpers;
 using HiddenLove.Shared;
-using Blazored.LocalStorage;
 
 namespace HiddenLove.Client
 {
@@ -25,8 +24,6 @@ namespace HiddenLove.Client
             builder.Services.AddTransient<JsHelper>();
             builder.Services.AddTransient<HttpWrapper>();
                         
-            builder.Services.AddBlazoredLocalStorage();
-
             await builder.Build().RunAsync();
         }
     }

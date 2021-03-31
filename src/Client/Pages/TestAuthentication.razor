@@ -1,6 +1,7 @@
 ﻿@page "/test"
 @inject HttpWrapper Http
 @inject JsHelper Js
+@inject NavigationManager NavManager
 
 <div class="row">
     <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
@@ -12,10 +13,9 @@
 @code {
     private string CurrentUser = "";
 
-    protected async override void OnInitialized()
+    protected override void OnInitialized()
     {
-        string res = await Js.ReadCookie(GlobalVariables.TokenCookieName);
-        Http.AddJwtAuthentication(res);
+        Http.Authenticate(Js, NavManager);
     }
     
     private async void GetAllUsers()

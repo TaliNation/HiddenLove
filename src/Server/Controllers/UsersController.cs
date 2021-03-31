@@ -22,6 +22,7 @@ namespace HiddenLove.Server.Controllers
         }
 
         [HttpPost("authenticate")]
+        [Produces("application/json")]
         public IActionResult Authenticate(AuthenticationRequest model)
         {
             AuthenticationResponse response = UserService.Authenticate(model);
@@ -33,6 +34,7 @@ namespace HiddenLove.Server.Controllers
         }
 
         [HttpPost("register")]
+        [Produces("application/json")]
         public IActionResult Register(RegisterRequest model)
         {
             var response = UserService.Register(model);
@@ -45,6 +47,7 @@ namespace HiddenLove.Server.Controllers
 
         [Authorize]
         [HttpGet]
+        [Produces("application/json")]
         public IActionResult GetAll()
         {
             return Ok(UserService.GetAll());
@@ -52,6 +55,7 @@ namespace HiddenLove.Server.Controllers
 
         [Authorize]
         [HttpGet("currentuser")]
+        [Produces("application/json")]
         public IActionResult GetCurrentUser()
         {
             return Ok(((User)HttpContext.Items["User"]).FullUsername);

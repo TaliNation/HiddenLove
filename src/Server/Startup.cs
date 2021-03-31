@@ -12,6 +12,11 @@ using HiddenLove.Server.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using HiddenLove.Shared;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Net.Http.Formatting;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace HiddenLove.Server
 {
@@ -47,7 +52,14 @@ namespace HiddenLove.Server
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                //app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler(c => c.Run(async context =>
+                {
+                    Exception exception = context.Features
+                        .Get<IExceptionHandlerPathFeature>()
+                        .Error;
+                    await context.Response.WriteAsJsonAsync(exception);
+                }));
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

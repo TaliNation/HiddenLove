@@ -3,8 +3,6 @@ using System.Data.SqlClient;
 using HiddenLove.DataAccess.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;
-using Microsoft.Extensions.Configuration;
-using Npgsql;
 
 namespace HiddenLove.DataAccess.Repositories
 {

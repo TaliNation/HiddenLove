@@ -1,11 +1,15 @@
-@page "/admin/createscenario"
+@page "/admin/scenario-creation"
+@using HiddenLove.Shared.Models.ScenarioCreation
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
 
 <div class="container">
     @* @foreach (string step in Steps)
     {
         <div class="row">
             <div class="col-10">
-
+                <SelectList @Items=@AvailableSteps />
             </div>
             <div class="col-2">
                 <i class="fas fa-minus-circle"></i>
@@ -21,14 +25,23 @@
     <div class="row">
         <button class="btn btn-primary">J'ai Terminé !</button>
     </div>
+
+    <SelectList Items="AvailableSteps" />
 </div>
 
 @code {
+    private List<KeyValuePair<int, string>> AvailableSteps = new List<KeyValuePair<int, string>>();
     private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<int, string>>>("ScenarioCreation/Steps");
+        Js.Log(AvailableSteps);
+    }
+
     private void AddStep()
     {
-        Steps.Add(new ScenarioCreationStep());
-        
+
     }
 
 

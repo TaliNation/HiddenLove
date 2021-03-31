@@ -1,4 +1,8 @@
 <div class="form-group">
+    @if(Label != null)
+    {
+        <label for="@Id">@Label</label>
+    }
     <input 
         class="form-control" 
         type="@(IsPassword ? "password" : "text")" 
@@ -22,6 +26,9 @@
 
     [Parameter]
     public string DefaultValue { get; set; } = "";
+
+    [Parameter]
+    public string Label { get; set; } = null;
 
     private void OnChangeCallback(ChangeEventArgs e) =>
         OnChange.InvokeAsync((string)e.Value);

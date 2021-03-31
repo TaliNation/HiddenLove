@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models;
 using BCrypt.Net;
@@ -68,9 +68,9 @@ namespace HiddenLove.Server.Services
 
         private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
             userCredentials != null
-            && userCredentials.PasswordHash != null
+            && userCredentials.Passwordhash != null
             && model.Password != null
-            && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials?.PasswordHash);
+            && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials?.Passwordhash);
 
         private string GerenateJwtToken(User user)
         {
@@ -93,9 +93,9 @@ namespace HiddenLove.Server.Services
             var user = new User 
             {
                 EmailAddress = model.EmailAddress,
-                UserName = model.UserName,
-                FullUserName = model.UserName + "#" + random.Next(0, 10000),
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password)
+                Username = model.UserName,
+                FullUsername = model.UserName + "#" + random.Next(0, 10000),
+                Passwordhash = BCrypt.Net.BCrypt.HashPassword(model.Password)
             };
 
             if(UserExists(user.EmailAddress))

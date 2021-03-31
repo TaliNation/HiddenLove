@@ -6,7 +6,7 @@ using System.Text;
 using HiddenLove.DataAccess.Repositories;
 using NUnit.Framework;
 using Moq;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;
@@ -28,8 +28,8 @@ namespace HiddenLove.Tests.Server.Services
         {
             UsersInMemoryDb = new List<User>
             {
-                new User { Id = 1, EmailAddress = "jean.valjean@mail.com", PasswordHash = "$2y$10$OU4W/aqtaHqt/yO302Qf6euq6gPAp7dA4ZyJCmExEVh/2MyrcFW2W" },  // marvel123
-                new User { Id = 2, EmailAddress = "tommy.mclagen@orange.fr", PasswordHash = "$2y$10$ZZfuPOUpxjg6rvxQnL9HTOwy/EnkvG8vzj.WGvjMlVT0a1UruL46e" }   // Leroileo78*
+                new User { Id = 1, EmailAddress = "jean.valjean@mail.com", Passwordhash = "$2y$10$OU4W/aqtaHqt/yO302Qf6euq6gPAp7dA4ZyJCmExEVh/2MyrcFW2W" },  // marvel123
+                new User { Id = 2, EmailAddress = "tommy.mclagen@orange.fr", Passwordhash = "$2y$10$ZZfuPOUpxjg6rvxQnL9HTOwy/EnkvG8vzj.WGvjMlVT0a1UruL46e" }   // Leroileo78*
             };
 
             RepositoryMock = new Mock<UserRepository>();

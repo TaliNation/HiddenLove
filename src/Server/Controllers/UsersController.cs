@@ -4,7 +4,7 @@ using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using System;
 using System.Diagnostics;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Net;
 
@@ -54,7 +54,7 @@ namespace HiddenLove.Server.Controllers
         [HttpGet("currentuser")]
         public IActionResult GetCurrentUser()
         {
-            return Ok((User)HttpContext.Items["User"]);
+            return Ok(((User)HttpContext.Items["User"]).FullUsername);
         }
     }
 }

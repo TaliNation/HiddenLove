@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
@@ -15,8 +15,8 @@ namespace HiddenLove.DataAccess.Repositories
 
         public virtual int Insert(Scenario entity) =>
             QueryFactory.Query("scenarios").InsertGetId<int>(new {
-                eventdate = entity.EventDate,
-                id_scenariotemplate = entity.IdScenarioTemplate,
+                eventdate = entity.Eventdate,
+                id_scenariotemplate = entity.IdScenariotemplate,
                 id_user = entity.IdUser
             });
     }

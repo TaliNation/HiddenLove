@@ -6,22 +6,21 @@
     <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
 </div>
 <div class="row">
-    <p>@CurrentUser.FullUserName</p>
+    <p>@CurrentUser</p>
 </div>
 
 @code {
-    private User CurrentUser;
+    private string CurrentUser = "";
 
     protected async override void OnInitialized()
     {
-        CurrentUser = new User();
         string res = await Js.ReadCookie(GlobalVariables.TokenCookieName);
         Http.AddJwtAuthentication(res);
     }
     
     private async void GetAllUsers()
     {
-        CurrentUser = await Http.GetResultAsync<User>("Users/currentuser");
+        CurrentUser = await Http.GetResultAsync<string>("Users/currentuser");
         StateHasChanged();
     }
 }

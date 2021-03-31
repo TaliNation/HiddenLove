@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 
 namespace HiddenLove.Server.Helpers
 {

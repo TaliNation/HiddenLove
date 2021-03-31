@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
@@ -21,9 +21,9 @@ namespace HiddenLove.DataAccess.Repositories
         public virtual int Insert(User user) =>
             QueryFactory.Query("users").InsertGetId<int>(new {
                 emailaddress = user.EmailAddress,
-                username = user.UserName,
-                fullusername = user.FullUserName,
-                passwordhash = user.PasswordHash
+                username = user.Username,
+                fullusername = user.FullUsername,
+                passwordhash = user.Passwordhash
             });
         
         

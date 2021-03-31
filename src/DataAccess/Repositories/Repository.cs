@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using HiddenLove.Shared.Entities;
+using HiddenLove.DataAccess.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using Microsoft.Extensions.Configuration;
@@ -27,10 +27,6 @@ namespace HiddenLove.DataAccess.Repositories
         
         public Repository()
         {
-            // string connectionString = "Server=127.0.0.1;Port=5432;Database=hiddenlove_dev;User Id=postgres;Password=root;";
-            // NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-            // var queryCompiler = new PostgresCompiler();
-
             SqlConnection connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
             var queryCompiler = new SqlServerCompiler(); 
 

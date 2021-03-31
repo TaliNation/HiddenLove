@@ -1,16 +1,25 @@
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using HiddenLove.Client.Helpers.HttpTypeFormatters;
 
 namespace HiddenLove.Client.Helpers
 {
     public class HttpWrapper
     {
-        public HttpClient Client { get; set; }
+        public HttpClient Client;
+
+        private List<MediaTypeFormatter> _mediaTypeFormatters;
 
         public HttpWrapper(HttpClient client, JsHelper js)
         {
             Client = client;
+
+            _mediaTypeFormatters = new List<MediaTypeFormatter>();
+            _mediaTypeFormatters.Add(new JsonMediaTypeFormatter());
+            _mediaTypeFormatters.Add(new TextMediaTypeFormatter());
         }
 
         public void AddJwtAuthentication(string token) =>
@@ -28,13 +37,14 @@ namespace HiddenLove.Client.Helpers
         public async Task<TResult> PostResultAsync<TRequest, TResult>(string uri, TRequest body)
         {
             HttpResponseMessage res = await PostAsync<TRequest>(uri, body);
-            return await res.Content.ReadAsAsync<TResult>();
+
+            return await res.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
         }
 
         public async Task<TResult> GetResultAsync<TResult>(string uri, params string[] parameters)
         {
             HttpResponseMessage	res = await GetAsync(uri, parameters);
-            return await res.Content.ReadAsAsync<TResult>();
+            return await res.Content.ReadAsAsync<TResult>(_mediaTypeFormatters);
         }
 
         private string ConcatUriAndParameters(string uri, params string[] parameters)

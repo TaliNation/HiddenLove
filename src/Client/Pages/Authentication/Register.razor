@@ -35,8 +35,6 @@
 </div>
 
 @code {
-    private AuthenticationResponse LoginToken;
-
     private string EmailAddress { get; set; } = "";
     private string Password { get; set; } = "";
     private string ConfirmedPassword { get; set; } = "";
@@ -81,9 +79,9 @@
             Js.LogError(error);
             return;
         }
-        LoginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
+        AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
 
-        Http.AddJwtAuthentication(LoginToken.Token);
+        Js.WriteCookie("token", loginToken.Token, 60 * 60);
 
         NavManager.NavigateTo("/test");
     }

@@ -22,9 +22,9 @@ namespace HiddenLove.Client
 
             builder.Services.AddScoped<HttpClient>(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
 
-            builder.Services.AddTransient<HttpWrapper>();
             builder.Services.AddTransient<JsHelper>();
-            
+            builder.Services.AddTransient<HttpWrapper>();
+                        
             builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();

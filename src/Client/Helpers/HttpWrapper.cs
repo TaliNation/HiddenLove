@@ -8,10 +8,9 @@ namespace HiddenLove.Client.Helpers
     {
         public HttpClient Client { get; set; }
 
-        public HttpWrapper(HttpClient client)
+        public HttpWrapper(HttpClient client, JsHelper js)
         {
             Client = client;
-            
         }
 
         public void AddJwtAuthentication(string token) =>

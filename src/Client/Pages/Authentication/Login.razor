@@ -2,7 +2,6 @@
 @inject HttpWrapper Http
 @inject JsHelper Js
 @inject NavigationManager NavManager
-@inject ILocalStorageService LocalStorage
 
 <div class="login-clean">
     <div class="login-form">
@@ -11,7 +10,6 @@
         </div>
         <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
         <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
-        <Checkbox Label="Rester connecté pendant 7 jours" OnChange="SetStayConnected" />
         <div class="form-group">
             <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
         </div>
@@ -25,7 +23,6 @@
     private string Password { get; set; } = "";
     private bool StayConnected { get; set; } = false;
 
-    private string CookieTokenValue { get; set; } = "";
     private string Message { get; set; } = "";
 
     public void SetEmailAddress(string s) => EmailAddress = s;
@@ -49,7 +46,7 @@
         }
         AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
         
-        Js.WriteCookie("token", loginToken.Token, StayConnected ? 60 * 60 * 24 * 7 : 60 * 60);
+        Js.WriteCookie("token", loginToken.Token, 60 * 60);
 
         NavManager.NavigateTo("/test");
     }

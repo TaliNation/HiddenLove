@@ -1,7 +1,8 @@
 @page "/login"
-@inject HttpClient Http
+@inject HttpWrapper Http
 @inject JsHelper Js
 @inject NavigationManager NavManager
+@inject ILocalStorageService LocalStorage
 
 <div class="login-clean">
     <div class="login-form">
@@ -39,7 +40,7 @@
             Password = Password
         };
         
-        HttpResponseMessage res = await Http.PostAsJsonAsync<AuthenticationRequest>("Users/authenticate", request);
+        HttpResponseMessage res = await Http.PostAsync<AuthenticationRequest>("Users/authenticate", request);
         if(!res.IsSuccessStatusCode)
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();
@@ -47,14 +48,9 @@
             return;
         }
         AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
-
-        Http.AddJwtAuthentication(loginToken.Token);
         
-        if(StayConnected)
-        {
-            Js.WriteCookie("token", loginToken.Token, 60 * 60 * 24 * 7);
-        }
+        Js.WriteCookie("token", loginToken.Token, StayConnected ? 60 * 60 * 24 * 7 : 60 * 60);
 
-        NavManager.NavigateTo("/");
+        NavManager.NavigateTo("/test");
     }
 }

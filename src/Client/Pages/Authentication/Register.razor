@@ -1,5 +1,5 @@
 @page "/register"
-@inject HttpClient Http
+@inject HttpWrapper Http
 @inject JsHelper Js
 @inject NavigationManager NavManager
 
@@ -74,7 +74,7 @@
             Password = Password
         };
 
-        var res = await Http.PostAsJsonAsync<RegisterRequest>("Users/register", registerRequest);
+        var res = await Http.PostAsync<RegisterRequest>("Users/register", registerRequest);
         if(!res.IsSuccessStatusCode)
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();
@@ -85,6 +85,6 @@
 
         Http.AddJwtAuthentication(LoginToken.Token);
 
-        NavManager.NavigateTo("/");
+        NavManager.NavigateTo("/test");
     }
 }

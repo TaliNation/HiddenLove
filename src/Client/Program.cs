@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using HiddenLove.Client.Helpers;
 using HiddenLove.Shared;
+using Blazored.LocalStorage;
 
 namespace HiddenLove.Client
 {
@@ -19,10 +20,12 @@ namespace HiddenLove.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddTransient<HttpClient>(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
+            builder.Services.AddScoped<HttpClient>(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
 
-            //builder.Services.AddTransient<HttpHelper>();
+            builder.Services.AddTransient<HttpWrapper>();
             builder.Services.AddTransient<JsHelper>();
+            
+            builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
         }

@@ -8,7 +8,7 @@
 		{
 			<option></option>
 		}
-		@foreach (KeyValuePair<int, string> item in Items)
+		@foreach (KeyValuePair<int?, string> item in Items)
 		{
 			<option value="@item.Key">@item.Value</option>
 		}
@@ -23,14 +23,16 @@
 	public string Label { get; set; } = null;
 
 	[Parameter]
-	public IEnumerable<KeyValuePair<int, string>> Items { get; set; } = new List<KeyValuePair<int, string>>();
+	public IEnumerable<KeyValuePair<int?, string>> Items { get; set; } = new List<KeyValuePair<int?, string>>();
 
 	[Parameter]
 	public bool HasDefaultItem { get; set; } = false;
 
 	[Parameter]
-	public EventCallback<string> OnChange { get; set; }
+	public EventCallback<int?> OnChange { get; set; }
 
-	private void OnChangeCallback(ChangeEventArgs e) =>
-		OnChange.InvokeAsync((string)e.Value);
+	private void OnChangeCallback(ChangeEventArgs e)
+	{
+		OnChange.InvokeAsync(e.Value.ToString().ToNullableInt());
+	}
 }

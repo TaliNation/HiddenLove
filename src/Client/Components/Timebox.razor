@@ -1,0 +1,50 @@
+<div class="form-group">
+    @if(Label != null)
+    {
+        <label for="@Id">@Label</label>
+    }
+    <input 
+        class="form-control" 
+        type="time" 
+        id="@Id" 
+        name="@Id" 
+        value="@Value"
+        min="@TimeMin"
+        max="@TimeMax"
+        @onchange="OnChangeCallback" />
+</div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    [Parameter]
+    public string Value { get; set; } = "";
+
+    [Parameter]
+    public string TimeMin { get; set; } = "";
+
+    [Parameter]
+    public string TimeMax { get; set; } = "";
+
+    [Parameter]
+    public string Label { get; set; } = null;
+
+    [Parameter]
+    public EventCallback<DateTime?> OnChange { get; set; }
+
+    private void OnChangeCallback(ChangeEventArgs e)
+    {
+        string timeString = e.Value.ToString();
+        DateTime parseResult; 
+        DateTime? res; 
+
+        if(DateTime.TryParse(timeString, out parseResult))
+            res = parseResult;
+        else
+            res = null;
+        
+        OnChange.InvokeAsync(res);
+    }
+}

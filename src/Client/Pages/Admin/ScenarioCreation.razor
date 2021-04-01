@@ -5,17 +5,23 @@
 @inject NavigationManager NavManager
 
 <div class="container">
-    @* @foreach (string step in Steps)
+    @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
     {
         <div class="row">
-            <div class="col-10">
-                <SelectList @Items=@AvailableSteps />
+            <div class="col-3">
+                <SelectList Items="AvailableSteps" OnChange="@(x => Steps[step.Index].StepId = x)" />
             </div>
-            <div class="col-2">
-                <i class="fas fa-minus-circle"></i>
+            <div class="col-3">
+                <Timebox OnChange="@(x => Steps[step.Index].StartTime = x)" />
+            </div>
+            <div class="col-3">
+                <Timebox OnChange="@(x => Steps[step.Index].EndTime = x)" />
+            </div>
+            <div class="col-3">
+                <i class="fas fa-minus-circle" @onclick="@(x => RemoveStep(step.Index))"></i>
             </div>
         </div>
-    } *@
+    }
     <div class="row">
         <div class="col-10"></div>
         <div class="col-2">
@@ -25,24 +31,42 @@
     <div class="row">
         <button class="btn btn-primary">J'ai Terminé !</button>
     </div>
-
-    <SelectList Items="AvailableSteps" />
 </div>
 
 @code {
-    private List<KeyValuePair<int, string>> AvailableSteps = new List<KeyValuePair<int, string>>();
+    private List<KeyValuePair<int?, string>> AvailableSteps = new List<KeyValuePair<int?, string>>();
     private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
 
     protected override async Task OnInitializedAsync()
     {
-        AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<int, string>>>("ScenarioCreation/Steps");
-        Js.Log(AvailableSteps);
+        AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<int?, string>>>("ScenarioCreation/Steps");
+        Console.WriteLine("App is ready to use");
     }
 
-    private void AddStep()
+    protected void AddStep()
     {
+        var newElement = new ScenarioCreationStep {
+            StepId = AvailableSteps.First().Key,
+            StartTime = null,
+            EndTime = null,
+            OrderIndex = 0
+        };
 
+        if(Steps.Count() > 0) 
+        {
+            newElement.StartTime = Steps[Steps.Count()-1].StartTime;
+            newElement.OrderIndex = Steps[Steps.Count()-1].OrderIndex + 1;
+        }         
+
+        Steps.Add(newElement);
+
+        Js.Log(Steps);
     }
-
-
+    
+    protected void RemoveStep(int index)
+    {
+        Console.WriteLine(index);
+        Steps.RemoveAt(index);
+        Js.Log(Steps);
+    }
 }

@@ -9,13 +9,13 @@
     {
         <div class="row">
             <div class="col-3">
-                <SelectList Items="AvailableSteps" OnChange="@(x => Steps[step.Index].StepId = x)" />
+                <SelectList Items="AvailableSteps" @bind-BindingValue="Steps[step.Index].StepIdAsString" />
             </div>
             <div class="col-3">
-                <Timebox OnChange="@(x => Steps[step.Index].StartTime = x)" />
+                <Timebox @bind-BindingValue="Steps[step.Index].StartTime" />
             </div>
             <div class="col-3">
-                <Timebox OnChange="@(x => Steps[step.Index].EndTime = x)" />
+                <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
             </div>
             <div class="col-3">
                 <i class="fas fa-minus-circle" @onclick="@(x => RemoveStep(step.Index))"></i>
@@ -29,44 +29,41 @@
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-primary">J'ai Terminé !</button>
+        <button class="btn btn-primary" @onclick="SubmitScenario">J'ai Terminé !</button>
     </div>
 </div>
 
 @code {
-    private List<KeyValuePair<int?, string>> AvailableSteps = new List<KeyValuePair<int?, string>>();
+    private List<KeyValuePair<string, string>> AvailableSteps = new List<KeyValuePair<string, string>>();
     private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
 
     protected override async Task OnInitializedAsync()
     {
-        AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<int?, string>>>("ScenarioCreation/Steps");
+        AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("ScenarioCreation/Steps");
         Console.WriteLine("App is ready to use");
     }
 
     protected void AddStep()
     {
         var newElement = new ScenarioCreationStep {
-            StepId = AvailableSteps.First().Key,
+            StepIdAsString = AvailableSteps.First().Key,
             StartTime = null,
-            EndTime = null,
-            OrderIndex = 0
+            EndTime = null
         };
 
         if(Steps.Count() > 0) 
-        {
-            newElement.StartTime = Steps[Steps.Count()-1].StartTime;
-            newElement.OrderIndex = Steps[Steps.Count()-1].OrderIndex + 1;
-        }         
+            newElement.StartTime = Steps[Steps.Count()-1].EndTime;
 
         Steps.Add(newElement);
-
-        Js.Log(Steps);
     }
     
     protected void RemoveStep(int index)
     {
-        Console.WriteLine(index);
         Steps.RemoveAt(index);
+    }
+
+    protected void SubmitScenario()
+    {
         Js.Log(Steps);
     }
 }

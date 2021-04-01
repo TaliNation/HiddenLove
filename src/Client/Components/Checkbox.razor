@@ -1,37 +1,35 @@
 <div class="form-check">
-    @if(CheckedByDefault) 
-    { 
-        <input 
-            class="form-check-input" 
-            type="checkbox" 
-            id="@Id" 
-            name="@Id" 
-            checked
-            @onchange="OnChangeCallback" />
-    }
-    else
-    {
-        <input 
-            class="form-check-input" 
-            type="checkbox" 
-            id="@Id" 
-            name="@Id" 
-            @onchange="OnChangeCallback" />
-    }
+    <input 
+        class="form-check-input" 
+        type="checkbox" 
+        id="@Id" 
+        name="@Id" 
+        @bind="@BindingValue" />
     <label class="form-check-label" for="@Id">@Label</label>
 </div>
 
 @code {
     [Parameter]
     public string Id { get; set; } = "";
-    [Parameter]
-    public bool CheckedByDefault { get; set; } = false;
+
     [Parameter]
     public string Label { get; set; } = "";
 
-    [Parameter]
-    public EventCallback<bool> OnChange { get; set; }
 
-    private void OnChangeCallback(ChangeEventArgs e) =>
-        OnChange.InvokeAsync((bool)e.Value);
+    private bool _value;
+
+    [Parameter]
+    public bool BindingValue
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            BindingValueChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<bool> BindingValueChanged { get; set; }   
 }

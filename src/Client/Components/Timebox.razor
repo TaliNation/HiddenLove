@@ -8,10 +8,9 @@
         type="time" 
         id="@Id" 
         name="@Id" 
-        value="@Value"
         min="@TimeMin"
         max="@TimeMax"
-        @onchange="OnChangeCallback" />
+        @bind="@BindingValue" />
 </div>
 
 @code {
@@ -31,20 +30,21 @@
     [Parameter]
     public string Label { get; set; } = null;
 
+
+    private DateTime? _value;
+
     [Parameter]
-    public EventCallback<DateTime?> OnChange { get; set; }
-
-    private void OnChangeCallback(ChangeEventArgs e)
+    public DateTime? BindingValue
     {
-        string timeString = e.Value.ToString();
-        DateTime parseResult; 
-        DateTime? res; 
-
-        if(DateTime.TryParse(timeString, out parseResult))
-            res = parseResult;
-        else
-            res = null;
-        
-        OnChange.InvokeAsync(res);
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            BindingValueChanged.InvokeAsync(value);
+        }
     }
+
+    [Parameter]
+    public EventCallback<DateTime?> BindingValueChanged { get; set; }   
 }

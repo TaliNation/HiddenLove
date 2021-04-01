@@ -8,8 +8,8 @@
         <div class="illustration">
             <img src="img/logo.png" />
         </div>
-        <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
-        <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
+        <Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
+        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="Password" />
         <div class="form-group">
             <button class="btn btn-primary btn-block" @onclick="LogUser">Submit</button>
         </div>
@@ -21,13 +21,8 @@
 @code {
     private string EmailAddress { get; set; } = "";
     private string Password { get; set; } = "";
-    private bool StayConnected { get; set; } = false;
 
     private string Message { get; set; } = "";
-
-    public void SetEmailAddress(string s) => EmailAddress = s;
-    public void SetPassword(string s) => Password = s;
-    public void SetStayConnected(bool b) => StayConnected = b;
 
     private async void LogUser()
     {

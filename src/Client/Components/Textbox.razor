@@ -9,8 +9,7 @@
         id="@Id" 
         name="@Id" 
         placeholder="@Placeholder" 
-        value="@DefaultValue"
-        @onchange="OnChangeCallback" />
+        @bind="@BindingValue" />
 </div>
 
 @code {
@@ -24,14 +23,23 @@
     public bool IsPassword { get; set; } = false;
 
     [Parameter]
-    public EventCallback<string> OnChange { get; set; }
-
-    [Parameter]
-    public string DefaultValue { get; set; } = "";
-
-    [Parameter]
     public string Label { get; set; } = null;
 
-    private void OnChangeCallback(ChangeEventArgs e) =>
-        OnChange.InvokeAsync((string)e.Value);
+
+    private string _value;
+
+    [Parameter]
+    public string BindingValue
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            BindingValueChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> BindingValueChanged { get; set; }   
 }

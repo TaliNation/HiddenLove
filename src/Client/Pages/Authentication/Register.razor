@@ -7,24 +7,24 @@
 
 <div class="row">
     <div class="col-4">
-        <Textbox Placeholder="Email Address" OnChange="SetEmailAddress" />
+        <Textbox Placeholder="Email Address" @bind-BindingValue="EmailAddress" />
     </div>
     <div class="col-4">
-        <Textbox Placeholder="Password" IsPassword OnChange="SetPassword" />
+        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="Password" />
     </div>
     <div class="col-4">
-        <Textbox Placeholder="Password" IsPassword OnChange="SetConfirmedPassword" />
+        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="ConfirmedPassword" />
     </div>
 </div>
 <div class="row">
     <div class="col-4">
-        <Textbox Placeholder="Username" OnChange="SetUsername" />
+        <Textbox Placeholder="Username" @bind-BindingValue="Username" />
     </div>
     <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." OnChange="SetTermsOfServiceAccepted" />
+        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfServiceAccepted" />
     </div>
     <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." OnChange="SetPrivacyPoliciesAccepted" />
+        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPoliciesAccepted" />
     </div>
     <div class="col-2">
         <button class="btn btn-primary full-width" @onclick="RegisterUser">Submit</button>
@@ -43,13 +43,6 @@
     private bool PrivacyPoliciesAccepted { get; set; } = false;
 
     private string Message { get; set; } = "";
-
-    public void SetEmailAddress(string s) => EmailAddress = s;
-    public void SetPassword(string s) => Password = s;
-    public void SetConfirmedPassword(string s) => ConfirmedPassword = s;
-    public void SetUsername(string s) => Username = s;
-    public void SetTermsOfServiceAccepted(bool b) => TermsOfServiceAccepted = b;
-    public void SetPrivacyPoliciesAccepted(bool b) => PrivacyPoliciesAccepted = b;
 
     private async void RegisterUser()
     {

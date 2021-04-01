@@ -5,13 +5,13 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    public class StepTemplateRepository : Repository, IRead<int, StepTemplate>
+    public class ScenarioRepository : Repository, IRead<int, Scenario>, IInsert<int, Scenario>
     {
-        public virtual StepTemplate GetById(int key) =>
-            QueryFactory.Query("StepTemplates").Where("StepTemplates.Id", "=", key).FirstOrDefault<StepTemplate>();
+        public virtual Scenario GetById(int key) =>
+            QueryFactory.Query("scenarios").Where("scenarios.id", "=", key).FirstOrDefault<Scenario>();
 
-        public virtual IEnumerable<StepTemplate> GetAll() =>
-            QueryFactory.Query("StepTemplates").Get<StepTemplate>();
+        public virtual IEnumerable<Scenario> GetAll() =>
+            QueryFactory.Query("scenarios").Get<Scenario>();
 
         public virtual int Insert(Scenario entity) =>
             QueryFactory.Query("scenarios").InsertGetId<int>(new {

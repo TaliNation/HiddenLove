@@ -12,6 +12,8 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class ScenarioCreationController : ControllerBase
     {
+
+        
         [HttpGet]
         [Route("Steps")]
         [Produces("application/json")]
@@ -25,14 +27,32 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        // [HttpGet]
-        // [Route("NewScenario")]
-        // [Produces("application/json")]
-        // public IActionResult NewScenario()
-        // {
-        //     var dbAccess = new ScenarioTemplateRe();
 
 
-        // }
+        [HttpPost]
+        [Route("NewScenario")]
+        [Produces("application/json")]
+        public IActionResult NewScenario(ScenarioCreation model)
+        {
+            var scenarioTemplateDbAccess = new ScenarioTemplateRepository();
+            int scenarioTemplateId = scenarioTemplateDbAccess.Insert(new ScenarioTemplate {
+                Title = model.Title,
+                Description = model.Description
+            });
+
+            var scenarioTemplateStepTemplateDbAccess = new ScenarioTemplatesStepTemplateRepository();
+
+            foreach(ScenarioCreationStep step in model.Steps)
+            {
+                scenarioTemplateStepTemplateDbAccess.Insert(new ScenarioTemplatesStepTemplate {
+                    IdScenariotemplate = scenarioTemplateId,
+                    IdSteptemplate = step.StepId,
+                    StartDate = step.StartTime,
+                    EndDate = step.EndTime
+                });
+            }
+
+            return Ok();
+        }
     }
 }

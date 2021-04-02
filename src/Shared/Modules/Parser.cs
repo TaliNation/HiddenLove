@@ -10,5 +10,14 @@ namespace HiddenLove.Shared.Modules
 
             return null;
         }
+
+        public static int ToInt(this string s, int defaultValue = 0)
+        {
+            int res;
+            if (int.TryParse(s, out res)) 
+                return res;
+
+            return defaultValue;
+        }
     }
 }

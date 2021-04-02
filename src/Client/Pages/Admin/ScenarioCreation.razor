@@ -5,6 +5,14 @@
 @inject NavigationManager NavManager
 
 <div class="container">
+    <div class="row">
+        <div class="col-3">
+            <Textbox Placeholder="Titre" @bind-BindingValue="Title" />
+        </div>
+        <div class="col-9">
+            <Textarea Placeholder="Description" @bind-BindingValue="Description" />
+        </div>
+    </div>
     @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
     {
         <div class="row">
@@ -31,11 +39,19 @@
     <div class="row">
         <button class="btn btn-primary" @onclick="SubmitScenario">J'ai Terminé !</button>
     </div>
+    <div class="row">
+        <p>@Message</p>
+    </div>
 </div>
 
 @code {
     private List<KeyValuePair<string, string>> AvailableSteps = new List<KeyValuePair<string, string>>();
     private List<ScenarioCreationStep> Steps = new List<ScenarioCreationStep>();
+
+    private string Title { get; set; } = "";
+    private string Description { get; set; } = "";
+
+    private string Message { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -62,8 +78,37 @@
         Steps.RemoveAt(index);
     }
 
-    protected void SubmitScenario()
+    protected async void SubmitScenario()
     {
-        Js.Log(Steps);
+        if(Title == "" || Title == null)
+        {
+            Message = "Le titre ne peut pas être vide.";
+            return;
+        }
+
+        if(Steps.Count() < 2)
+        {
+            Message = "Un scénario doit au moins contenir 2 étapes.";
+            return;
+        }
+
+        var request = new HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation
+        {
+            Title = Title,
+            Description = Description,
+            Steps = Steps
+        };
+
+        Js.Log(request);
+
+        var res = await Http.PostAsync<HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation>("ScenarioCreation/NewScenario", request);
+        if(!res.IsSuccessStatusCode)
+        {
+            HttpError error = await res.Content.ReadAsAsync<HttpError>();
+            Js.LogError(error);
+            return;
+        }
+
+        NavManager.NavigateTo("/");
     }
 }

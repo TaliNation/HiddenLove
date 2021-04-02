@@ -67,7 +67,5 @@ namespace HiddenLove.Client.Helpers
 
             return uri;
         }
-
-
     }
 }

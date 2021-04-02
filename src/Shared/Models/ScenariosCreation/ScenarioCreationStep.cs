@@ -5,9 +5,9 @@ namespace HiddenLove.Shared.Models.ScenarioCreation
 {
     public class ScenarioCreationStep
     {
-        public int? StepId
+        public int StepId
         {
-            get => StepIdAsString.ToNullableInt();
+            get => StepIdAsString.ToInt();
         }
         public string StepIdAsString { get; set; }
         public DateTime? StartTime { get; set; }

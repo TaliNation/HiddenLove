@@ -15,10 +15,8 @@ namespace HiddenLove.DataAccess.Repositories
         
         public virtual int Insert(ScenarioTemplate entity) =>
             QueryFactory.Query("ScenarioTemplates").InsertGetId<int>(new {
-                Id = entity.Id,
                 Title = entity.Title,
                 Description = entity.Description,
-                Image = entity.Image
             });
     }
 }

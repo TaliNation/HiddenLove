@@ -27,6 +27,8 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
+
+
         [HttpPost]
         [Route("NewScenario")]
         [Produces("application/json")]

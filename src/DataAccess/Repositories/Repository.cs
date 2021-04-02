@@ -3,11 +3,10 @@ using System.Data.SqlClient;
 using HiddenLove.DataAccess.Entities;
 using SqlKata.Compilers;
 using SqlKata.Execution;
+using HiddenLove.DataAccess.QueryFactories;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    public interface IRepository { }
-
     public interface IRead<TKey, TEntity> where TEntity : IEntity<TKey>
     {
         TEntity GetById(TKey key);
@@ -19,16 +18,19 @@ namespace HiddenLove.DataAccess.Repositories
         TKey Insert(TEntity entity);
     }
 
-    public abstract class Repository : IRepository
+    public abstract class Repository
     {
         protected QueryFactory QueryFactory { get; } 
         
         public Repository()
         {
-            SqlConnection connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
-            var queryCompiler = new SqlServerCompiler(); 
+            IQueryFactory queryFactory = new ProductionDbQueryFactory();
+            QueryFactory = queryFactory.QueryFactory;
+        }
 
-            QueryFactory = new QueryFactory(connection, queryCompiler);
+        public Repository(IQueryFactory queryFactory)
+        {
+            QueryFactory = queryFactory.QueryFactory;
         }
     }
 }

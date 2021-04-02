@@ -8,8 +8,8 @@
         <div class="illustration">
             <img src="img/logo.png" class="illustration"/>
         </div>
-        <Textbox Placeholder="Email" OnChange="SetEmailAddress" />
-        <Textbox Placeholder="Mot de passe" IsPassword OnChange="SetPassword" />
+        <Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
+        <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="EmailAddress" />
         <div class="form-group">
             <button class="btn btn-primary btn-block" @onclick="LogUser">Valider</button>
         </div>

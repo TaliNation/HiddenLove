@@ -10,7 +10,7 @@
         <Textbox Placeholder="Email Address" @bind-BindingValue="EmailAddress" />
     </div>
     <div class="col-4">
-        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="Password" />
+        <Textbox Label="coucou" Placeholder="Password" IsPassword @bind-BindingValue="Password" />
     </div>
     <div class="col-4">
         <Textbox Placeholder="Password" IsPassword @bind-BindingValue="ConfirmedPassword" />
@@ -27,8 +27,7 @@
         <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPoliciesAccepted" />
     </div>
     <div class="col-2">
-        @* <button class="btn btn-primary full-width" @onclick="RegisterUser">Submit</button> *@
-        <Button Text="Envoyer" />
+        <button class="btn btn-primary full-width" @onclick="RegisterUser">Submit</button>
     </div>
 </div>
 <div class="row">

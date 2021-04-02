@@ -3,32 +3,31 @@
 @inject JsHelper Js
 @inject NavigationManager NavManager
 
-<h1>Register</h1>
+<h1>Inscription</h1>
 
 <div class="row">
     <div class="col-4">
-        <Textbox Placeholder="Email Address" @bind-BindingValue="EmailAddress" />
+        <Textbox Placeholder="Adresse Email" @bind-BindingValue="EmailAddress" />
     </div>
     <div class="col-4">
-        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="Password" />
+        <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
     </div>
     <div class="col-4">
-        <Textbox Placeholder="Password" IsPassword @bind-BindingValue="ConfirmedPassword" />
+        <Textbox Placeholder="Confirmation du mot de passe" IsPassword @bind-BindingValue="ConfirmedPassword" />
     </div>
 </div>
 <div class="row">
     <div class="col-4">
-        <Textbox Placeholder="Username" @bind-BindingValue="Username" />
+        <Textbox Placeholder="Nom d'utilisateur" @bind-BindingValue="Username" />
     </div>
     <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfServiceAccepted" />
+        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfServiceAccepted" id="Tos-Checkbox"/>
     </div>
     <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPoliciesAccepted" />
+        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPoliciesAccepted" id="Pp-Checkbox"/>
     </div>
     <div class="col-2">
-        @* <button class="btn btn-primary full-width" @onclick="RegisterUser">Submit</button> *@
-        <Button Text="Envoyer" />
+        <button class="btn btn-primary full-width" @onclick="RegisterUser">Valider</button>
     </div>
 </div>
 <div class="row">
@@ -49,13 +48,13 @@
     {
         if(!TermsOfServiceAccepted || !PrivacyPoliciesAccepted)
         {
-            Message = "You must accept the terms of services and the privacy policy to register.";
+            Message = "Vous devez accepter les conditions générales d'utilisation ainsi que la politique de vie privée pour vous inscrire.";
             return;
         }
 
         if(Password != ConfirmedPassword)
         {
-            Message = "Password and confirmation are not identical;";
+            Message = "Les mots de passes ne sont pas identiques.;";
             return;
         }
 

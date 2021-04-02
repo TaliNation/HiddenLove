@@ -46,9 +46,10 @@ CREATE TABLE Users
 (
     Id INT IDENTITY NOT NULL PRIMARY KEY,
     EmailAddress VARCHAR(255) NOT NULL UNIQUE,
+    SecondaryEmailAddress VARCHAR(255) NOT NULL UNIQUE,
     Username VARCHAR(255) NOT NULL,
     FullUsername VARCHAR(255) NOT NULL UNIQUE,
-    Passwordhash VARCHAR(255) NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
     Id_privilege INTEGER,
     FOREIGN KEY (Id_privilege)
 		REFERENCES Privileges (id)
@@ -60,7 +61,7 @@ CREATE TABLE Users
 CREATE TABLE Scenarios
 (
     Id INT IDENTITY NOT NULL PRIMARY KEY,
-    Eventdate DATE NOT NULL,
+    EventDate DATE NOT NULL,
     Id_user INTEGER NOT NULL,
     Id_scenariotemplate INTEGER NOT NULL,
     FOREIGN KEY (Id_user)
@@ -74,17 +75,16 @@ CREATE TABLE Scenarios
 /*==============================================================*/
 CREATE TABLE ScenarioTemplates_StepTemplates
 (
+    Id INT IDENTITY NOT NULL PRIMARY KEY,
     Id_scenariotemplate INTEGER NOT NULL,
     Id_steptemplate INTEGER NOT NULL,
-    OrderIndex INTEGER,
     StartDate DATETIME,
     EndDate DATETIME,
-    PRIMARY KEY(id_scenariotemplate, id_steptemplate),
     FOREIGN KEY (id_scenariotemplate)
-		REFERENCES ScenarioTemplates (id),
+		  REFERENCES ScenarioTemplates (id),
     FOREIGN KEY (id_steptemplate)
-		REFERENCES StepTemplates (id)
-)
+		  REFERENCES StepTemplates (id)
+);
 
 /*==============================================================*/
 /* Table: Subscriptions                                         */

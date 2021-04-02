@@ -89,6 +89,7 @@ a, .btn-link {
   border-bottom: 1px solid #dfe7f1;
   border-radius: 0;
   box-shadow: none;
+  margin-top: 25px;
   outline: none;
   color: inherit;
   text-indent: 8px;
@@ -100,7 +101,7 @@ a, .btn-link {
   border-radius: 4px;
   padding: 11px;
   box-shadow: none;
-  margin-top: 26px;
+  margin-top: 25px;
   text-shadow: none;
   outline: none !important;
 }
@@ -123,10 +124,12 @@ a, .btn-link {
   text-decoration: none;
 }
 .login-clean .illustration {
-  text-align: center;
-  padding: 0 0 20px;
-  font-size: 100px;
-  color: #f4476b;
+  width: 100%;
+  height: auto;
+  /*  text-align: center;
+    padding: 0 0 20px;
+    font-size: 100px;
+    color: rgb(244,71,107);*/
 }
 
 /*# sourceMappingURL=app.css.map */

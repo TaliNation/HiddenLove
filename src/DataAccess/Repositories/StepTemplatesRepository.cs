@@ -12,12 +12,5 @@ namespace HiddenLove.DataAccess.Repositories
 
         public virtual IEnumerable<StepTemplate> GetAll() =>
             QueryFactory.Query("StepTemplates").Get<StepTemplate>();
-
-        public virtual int Insert(Scenario entity) =>
-            QueryFactory.Query("scenarios").InsertGetId<int>(new {
-                eventdate = entity.Eventdate,
-                id_scenariotemplate = entity.IdScenariotemplate,
-                id_user = entity.IdUser
-            });
     }
 }

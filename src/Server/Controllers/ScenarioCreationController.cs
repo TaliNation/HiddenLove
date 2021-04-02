@@ -25,14 +25,20 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        // [HttpGet]
-        // [Route("NewScenario")]
-        // [Produces("application/json")]
-        // public IActionResult NewScenario()
-        // {
-        //     var dbAccess = new ScenarioTemplateRe();
+        [HttpPost]
+        [Route("NewScenario")]
+        [Produces("application/json")]
+        public IActionResult NewScenario(ScenarioCreation model)
+        {
+            var scenarioTemplateDbAccess = new ScenarioTemplateRepository();
+            int scenarioTemplateId = scenarioTemplateDbAccess.Insert(new ScenarioTemplate {
+                Title = model.Title,
+                Description = model.Description
+            });
 
+            #warning TODO: insertion des étapes dans la table intermédiaire
 
-        // }
+            return null;
+        }
     }
 }

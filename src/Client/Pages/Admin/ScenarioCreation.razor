@@ -92,15 +92,6 @@
             return;
         }
 
-        foreach(ScenarioCreationStep step in Steps)
-        {
-            if(step.StartTime == null || step.EndTime == null)
-            {
-                Message = "Toutes les étapes doivent avoir une heure de début et de fin.";
-                return;
-            }
-        }
-        
         var request = new HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation
         {
             Title = Title,

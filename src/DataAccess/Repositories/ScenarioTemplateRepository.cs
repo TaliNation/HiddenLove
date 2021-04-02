@@ -5,19 +5,20 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    public class ScenarioRepository : Repository, IRead<int, Scenario>, IInsert<int, Scenario>
+    public class ScenarioTemplateRepository : Repository, IRead<int, ScenarioTemplate>, IInsert<int, ScenarioTemplate>
     {
-        public virtual Scenario GetById(int key) =>
-            QueryFactory.Query("scenarios").Where("scenarios.id", "=", key).FirstOrDefault<Scenario>();
+        public virtual ScenarioTemplate GetById(int key) =>
+            QueryFactory.Query("ScenarioTemplates").Where("ScenarioTemplates.Id", "=", key).FirstOrDefault<ScenarioTemplate>();
 
-        public virtual IEnumerable<Scenario> GetAll() =>
-            QueryFactory.Query("scenarios").Get<Scenario>();
-
-        public virtual int Insert(Scenario entity) =>
-            QueryFactory.Query("scenarios").InsertGetId<int>(new {
-                eventdate = entity.Eventdate,
-                id_scenariotemplate = entity.IdScenariotemplate,
-                id_user = entity.IdUser
+        public virtual IEnumerable<ScenarioTemplate> GetAll() =>
+            QueryFactory.Query("ScenarioTemplates").Get<ScenarioTemplate>();
+        
+        public virtual int Insert(ScenarioTemplate entity) =>
+            QueryFactory.Query("ScenarioTemplates").InsertGetId<int>(new {
+                Id = entity.Id,
+                Title = entity.Title,
+                Description = entity.Description,
+                Image = entity.Image
             });
     }
 }

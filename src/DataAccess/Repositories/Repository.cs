@@ -1,40 +1,55 @@
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using HiddenLove.DataAccess.Entities;
-using SqlKata.Compilers;
-using SqlKata.Execution;
 using HiddenLove.DataAccess.QueryFactories;
-using System;
+using HiddenLove.DataAccess.TableAccesses;
+using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
-    [Obsolete("This module is part of an old data access framework and should not be used. Prefer the one in HiddenLove.DataAccess.RD.")]
-    public interface IRead<TKey, TEntity> where TEntity : IEntity<TKey>
-    {
-        TEntity GetById(TKey key);
-        IEnumerable<TEntity> GetAll();
-    }
 
-    [Obsolete("This module is part of an old data access framework and should not be used. Prefer the one in HiddenLove.DataAccess.RD.")]
-    public interface IInsert<TKey, TEntity> where TEntity : IEntity<TKey>
+    public class Repository
     {
-        TKey Insert(TEntity entity);
-    }
+        protected QueryFactory QueryFactory { get; private set; } 
 
-    [Obsolete("This module is part of an old data access framework and should not be used. Prefer the one in HiddenLove.DataAccess.RD.")]
-    public abstract class Repository
-    {
-        protected QueryFactory QueryFactory { get; } 
+        public TableAccess TableAccess { get; private set; }
         
-        public Repository()
+        public Repository(TableAccess tableAccess)
         {
             IQueryFactory queryFactory = new ProductionDbQueryFactory();
             QueryFactory = queryFactory.QueryFactory;
+
+            SetTableAccess(tableAccess);
         }
 
-        public Repository(IQueryFactory queryFactory)
+        public Repository(TableAccess tableAccess, IQueryFactory queryFactory)
         {
             QueryFactory = queryFactory.QueryFactory;
+            SetTableAccess(tableAccess);
         }
+
+        public void SetQueryFactory(IQueryFactory queryFactory)
+        {
+            QueryFactory = queryFactory.QueryFactory;
+            TableAccess.SetQueryFactory(QueryFactory);
+        }
+
+        public void SetTableAccess(TableAccess tableAccess)
+        {
+            TableAccess = tableAccess;
+            TableAccess.SetQueryFactory(QueryFactory);
+        }
+
+
+        public virtual TEntity GetById<TKey, TEntity>(TKey key) where TEntity : IEntity<TKey> =>
+            TableAccess.GetById<TKey, TEntity>(key);
+
+        public virtual IEnumerable<TEntity> GetAll<TKey, TEntity>() where TEntity : IEntity<TKey> =>
+            TableAccess.GetAll<TEntity>();
+
+        public virtual IEnumerable<TEntity> GetByColumn<TKey, TEntity>(string columnName, object columnValue) where TEntity : IEntity<TKey> =>
+            TableAccess.GetByColumn<TEntity>(columnName, columnValue);
+
+        public virtual TKey Insert<TKey, TEntity>(TEntity entity) where TEntity : IEntity<TKey> =>
+            TableAccess.Insert<TKey>(entity);
     }
 }

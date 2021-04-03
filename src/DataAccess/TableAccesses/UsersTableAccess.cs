@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using HiddenLove.DataAccess.Entities;
 using SqlKata.Execution;
 
-namespace HiddenLove.DataAccess.RD.TableAccesses
+namespace HiddenLove.DataAccess.TableAccesses
 {
     public sealed class UsersTableAccess : TableAccess
     {

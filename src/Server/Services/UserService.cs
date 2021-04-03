@@ -9,7 +9,7 @@ using System.Text;
 using HiddenLove.DataAccess.Entities;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models;
-using BCrypt.Net;
+using HiddenLove.DataAccess.TableAccesses;
 using HiddenLove.DataAccess.Repositories;
 
 namespace HiddenLove.Server.Services
@@ -17,18 +17,17 @@ namespace HiddenLove.Server.Services
     public interface IUserService
     {
         AuthenticationResponse Authenticate(AuthenticationRequest model);
-        IEnumerable<User> GetAll();
         User GetById(int id);
         AuthenticationResponse Register(RegisterRequest model);
     }
 
     public class UserService : IUserService
     {
-        private UserRepository _dataAccess { get; } 
+        private Repository _dataAccess { get; } 
 
         private readonly AppSettings _appSettings;
 
-        public UserService(IOptions<AppSettings> appSettings, UserRepository dataAccess)
+        public UserService(IOptions<AppSettings> appSettings, Repository dataAccess)
         {
             _appSettings = appSettings.Value;
             _dataAccess = dataAccess;
@@ -37,19 +36,19 @@ namespace HiddenLove.Server.Services
         public UserService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _dataAccess = new UserRepository();
+            _dataAccess = new Repository(new UsersTableAccess());
         }
 
         public AuthenticationResponse Authenticate(AuthenticationRequest model)
         {
-            User userCredentials = _dataAccess.GetByEmailAddress(model.EmailAddress);
+            User userCredentials = _dataAccess.GetByColumn<int, User>("EmailAddress", model.EmailAddress).FirstOrDefault();
             
             if(!IsUserValid(userCredentials, model))
             {
                 return null;
             }
 
-            User user = _dataAccess.GetById(userCredentials.Id);
+            User user = _dataAccess.GetById<int, User>(userCredentials.Id);
 
             string token = GerenateJwtToken(user);
 
@@ -60,11 +59,8 @@ namespace HiddenLove.Server.Services
             };
         } 
 
-        public IEnumerable<User> GetAll() =>
-            _dataAccess.GetAll();
-
         public User GetById(int id) =>
-            _dataAccess.GetById(id);
+            _dataAccess.GetById<int, User>(id);
 
         private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
             userCredentials != null
@@ -101,7 +97,7 @@ namespace HiddenLove.Server.Services
             if(UserExists(user.EmailAddress))
                 return null;
 
-            _dataAccess.Insert(user);
+            _dataAccess.Insert<int, User>(user);
 
             var authenticationRequest = new AuthenticationRequest
             {
@@ -114,7 +110,7 @@ namespace HiddenLove.Server.Services
 
         private bool UserExists(string userEmailAddress)
         {
-            User user = _dataAccess.GetByEmailAddress(userEmailAddress);
+            User user = _dataAccess.GetByColumn<int, User>("EmailAddress", userEmailAddress).FirstOrDefault();
 
             if(user == null)
                 return false;

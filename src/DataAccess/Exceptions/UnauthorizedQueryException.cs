@@ -1,6 +1,6 @@
 using System;
 
-namespace HiddenLove.DataAccess.RD.Exceptions
+namespace HiddenLove.DataAccess.Exceptions
 {
     [Serializable]
     public class UnauthorizedQueryException : Exception

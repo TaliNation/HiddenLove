@@ -2,6 +2,9 @@ using System;
 
 namespace HiddenLove.DataAccess.Exceptions
 {
+    /// <summary>
+    /// Exception lorsqu'un requête non explicitement déclarée dans le Repository tente d'être exécutée
+    /// </summary>
     [Serializable]
     public class UnauthorizedQueryException : Exception
     {

@@ -14,13 +14,30 @@ using HiddenLove.DataAccess.Repositories;
 
 namespace HiddenLove.Server.Services
 {
+    /// <summary>
+    /// Service d'authentification des utilisateurs
+    /// </summary>
     public interface IUserService
     {
+        /// <summary>
+        /// Authentification de l'utilisateur
+        /// </summary>
         AuthenticationResponse Authenticate(AuthenticationRequest model);
+
+        /// <summary>
+        /// Récupération de l'utilisateur par son ID
+        /// </summary>
         User GetById(int id);
+
+        /// <summary>
+        /// Inscription et authentification de l'utilisateur
+        /// </summary>
         AuthenticationResponse Register(RegisterRequest model);
     }
 
+    /// <summary>
+    /// Service d'authentification des utilisateurs
+    /// </summary>
     public class UserService : IUserService
     {
         private Repository _dataAccess { get; } 

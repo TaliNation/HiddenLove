@@ -15,6 +15,10 @@ namespace HiddenLove.Server.Controllers
     {
         private User _currentUser => (User)HttpContext.Items["User"];
 
+        /// <summary>
+        /// Récupération de tous les scénarios type pour laisser le choix à l'utilisateur
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Route("AvailableScenarios")]
@@ -33,6 +37,9 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
+        /// <summary>
+        /// Réservation et planification d'un scénario par l'utilisateur
+        /// </summary>
         [Authorize]
         [HttpPost]
         [Route("BookScenario")]
@@ -50,6 +57,9 @@ namespace HiddenLove.Server.Controllers
             return Ok(scenarioId);
         }
 
+        /// <summary>
+        /// API de test
+        /// </summary>
         [Authorize]
         [HttpGet("CurrentUser")]
         [Produces("application/json")]
@@ -58,6 +68,9 @@ namespace HiddenLove.Server.Controllers
             return Ok(_currentUser);
         }
 
+        /// <summary>
+        /// API de test
+        /// </summary>
         [Authorize]
         [HttpGet("CurrentUsername")]
         [Produces("application/json")]

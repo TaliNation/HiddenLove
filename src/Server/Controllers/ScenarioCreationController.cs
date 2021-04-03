@@ -14,7 +14,9 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class ScenarioCreationController : ControllerBase
     {
-
+        /// <summary>
+        /// Récupération de tous les types d'étapes pour les assembler dans la création des scénarios
+        /// </summary>
         [Authorize]
         [HttpGet]
         [Route("Steps")]
@@ -29,6 +31,9 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
+        /// <summary>
+        /// Création d'un nouveau scénario type
+        /// </summary>
         [Authorize]
         [HttpPost]
         [Route("NewScenario")]

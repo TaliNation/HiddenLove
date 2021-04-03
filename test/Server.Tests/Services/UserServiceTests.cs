@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using HiddenLove.DataAccess.Repositories;
 using NUnit.Framework;
 using Moq;
@@ -10,8 +7,8 @@ using HiddenLove.DataAccess.Entities;
 using HiddenLove.Server.Services;
 using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;
-using FluentAssertions;
 using HiddenLove.Shared.Models;
+using HiddenLove.DataAccess.TableAccesses;
 
 namespace HiddenLove.Tests.Server.Services
 {
@@ -19,7 +16,7 @@ namespace HiddenLove.Tests.Server.Services
     public class UserServiceTests
     {
         private UserService TestSubject;
-        private Mock<UserRepository> RepositoryMock;
+        private Mock<Repository> RepositoryMock;
         private List<User> UsersInMemoryDb;
         private IOptions<AppSettings> AppSettings;
 
@@ -32,17 +29,21 @@ namespace HiddenLove.Tests.Server.Services
                 new User { Id = 2, EmailAddress = "tommy.mclagen@orange.fr", Passwordhash = "$2y$10$ZZfuPOUpxjg6rvxQnL9HTOwy/EnkvG8vzj.WGvjMlVT0a1UruL46e" }   // Leroileo78*
             };
 
-            RepositoryMock = new Mock<UserRepository>();
-            RepositoryMock.Setup(x => x.GetById(It.IsAny<int>()))
+            RepositoryMock = new Mock<Repository>(new UsersTableAccess());
+            RepositoryMock.Setup(x => x.GetById<int, User>(It.IsAny<int>()))
                 .Returns((int i) => UsersInMemoryDb.FirstOrDefault(x => x.Id == i));
 
-            RepositoryMock.Setup(x => x.GetAll())
+            RepositoryMock.Setup(x => x.GetAll<int, User>())
                 .Returns(UsersInMemoryDb);
 
-            RepositoryMock.Setup(x => x.GetByEmailAddress(It.IsAny<string>()))
-                .Returns((string s) => UsersInMemoryDb.FirstOrDefault(x => x.EmailAddress == s));
+            RepositoryMock.Setup(
+                    x => x.GetByColumn<int, User>(
+                        It.Is<string>(x => x.ToUpper() == "EMAILADDRESS"), It.IsAny<object>()))
+                .Returns(
+                    (string s, object o) => UsersInMemoryDb
+                    .Where(x => o != null && x.EmailAddress == o.ToString()));
 
-            RepositoryMock.Setup(x => x.Insert(It.IsAny<User>()))
+            RepositoryMock.Setup(x => x.Insert<int, User>(It.IsAny<User>()))
                 .Callback((User u) => { 
                     u.Id = UsersInMemoryDb.Count + 1;
                     UsersInMemoryDb.Add(u); 
@@ -60,16 +61,6 @@ namespace HiddenLove.Tests.Server.Services
             string actual = TestSubject.GetById(id).EmailAddress;
 
             Assert.AreEqual(expected, actual);   
-        }
-
-        [Test]
-        public void GetAll()
-        {
-            IEnumerable<User> expected = UsersInMemoryDb;
-
-            IEnumerable<User> actual = TestSubject.GetAll();
-
-            actual.Should().Equal(expected);
         }
 
         [Test]

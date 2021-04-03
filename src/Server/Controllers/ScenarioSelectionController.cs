@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using HiddenLove.DataAccess.Entities;
-using HiddenLove.DataAccess.RD.TableAccesses;
+using HiddenLove.DataAccess.Repositories;
+using HiddenLove.DataAccess.TableAccesses;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models.ScenarioSelection;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetAvailableScenarios()
         {
-            var dbAccess = new DataAccess.RD.Repositories.Repository(new ScenarioTemplatesTableAccess());
+            var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
 
             IEnumerable<ScenarioTemplate> entities = dbAccess.GetAll<int, ScenarioTemplate>();
             List<ScenarioSelectionData> res = entities.Select(x => new ScenarioSelectionData {
@@ -38,7 +39,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult BookScenario(SelectedScenarioData model)
         {
-            var dbAccess = new DataAccess.RD.Repositories.Repository(new ScenariosTableAccess());
+            var dbAccess = new Repository(new ScenariosTableAccess());
 
             int scenarioId = dbAccess.Insert<int, Scenario>(new Scenario {
                 IdScenariotemplate = model.IdScenario,

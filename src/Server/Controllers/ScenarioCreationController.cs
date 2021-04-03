@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using HiddenLove.Shared.Models;
 using HiddenLove.Shared.Models.ScenarioCreation;
-using HiddenLove.DataAccess.RD.Repositories;
-using HiddenLove.DataAccess.RD.TableAccesses;
 using HiddenLove.Server.Helpers;
+using HiddenLove.DataAccess.TableAccesses;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -22,7 +21,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetAllStepTemplates()
         { 
-            var dbAccess = new DataAccess.RD.Repositories.Repository(new StepTemplatesTableAccess());
+            var dbAccess = new Repository(new StepTemplatesTableAccess());
             
             IEnumerable<StepTemplate> entities =  dbAccess.GetAll<int, StepTemplate>();
             List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList<KeyValuePair<int, string>>();
@@ -36,7 +35,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult NewScenario(ScenarioCreation model)
         {
-            var dbAccess = new DataAccess.RD.Repositories.Repository(new ScenarioTemplatesTableAccess());
+            var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
             int scenarioTemplateId = dbAccess.Insert<int, ScenarioTemplate>(new ScenarioTemplate {
                 Title = model.Title,
                 Description = model.Description

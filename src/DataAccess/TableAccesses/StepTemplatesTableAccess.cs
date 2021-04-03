@@ -1,4 +1,4 @@
-namespace HiddenLove.DataAccess.RD.TableAccesses
+namespace HiddenLove.DataAccess.TableAccesses
 {
     public sealed class StepTemplatesTableAccess : TableAccess
     {

@@ -40,7 +40,7 @@ namespace HiddenLove.Server.Controllers
             var response = UserService.Register(model);
 
             if(response == null)
-                return BadRequest(new HttpError("Server error"));
+                return BadRequest(new HttpError("Invalid email address."));
                 
             return Ok(response);
         }

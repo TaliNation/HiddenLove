@@ -4,23 +4,31 @@
 @inject NavigationManager NavManager
 
 <div class="row">
-    <button class="btn btn-primary full-width" @onclick="GetAllUsers">Get all users</button>
-</div>
-<div class="row">
-    <p>@CurrentUser</p>
+    <div class="col-6">
+        <button class="btn btn-primary full-width" @onclick="GetUser">Get User</button>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-primary full-width" @onclick="GetUsername">Get Username</button>
+    </div>
 </div>
 
 @code {
-    private string CurrentUser = "";
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Http.Authenticate(Js, NavManager);
+        await Http.Authenticate(Js, NavManager);
+        var res = await Http.GetResultAsync<object>("ScenarioSelection/CurrentUser");
+        Js.Log(res);
     }
     
-    private async void GetAllUsers()
+    private async void GetUser()
     {
-        CurrentUser = await Http.GetResultAsync<string>("Users/currentuser");
-        StateHasChanged();
+        var res = await Http.GetResultAsync<object>("ScenarioSelection/CurrentUser");
+        Js.Log(res);
+    }
+
+    private async void GetUsername()
+    {
+        var res = await Http.GetResultAsync<string>("ScenarioSelection/CurrentUsername");
+        Js.Log(res);
     }
 }

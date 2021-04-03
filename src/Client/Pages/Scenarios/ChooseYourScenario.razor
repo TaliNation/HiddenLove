@@ -1,4 +1,4 @@
-@page "/scenario/selection"
+@page "/scenario/select"
 @using HiddenLove.Shared.Models.ScenarioSelection
 @inject HttpWrapper Http
 @inject JsHelper Js
@@ -6,13 +6,13 @@
 
 <h1>Selectionnez un scénario !</h1>
 
-@if(IsPageLoaded)
+@if(_isPageLoaded)
 {
     <div class="row">
-        @foreach(ScenarioSelectionData scenario in Scenarios)
+        @foreach(ScenarioSelectionData scenario in _scenarios)
         {
             <div class="col-md-3 col-sm-6 padding-bottom">
-                @scenario.Title
+                <p @onclick="@(() => SelectScenarioTemplate(scenario.Id))">@scenario.Title</p>
             </div>
         }
     </div>
@@ -23,26 +23,59 @@ else
 }
 
 <div class="row">
-    <Datebox @bind-BindingValue="EventDate" />
-    <Button OnClick="LogDate" Text="EE" />
+    <Datebox @bind-BindingValue="_eventDate" />
+    <Button OnClick="SelectScenario" Text="EE" />
+</div>
+<div class="row">
+    <p>@_message</p>
 </div>
 
 @code {
-    public bool IsPageLoaded { get; set; } = false;
+    private bool _isPageLoaded { get; set; } = false;
 
-    private List<ScenarioSelectionData> Scenarios = new List<ScenarioSelectionData>();
+    private List<ScenarioSelectionData> _scenarios = new List<ScenarioSelectionData>();
 
-    private DateTime? EventDate { get; set; } = null;
+    private DateTime? _eventDate { get; set; } = null;
+    private int? _scenarioTemplateId { get; set; } = null;
+    private string _message { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
-        Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
-        IsPageLoaded = true;
+        await Http.Authenticate(Js, NavManager);
+        _scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
+        _isPageLoaded = true;
     }
 
-    private void LogDate()
+    private void SelectScenarioTemplate(int id)
     {
-        Js.Log(EventDate);
+        _scenarioTemplateId = id;
+        Js.Log(id);
+    }
+
+    private async void SelectScenario()
+    {
+        if(_scenarioTemplateId == null) 
+        {
+            _message = "Aucun scénario sélectionné.";
+            return;
+        }
+
+        if(_eventDate == null)
+        {
+            _message = "Une date pour l'execution du scénario doit être planifiée.";
+            return;
+        }
+
+        var req = new SelectedScenarioData {
+            IdScenario = _scenarioTemplateId.GetValueOrDefault(0),
+            EventDate = _eventDate.GetValueOrDefault(DateTime.Now)
+        };
+
+        Js.Log(req);
+
+        int idCreatedScenario = await Http.PostResultAsync<SelectedScenarioData, int>("ScenarioSelection/BookScenario", req);
+        
+        NavManager.NavigateTo("/scenario/view/" + idCreatedScenario);
     }
 
 

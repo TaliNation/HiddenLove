@@ -1,0 +1,11 @@
+@page "/scenario/view/{IdScenario:int}"
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
+
+@IdScenario
+
+@code {
+    [Parameter]
+    public int IdScenario { get; set; }
+}

@@ -1,0 +1,49 @@
+<div class="form-group">
+    @if(Label != null)
+    {
+        <label for="@Id">@Label</label>
+    }
+    <input 
+        class="form-control" 
+        type="date" 
+        id="@Id" 
+        name="@Id" 
+        min="@Min"
+        max="@Max"
+        @bind="@BindingValue" />
+</div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    [Parameter]
+    public string Value { get; set; } = "";
+
+    [Parameter]
+    public string Min { get; set; } = "";
+
+    [Parameter]
+    public string Max { get; set; } = "";
+
+    [Parameter]
+    public string Label { get; set; } = null;
+
+    private DateTime? _value;
+
+    [Parameter]
+    public DateTime? BindingValue
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            BindingValueChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<DateTime?> BindingValueChanged { get; set; }   
+}

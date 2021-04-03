@@ -21,6 +21,9 @@ namespace HiddenLove.Server.Controllers
             UserService = userService;
         }
 
+        /// <summary>
+        /// Authentification de l'utilisateur
+        /// </summary>
         [HttpPost("authenticate")]
         [Produces("application/json")]
         public IActionResult Authenticate(AuthenticationRequest model)
@@ -33,6 +36,9 @@ namespace HiddenLove.Server.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Inscription d'un utilisateur et authentication avec son nouveau compte
+        /// </summary>
         [HttpPost("register")]
         [Produces("application/json")]
         public IActionResult Register(RegisterRequest model)

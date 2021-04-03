@@ -4,6 +4,9 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.QueryFactories
 {
+    /// <summary>
+    /// <see cref="IQueryFactory"/> correspondant à la base de production en ligne SQL Server. 
+    /// </summary>
     public class ProductionDbQueryFactory : IQueryFactory
     {
         public QueryFactory QueryFactory { get; } 

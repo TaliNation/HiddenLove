@@ -7,6 +7,10 @@ using SqlKata.Execution;
 namespace HiddenLove.DataAccess.Repositories
 {
 
+    /// <summary>
+    /// Repository (dépôt) de base permettant d'aggréger toutes les requêtes simples vers la base de données.
+    /// Voir <see cref="https://martinfowler.com/eaaCatalog/repository.html"/>
+    /// </summary>
     public class Repository
     {
         protected QueryFactory QueryFactory { get; private set; } 

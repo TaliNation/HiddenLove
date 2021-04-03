@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace HiddenLove.Server.Helpers
 {
+    #warning Documenter ça
     public class RoutePrefixConvention : IApplicationModelConvention
     {
-        private readonly AttributeRouteModel RoutePrefix;
+        private readonly AttributeRouteModel _routePrefix;
 
         public RoutePrefixConvention(IRouteTemplateProvider route)
         {
-            RoutePrefix = new AttributeRouteModel(route);
+            _routePrefix = new AttributeRouteModel(route);
         }
 
         public void Apply(ApplicationModel application)
@@ -19,11 +20,11 @@ namespace HiddenLove.Server.Helpers
             {
                 if(selector.AttributeRouteModel != null)
                 {
-                    selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(RoutePrefix, selector.AttributeRouteModel);
+                    selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(_routePrefix, selector.AttributeRouteModel);
                 }
                 else
                 {
-                    selector.AttributeRouteModel = RoutePrefix;
+                    selector.AttributeRouteModel = _routePrefix;
                 }
             }
         }

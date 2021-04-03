@@ -10,6 +10,9 @@ using HiddenLove.Server.Services;
 
 namespace HiddenLove.Server.Helpers
 {
+    /// <summary>
+    /// Identification d'un utilisateur via son JWT
+    /// </summary>
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
@@ -21,17 +24,23 @@ namespace HiddenLove.Server.Helpers
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        /// <summary>
+        /// Récupération du token et identification de l'utilisateur
+        /// </summary>
+        public async Task Invoke(HttpContext httpContext, IUserService userService)
         {
-            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var token = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if(token != null)
-                AttachUserToContext(context, userService, token);
+                AttachUserToContext(httpContext, userService, token);
 
-            await _next(context);
+            await _next(httpContext);
         }
 
-        private void AttachUserToContext(HttpContext context, IUserService userService, string token)
+        /// <summary>
+        /// Attachement de l'utilisateur au contexte Http pour pouvoir l'identifier dans les API et lui autoriser les accès
+        /// </summary>
+        private void AttachUserToContext(HttpContext httpContext, IUserService userService, string token)
         {
             try
             {
@@ -49,7 +58,7 @@ namespace HiddenLove.Server.Helpers
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-                context.Items["User"] = userService.GetById(userId);
+                httpContext.Items["User"] = userService.GetById(userId);
             }
             catch
             {

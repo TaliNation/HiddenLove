@@ -7,13 +7,13 @@ using HiddenLove.DataAccess.Entities;
 namespace HiddenLove.Server.Helpers
 {
     /// <summary>
-    /// Attributs permettant de gérer les accès à certaines ressources
+    /// Gestion des accès à certaines ressources
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         /// <summary>
-        /// Permet de vérifier qu'un utilisateur est authentifié avant d'accéder à la ressource
+        /// Vérifier qu'un utilisateur est authentifié
         /// </summary>
         public void OnAuthorization(AuthorizationFilterContext context)
         {

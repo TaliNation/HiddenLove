@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using HiddenLove.DataAccess.Entities;
 using HiddenLove.DataAccess.QueryFactories;
 using HiddenLove.DataAccess.RD.TableAccesses;
-using HiddenLove.DataAccess.RD.TableInfos;
 using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.RD.Repositories
@@ -12,9 +11,9 @@ namespace HiddenLove.DataAccess.RD.Repositories
     {
         protected QueryFactory QueryFactory { get; private set; } 
 
-        public TableAccessGenerics TableAccess { get; private set; }
+        public TableAccess TableAccess { get; private set; }
         
-        public Repository(TableAccessGenerics tableAccess)
+        public Repository(TableAccess tableAccess)
         {
             IQueryFactory queryFactory = new ProductionDbQueryFactory();
             QueryFactory = queryFactory.QueryFactory;
@@ -22,7 +21,7 @@ namespace HiddenLove.DataAccess.RD.Repositories
             SetTableAccess(tableAccess);
         }
 
-        public Repository(TableAccessGenerics tableAccess, IQueryFactory queryFactory)
+        public Repository(TableAccess tableAccess, IQueryFactory queryFactory)
         {
             QueryFactory = queryFactory.QueryFactory;
             SetTableAccess(tableAccess);
@@ -34,7 +33,7 @@ namespace HiddenLove.DataAccess.RD.Repositories
             TableAccess.SetQueryFactory(QueryFactory);
         }
 
-        public void SetTableAccess(TableAccessGenerics tableAccess)
+        public void SetTableAccess(TableAccess tableAccess)
         {
             TableAccess = tableAccess;
             TableAccess.SetQueryFactory(QueryFactory);

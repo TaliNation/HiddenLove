@@ -11,8 +11,5 @@ namespace HiddenLove.DataAccess.Entities
         public DateTime Eventdate { get; set; }
         public int IdUser { get; set; }
         public int IdScenariotemplate { get; set; }
-
-        public virtual ScenarioTemplate IdScenariotemplateNavigation { get; set; }
-        public virtual User IdUserNavigation { get; set; }
     }
 }

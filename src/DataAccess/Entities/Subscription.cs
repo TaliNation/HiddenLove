@@ -15,8 +15,5 @@ namespace HiddenLove.DataAccess.Entities
         public int? IdBillingdetails { get; set; }
         public int IdUser { get; set; }
         public int? IdOffer { get; set; }
-
-        public virtual Offer IdOfferNavigation { get; set; }
-        public virtual User IdUserNavigation { get; set; }
     }
 }

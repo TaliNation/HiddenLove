@@ -3,18 +3,19 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.RD.TableAccesses
 {
-    public sealed class ScenariosTableAccess : TableAccess
+    public sealed class ScenarioTemplatesStepTemplatesTableAccess : TableAccess
     {
-        public override string TableName => "Scenarios";
+        public override string TableName => "ScenarioTemplates_StepTemplates";
         public override string PrimaryKeyName => "Id";
 
         public override TKey Insert<TKey>(IEntity<TKey> entity)
         {
-            Scenario obj = (Scenario)entity;
+            ScenarioTemplateStepTemplate obj = (ScenarioTemplateStepTemplate)entity;
             return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
-                Eventdate = obj.Eventdate,
                 Id_scenariotemplate = obj.IdScenariotemplate,
-                Id_user = obj.IdUser
+                Id_steptemplate = obj.IdSteptemplate,
+                StartDate = obj.StartDate,
+                EndDate = obj.EndDate
             });
         }
     }

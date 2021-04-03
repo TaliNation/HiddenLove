@@ -1,22 +1,44 @@
-@page "/scenario/choose"
+@page "/scenario/selection"
+@using HiddenLove.Shared.Models.ScenarioSelection
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
 
-<h1>Select your scenarios</h1>
+<h1>Selectionnez un scénario !</h1>
+
+@if(IsPageLoaded)
+{
+    <div class="row">
+        @foreach(ScenarioSelectionData scenario in Scenarios)
+        {
+            <div class="col-md-3 col-sm-6 padding-bottom">
+                @scenario.Title
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Chargement...</p>
+}
 
 <div class="row">
-    <div class="col-md-3 col-sm-6 padding-bottom">
-        <Card />
-    </div>
-    <div class="col-md-3 col-sm-6 padding-bottom">
-        <Card />
-    </div>
-    <div class="col-md-3 col-sm-6 padding-bottom">
-        <Card />
-    </div>
-    <div class="col-md-3 col-sm-6 padding-bottom">
-        <Card />
-    </div>
-
-    
+    <DateTimeField @bind-BindingValue="EventDate" />
 </div>
 
+@code {
+    public bool IsPageLoaded { get; set; } = false;
+
+    private List<ScenarioSelectionData> Scenarios = new List<ScenarioSelectionData>();
+
+    private DateTime? EventDate { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
+        IsPageLoaded = true;
+    }
+
+
+}
 

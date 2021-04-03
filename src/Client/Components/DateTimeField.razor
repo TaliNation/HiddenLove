@@ -5,11 +5,11 @@
     }
     <input 
         class="form-control" 
-        type="time" 
+        type="@(IsTime ? "time" : "date")" 
         id="@Id" 
         name="@Id" 
-        min="@TimeMin"
-        max="@TimeMax"
+        min="@Min"
+        max="@Max"
         @bind="@BindingValue" />
 </div>
 
@@ -22,13 +22,16 @@
     public string Value { get; set; } = "";
 
     [Parameter]
-    public string TimeMin { get; set; } = "";
+    public string Min { get; set; } = "";
 
     [Parameter]
-    public string TimeMax { get; set; } = "";
+    public string Max { get; set; } = "";
 
     [Parameter]
     public string Label { get; set; } = null;
+
+    [Parameter]
+    public bool IsTime { get; set; } = false;
 
 
     private DateTime? _value;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HiddenLove.DataAccess.Entities;
@@ -5,6 +6,7 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.Repositories
 {
+    [Obsolete("This module is part of an old data access framework and should not be used. Prefer the one in HiddenLove.DataAccess.RD.")]
     public class UserRepository : Repository, IRead<int, User>, IInsert<int, User>
     {
         //public UserRepository() : base() { }

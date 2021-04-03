@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HiddenLove.DataAccess.Entities
 {
-    public partial class ScenarioTemplatesStepTemplate : IEntity<int>
+    public partial class ScenarioTemplateStepTemplate : IEntity<int>
     {
         public int Id { get; set; }
         public int IdScenariotemplate { get; set; }

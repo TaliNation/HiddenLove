@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using HiddenLove.Shared.Models;
 using HiddenLove.Shared.Models.ScenarioCreation;
+using HiddenLove.DataAccess.RD.Repositories;
+using HiddenLove.DataAccess.RD.TableAccesses;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -19,14 +21,13 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetAllStepTemplates()
         { 
-            var dbAccess = new StepTemplateRepository();
+            var dbAccess = new DataAccess.RD.Repositories.Repository(new StepTemplatesTableAccess());
             
-            IEnumerable<StepTemplate> entities =  dbAccess.GetAll();
+            IEnumerable<StepTemplate> entities =  dbAccess.GetAll<int, StepTemplate>();
             List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList<KeyValuePair<int, string>>();
 
             return Ok(res);
         }
-
 
 
         [HttpPost]
@@ -34,17 +35,17 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult NewScenario(ScenarioCreation model)
         {
-            var scenarioTemplateDbAccess = new ScenarioTemplateRepository();
-            int scenarioTemplateId = scenarioTemplateDbAccess.Insert(new ScenarioTemplate {
+            var dbAccess = new DataAccess.RD.Repositories.Repository(new ScenarioTemplatesTableAccess());
+            int scenarioTemplateId = dbAccess.Insert<int, ScenarioTemplate>(new ScenarioTemplate {
                 Title = model.Title,
                 Description = model.Description
             });
 
-            var scenarioTemplateStepTemplateDbAccess = new ScenarioTemplatesStepTemplateRepository();
+            dbAccess.SetTableAccess(new ScenarioTemplatesStepTemplatesTableAccess());
 
             foreach(ScenarioCreationStep step in model.Steps)
             {
-                scenarioTemplateStepTemplateDbAccess.Insert(new ScenarioTemplatesStepTemplate {
+                dbAccess.Insert<int, ScenarioTemplateStepTemplate>(new ScenarioTemplateStepTemplate {
                     IdScenariotemplate = scenarioTemplateId,
                     IdSteptemplate = step.StepId,
                     StartDate = step.StartTime,

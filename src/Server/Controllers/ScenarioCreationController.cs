@@ -7,6 +7,7 @@ using HiddenLove.Shared.Models;
 using HiddenLove.Shared.Models.ScenarioCreation;
 using HiddenLove.DataAccess.RD.Repositories;
 using HiddenLove.DataAccess.RD.TableAccesses;
+using HiddenLove.Server.Helpers;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -15,7 +16,7 @@ namespace HiddenLove.Server.Controllers
     public class ScenarioCreationController : ControllerBase
     {
 
-        
+        [Authorize]
         [HttpGet]
         [Route("Steps")]
         [Produces("application/json")]
@@ -29,7 +30,7 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("NewScenario")]
         [Produces("application/json")]

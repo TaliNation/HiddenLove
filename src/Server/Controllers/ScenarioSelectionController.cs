@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HiddenLove.DataAccess.Entities;
 using HiddenLove.DataAccess.RD.TableAccesses;
+using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models.ScenarioSelection;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace HiddenLove.Server.Controllers
     {
         private User _currentUser => (User)HttpContext.Items["User"];
 
+        [Authorize]
         [HttpGet]
         [Route("AvailableScenarios")]
         [Produces("application/json")]
@@ -30,12 +32,14 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("BookScenario")]
         [Produces("application/json")]
         public IActionResult BookScenario(SelectedScenarioData model)
         {
             var dbAccess = new DataAccess.RD.Repositories.Repository(new ScenariosTableAccess());
+
             int scenarioId = dbAccess.Insert<int, Scenario>(new Scenario {
                 IdScenariotemplate = model.IdScenario,
                 IdUser = _currentUser.Id,
@@ -43,6 +47,22 @@ namespace HiddenLove.Server.Controllers
             });
 
             return Ok(scenarioId);
+        }
+
+        [Authorize]
+        [HttpGet("CurrentUser")]
+        [Produces("application/json")]
+        public IActionResult GetCurrentUser()
+        {
+            return Ok(_currentUser);
+        }
+
+        [Authorize]
+        [HttpGet("CurrentUsername")]
+        [Produces("application/json")]
+        public IActionResult GetCurrentUsername()
+        {
+            return Ok(_currentUser.Id);
         }
     }
 }

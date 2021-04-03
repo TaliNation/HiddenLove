@@ -44,21 +44,5 @@ namespace HiddenLove.Server.Controllers
                 
             return Ok(response);
         }
-
-        [Authorize]
-        [HttpGet]
-        [Produces("application/json")]
-        public IActionResult GetAll()
-        {
-            return Ok(UserService.GetAll());
-        }
-
-        [Authorize]
-        [HttpGet("currentuser")]
-        [Produces("application/json")]
-        public IActionResult GetCurrentUser()
-        {
-            return Ok(((User)HttpContext.Items["User"]).FullUsername);
-        }
     }
 }

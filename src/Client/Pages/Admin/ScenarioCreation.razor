@@ -53,13 +53,9 @@
 
     private string Message { get; set; } = "";
 
-    protected override void OnInitialized()
-    {
-        Http.Authenticate(Js, NavManager);
-    }
-
     protected override async Task OnInitializedAsync()
     {
+        await Http.Authenticate(Js, NavManager);
         AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("ScenarioCreation/Steps");
         Console.WriteLine("App is ready to use");
     }

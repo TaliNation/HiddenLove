@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using HiddenLove.DataAccess.Entities;
 using SqlKata.Execution;
 
-namespace HiddenLove.DataAccess.RD.TableAccess
+namespace HiddenLove.DataAccess.RD.TableAccesses
 {
-    public abstract class TableAccess
+    public abstract class TableAccessGenerics
     {
         protected QueryFactory QueryFactory;
 
@@ -14,10 +15,6 @@ namespace HiddenLove.DataAccess.RD.TableAccess
 
         public abstract IEnumerable<TEntity> GetAll<TEntity>();
 
-        public abstract TKey InsertGetKey<TKey, TEntity>(TEntity entity);
-
-        public abstract void Insert<TEntity>(TEntity entity);
-
-        public abstract TEntity InsertGetEntity<TEntity>(TEntity entity);
+        public abstract TKey Insert<TKey>(IEntity<TKey> entity);
     }
 }

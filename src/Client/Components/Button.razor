@@ -1,0 +1,14 @@
+<button class="btn btn-@Type" @onclick="OnClickCallback">@Text</button>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = "";
+
+    [Parameter]
+    public string Type { get; set; } = "primary";
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    private void OnClickCallback() => OnClick.InvokeAsync();
+}

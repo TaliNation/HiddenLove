@@ -24,6 +24,7 @@ else
 
 <div class="row">
     <DateTimeField @bind-BindingValue="EventDate" />
+    <Button OnClick="LogDate" Text="EE" />
 </div>
 
 @code {
@@ -37,6 +38,11 @@ else
     {
         Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
         IsPageLoaded = true;
+    }
+
+    private void LogDate()
+    {
+        Js.Log(EventDate);
     }
 
 

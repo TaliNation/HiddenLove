@@ -14,7 +14,7 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService UserService;
+        private readonly IUserService UserService;
 
         public UsersController(IUserService userService)
         {
@@ -47,7 +47,7 @@ namespace HiddenLove.Server.Controllers
 
             if(response == null)
                 return BadRequest(new HttpError("Invalid email address."));
-                
+
             return Ok(response);
         }
     }

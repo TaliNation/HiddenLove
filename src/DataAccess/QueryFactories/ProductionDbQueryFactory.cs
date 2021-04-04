@@ -5,16 +5,16 @@ using SqlKata.Execution;
 namespace HiddenLove.DataAccess.QueryFactories
 {
     /// <summary>
-    /// <see cref="IQueryFactory"/> correspondant à la base de production en ligne SQL Server. 
+    /// <see cref="IQueryFactory"/> correspondant à la base de production en ligne SQL Server.
     /// </summary>
     public class ProductionDbQueryFactory : IQueryFactory
     {
-        public QueryFactory QueryFactory { get; } 
-        
+        public QueryFactory QueryFactory { get; }
+
         public ProductionDbQueryFactory()
         {
-            SqlConnection connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
-            var queryCompiler = new SqlServerCompiler(); 
+            var connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
+            var queryCompiler = new SqlServerCompiler();
 
             QueryFactory = new QueryFactory(connection, queryCompiler);
         }

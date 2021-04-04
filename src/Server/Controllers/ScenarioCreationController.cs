@@ -22,9 +22,9 @@ namespace HiddenLove.Server.Controllers
         [Route("Steps")]
         [Produces("application/json")]
         public IActionResult GetAllStepTemplates()
-        { 
+        {
             var dbAccess = new Repository(new StepTemplatesTableAccess());
-            
+
             IEnumerable<StepTemplate> entities =  dbAccess.GetAll<int, StepTemplate>();
             List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList<KeyValuePair<int, string>>();
 

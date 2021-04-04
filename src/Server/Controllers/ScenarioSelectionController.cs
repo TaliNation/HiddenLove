@@ -13,7 +13,7 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class ScenarioSelectionController : ControllerBase
     {
-        private User _currentUser => (User)HttpContext.Items["User"];
+        private User CurrentUser => (User)HttpContext.Items["User"];
 
         /// <summary>
         /// Récupération de tous les scénarios type pour laisser le choix à l'utilisateur
@@ -50,7 +50,7 @@ namespace HiddenLove.Server.Controllers
 
             int scenarioId = dbAccess.Insert<int, Scenario>(new Scenario {
                 IdScenariotemplate = model.IdScenario,
-                IdUser = _currentUser.Id,
+                IdUser = CurrentUser.Id,
                 Eventdate = model.EventDate
             });
 
@@ -65,7 +65,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetCurrentUser()
         {
-            return Ok(_currentUser);
+            return Ok(CurrentUser);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetCurrentUsername()
         {
-            return Ok(_currentUser.Id);
+            return Ok(CurrentUser.Id);
         }
     }
 }

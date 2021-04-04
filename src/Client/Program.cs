@@ -12,18 +12,18 @@ using HiddenLove.Shared;
 
 namespace HiddenLove.Client
 {
-    public class Program
+    public static class Program
     {
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped<HttpClient>(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
+            builder.Services.AddScoped<HttpClient>(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + GlobalVariables.ApiRootUrl + "/") });
 
             builder.Services.AddTransient<JsHelper>();
             builder.Services.AddTransient<HttpWrapper>();
-                        
+
             await builder.Build().RunAsync();
         }
     }

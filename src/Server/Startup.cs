@@ -1,19 +1,12 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 using HiddenLove.Server.Helpers;
 using HiddenLove.Server.Services;
-using HiddenLove.Server.Extensions; 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
+using HiddenLove.Server.Extensions;
 using HiddenLove.Shared;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Net.Http.Formatting;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -33,9 +26,7 @@ namespace HiddenLove.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(x => {
-                x.UseGeneralRoutePrefix(GlobalVariables.ApiRootUrl);
-            });
+            services.AddControllersWithViews(x => x.UseGeneralRoutePrefix(GlobalVariables.ApiRootUrl));
             services.AddRazorPages();
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));

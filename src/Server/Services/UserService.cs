@@ -40,32 +40,32 @@ namespace HiddenLove.Server.Services
     /// </summary>
     public class UserService : IUserService
     {
-        private Repository _dataAccess { get; } 
+        private Repository DataAccess { get; }
 
         private readonly AppSettings _appSettings;
 
         public UserService(IOptions<AppSettings> appSettings, Repository dataAccess)
         {
             _appSettings = appSettings.Value;
-            _dataAccess = dataAccess;
+            DataAccess = dataAccess;
         }
 
         public UserService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _dataAccess = new Repository(new UsersTableAccess());
+            DataAccess = new Repository(new UsersTableAccess());
         }
 
         public AuthenticationResponse Authenticate(AuthenticationRequest model)
         {
-            User userCredentials = _dataAccess.GetByColumn<int, User>("EmailAddress", model.EmailAddress).FirstOrDefault();
-            
+            User userCredentials = DataAccess.GetByColumn<int, User>("EmailAddress", model.EmailAddress).FirstOrDefault();
+
             if(!IsUserValid(userCredentials, model))
             {
                 return null;
             }
 
-            User user = _dataAccess.GetById<int, User>(userCredentials.Id);
+            User user = DataAccess.GetById<int, User>(userCredentials.Id);
 
             string token = GerenateJwtToken(user);
 
@@ -74,14 +74,13 @@ namespace HiddenLove.Server.Services
                 Id = user.Id,
                 Token = token
             };
-        } 
+        }
 
         public User GetById(int id) =>
-            _dataAccess.GetById<int, User>(id);
+            DataAccess.GetById<int, User>(id);
 
-        private bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
-            userCredentials != null
-            && userCredentials.Passwordhash != null
+        private static bool IsUserValid(User userCredentials, AuthenticationRequest model) =>
+            userCredentials?.Passwordhash != null
             && model.Password != null
             && BCrypt.Net.BCrypt.Verify(model.Password, userCredentials?.Passwordhash);
 
@@ -103,7 +102,7 @@ namespace HiddenLove.Server.Services
         {
             var random = new Random();
 
-            var user = new User 
+            var user = new User
             {
                 EmailAddress = model.EmailAddress,
                 Username = model.UserName,
@@ -114,7 +113,7 @@ namespace HiddenLove.Server.Services
             if(UserExists(user.EmailAddress))
                 return null;
 
-            _dataAccess.Insert<int, User>(user);
+            DataAccess.Insert<int, User>(user);
 
             var authenticationRequest = new AuthenticationRequest
             {
@@ -127,12 +126,9 @@ namespace HiddenLove.Server.Services
 
         private bool UserExists(string userEmailAddress)
         {
-            User user = _dataAccess.GetByColumn<int, User>("EmailAddress", userEmailAddress).FirstOrDefault();
+            User user = DataAccess.GetByColumn<int, User>("EmailAddress", userEmailAddress).FirstOrDefault();
 
-            if(user == null)
-                return false;
-            else
-                return true;
+            return user != null;
         }
     }
 }

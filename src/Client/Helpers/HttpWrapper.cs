@@ -15,7 +15,7 @@ namespace HiddenLove.Client.Helpers
     {
         public HttpClient Client;
 
-        public HttpWrapper(HttpClient client, JsHelper js)
+        public HttpWrapper(HttpClient client)
         {
             Client = client;
         }
@@ -29,7 +29,7 @@ namespace HiddenLove.Client.Helpers
 
         public bool AddJwtAuthentication(string token)
         {
-            if(token == null || token == "")
+            if(string.IsNullOrEmpty(token))
                 return false;
 
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -60,7 +60,7 @@ namespace HiddenLove.Client.Helpers
                 await res.Content.ReadAsStringAsync());
         }
 
-        private string ConcatUriAndParameters(string uri, params string[] parameters)
+        private static string ConcatUriAndParameters(string uri, params string[] parameters)
         {
             foreach (string parameter in parameters)
                 uri += "/" + parameter;

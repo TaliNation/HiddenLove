@@ -11,7 +11,7 @@ namespace HiddenLove.DataAccess.TableAccesses
         public override TKey Insert<TKey>(IEntity<TKey> entity)
         {
             ScenarioTemplate obj = (ScenarioTemplate)entity;
-            return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
+            return _queryFactory.Query(TableName).InsertGetId<TKey>(new {
                 Title = obj.Title,
                 Description = obj.Description
             });

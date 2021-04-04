@@ -12,7 +12,7 @@ namespace HiddenLove.DataAccess.TableAccesses
         public override TKey Insert<TKey>(IEntity<TKey> entity) 
         {
             User user = (User)entity; 
-            return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
+            return _queryFactory.Query(TableName).InsertGetId<TKey>(new {
                 emailaddress = user.EmailAddress,
                 username = user.Username,
                 fullusername = user.FullUsername,

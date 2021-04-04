@@ -9,6 +9,7 @@ using HiddenLove.Server.Helpers;
 using Microsoft.Extensions.Options;
 using HiddenLove.Shared.Models;
 using HiddenLove.DataAccess.TableAccesses;
+using System;
 
 namespace HiddenLove.Tests.Server.Services
 {
@@ -31,22 +32,22 @@ namespace HiddenLove.Tests.Server.Services
 
             RepositoryMock = new Mock<Repository>(new UsersTableAccess());
             RepositoryMock.Setup(x => x.GetById<int, User>(It.IsAny<int>()))
-                .Returns((int i) => UsersInMemoryDb.FirstOrDefault(x => x.Id == i));
+                .Returns((int i) => UsersInMemoryDb.Find(x => x.Id == i));
 
             RepositoryMock.Setup(x => x.GetAll<int, User>())
                 .Returns(UsersInMemoryDb);
 
             RepositoryMock.Setup(
                     x => x.GetByColumn<int, User>(
-                        It.Is<string>(x => x.ToUpper() == "EMAILADDRESS"), It.IsAny<object>()))
+                        It.Is<string>(x => string.Equals(x, "EMAILADDRESS", StringComparison.OrdinalIgnoreCase)), It.IsAny<object>()))
                 .Returns(
-                    (string s, object o) => UsersInMemoryDb
+                    (string _, object o) => UsersInMemoryDb
                     .Where(x => o != null && x.EmailAddress == o.ToString()));
 
             RepositoryMock.Setup(x => x.Insert<int, User>(It.IsAny<User>()))
-                .Callback((User u) => { 
+                .Callback((User u) => {
                     u.Id = UsersInMemoryDb.Count + 1;
-                    UsersInMemoryDb.Add(u); 
+                    UsersInMemoryDb.Add(u);
                 });
 
             AppSettings = Options.Create(new AppSettings { Secret = "secretsecretsecret" });
@@ -60,7 +61,7 @@ namespace HiddenLove.Tests.Server.Services
         {
             string actual = TestSubject.GetById(id).EmailAddress;
 
-            Assert.AreEqual(expected, actual);   
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -73,7 +74,7 @@ namespace HiddenLove.Tests.Server.Services
         public void Authenticate_Success(string emailAddress, string password, int? expected)
         {
             var authenticationRequest = new AuthenticationRequest { EmailAddress = emailAddress, Password = password };
-            
+
             AuthenticationResponse actual = TestSubject.Authenticate(authenticationRequest);
 
             Assert.AreEqual(expected, actual?.Id);

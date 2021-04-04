@@ -22,7 +22,7 @@ namespace HiddenLove.Server.Extensions
             opts.UseGeneralRoutePrefix(new RouteAttribute(prefix));
         }
 
-        private static string RemoveEndSlash(string s) => 
-            s.EndsWith('/') ? s.Substring(0, s.Length - 2) : s;
+        private static string RemoveEndSlash(string s) =>
+            s.EndsWith('/') ? s[0..^2] : s;
     }
 }

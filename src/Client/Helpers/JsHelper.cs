@@ -5,7 +5,7 @@ namespace HiddenLove.Client.Helpers
 {
     public class JsHelper
     {
-        private IJSRuntime JsRuntime;
+        private readonly IJSRuntime JsRuntime;
 
         public JsHelper(IJSRuntime jsRuntime) =>
             JsRuntime = jsRuntime;

@@ -6,7 +6,7 @@ using SqlKata.Execution;
 namespace HiddenLove.DataAccess.TableAccesses
 {
     /// <summary>
-    /// Stratégie d'accès au données, permettant de cibler une table sur laquelle exécuter les requêtes, et changer sans reconstruire la connexion. 
+    /// Stratégie d'accès au données, permettant de cibler une table sur laquelle exécuter les requêtes, et changer sans reconstruire la connexion.
     /// Voir <see cref="https://fr.wikipedia.org/wiki/Strat%C3%A9gie_(patron_de_conception)"/> - <see cref="https://refactoring.guru/design-patterns/strategy"/>
     /// </summary>
     public abstract class TableAccess

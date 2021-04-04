@@ -60,10 +60,7 @@ namespace HiddenLove.Server.Helpers
 
                 httpContext.Items["User"] = userService.GetById(userId);
             }
-            catch
-            {
-                
-            }
+            catch {}
         }
     }
 }

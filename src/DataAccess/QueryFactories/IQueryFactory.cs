@@ -7,6 +7,6 @@ namespace HiddenLove.DataAccess.QueryFactories
     /// </summary>
     public interface IQueryFactory
     {
-        QueryFactory QueryFactory { get; } 
+        QueryFactory QueryFactory { get; }
     }
 }

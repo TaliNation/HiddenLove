@@ -3,79 +3,127 @@
 @inject JsHelper Js
 @inject NavigationManager NavManager
 
-<h1>Inscription</h1>
+    <div class="register-clean">
+        <div class="register-form">
 
-<div class="row">
-    <div class="col-4">
-        <Textbox Placeholder="Adresse Email" @bind-BindingValue="EmailAddress" />
+        
+            <Textbox Placeholder="Nom d'utilisateur" @bind-BindingValue="Username" />
+                
+            <Textbox Placeholder="Adresse Email" @bind-BindingValue="EmailAddress" />
+           
+            <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
+        
+            <Textbox Placeholder="Confirmation du mot de passe" IsPassword @bind-BindingValue="ConfirmedPassword" />
+        
+
+
+        
+            <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfService" id="Tos-Checkbox"/>
+        
+            <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies" id="Pp-Checkbox"/>
+       
+            <button class="btn btn-primary full-width" disabled="@RegisterButtonDisabled"  @onclick="RegisterUser">Valider</button>
+        
+   
+    <div class="row">
+        <p style="color: red">@Message</p>
     </div>
-    <div class="col-4">
-        <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
     </div>
-    <div class="col-4">
-        <Textbox Placeholder="Confirmation du mot de passe" IsPassword @bind-BindingValue="ConfirmedPassword" />
-    </div>
-</div>
-<div class="row">
-    <div class="col-4">
-        <Textbox Placeholder="Nom d'utilisateur" @bind-BindingValue="Username" />
-    </div>
-    <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfServiceAccepted" id="Tos-Checkbox"/>
-    </div>
-    <div class="col-2">
-        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPoliciesAccepted" id="Pp-Checkbox"/>
-    </div>
-    <div class="col-2">
-        <button class="btn btn-primary full-width" @onclick="RegisterUser">Valider</button>
-    </div>
-</div>
-<div class="row">
-    <p>@Message</p>
-</div>
+                </div>
 
 @code {
-    private string EmailAddress { get; set; } = "";
-    private string Password { get; set; } = "";
-    private string ConfirmedPassword { get; set; } = "";
-    private string Username { get; set; } = "";
-    private bool TermsOfServiceAccepted { get; set; } = false;
-    private bool PrivacyPoliciesAccepted { get; set; } = false;
+private string EmailAddress { get; set; } = "";
+private string Password { get; set; } = "";
+private string ConfirmedPassword { get; set; } = "";
+private string Username { get; set; } = "";
 
-    private string Message { get; set; } = "";
 
-    private async void RegisterUser()
+private bool TermsOfService { 
+  get
+  {
+    return _termsOfService;
+  }
+  // A chaque fois que la veleur change, on vérifie s'il faut activer le bouton ou non
+  set
+  {
+    _termsOfService = value;
+    EnableButton();
+  }
+}
+
+private bool PrivacyPolicies { 
+  get
+  {
+    return _privacyPolicies;
+  }
+  // A chaque fois que la veleur change, on vérifie s'il faut activer le bouton ou non
+  set
+  {
+    _privacyPolicies = value;
+    EnableButton();
+  }
+}
+private void EnableButton()
+{
+    Console.WriteLine(TermsOfService.ToString() +" "+ PrivacyPolicies.ToString());
+  if(!TermsOfService || !PrivacyPolicies)
+    RegisterButtonDisabled = true;
+  else
+    RegisterButtonDisabled = false;
+}
+
+
+private string Message { get; set; } = "";
+
+private bool RegisterButtonDisabled { get; set; } = true;
+
+private bool TermsOfServiceAccepted { get; set; }
+
+private bool PrivacyPoliciesAccepted { get; set; }
+
+private bool _termsOfService = false;
+
+private bool _privacyPolicies = false;
+
+private async void RegisterUser()
+{
+    /*if(!TermsOfServiceAccepted || !PrivacyPoliciesAccepted)
     {
-        if(!TermsOfServiceAccepted || !PrivacyPoliciesAccepted)
-        {
-            Message = "Vous devez accepter les conditions générales d'utilisation ainsi que la politique de vie privée pour vous inscrire.";
-            return;
-        }
+        Message = "Il est nécessaire d'accepter les conditions générales d'utilisation ainsi que la politique de vie privée pour vous inscrire sur Hidden Love.";
+        return;
+    }*/
 
-        if(Password != ConfirmedPassword)
-        {
-            Message = "Les mots de passes ne sont pas identiques.;";
-            return;
-        }
 
-        var registerRequest = new RegisterRequest
-        {
-            EmailAddress = EmailAddress,
-            UserName = Username,
-            Password = Password
-        };
+   /* if(!TermsOfServiceAccepted || !PrivacyPoliciesAccepted)
+    {
+        
+        return;
+    }*/
 
-        var res = await Http.PostAsync<RegisterRequest>("Users/register", registerRequest);
-        if(!res.IsSuccessStatusCode)
-        {
-            HttpError error = await res.Content.ReadAsAsync<HttpError>();
-            Js.LogError(error);
-            return;
-        }
-        AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
-
-        Js.WriteCookie("token", loginToken.Token, 60 * 60);
-
-        NavManager.NavigateTo("/test");
+    if(Password != ConfirmedPassword)
+    {
+        Message = "Les mots de passes ne sont pas identiques.";
+        return;
     }
+
+    var registerRequest = new RegisterRequest
+    {
+        EmailAddress = EmailAddress,
+        UserName = Username,
+        Password = Password
+    };
+
+    var res = await Http.PostAsync<RegisterRequest>("Users/register", registerRequest);
+    if(!res.IsSuccessStatusCode)
+    {
+        HttpError error = await res.Content.ReadAsAsync<HttpError>();
+        Js.LogError(error);
+        return;
+    }
+    AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
+
+    Js.WriteCookie("token", loginToken.Token, 60 * 60);
+
+    NavManager.NavigateTo("/test");
+}
 }

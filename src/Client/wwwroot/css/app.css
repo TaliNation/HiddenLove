@@ -1,10 +1,14 @@
+@charset "UTF-8";
 @import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
-html, body {
+html,
+body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #f1f7fc;
 }
 
-a, .btn-link {
-  color: #0366d6;
+a,
+.btn-link {
+  color: #007bff;
 }
 
 .btn-primary {
@@ -69,32 +73,60 @@ a, .btn-link {
   max-width: 200px;
 }
 
+/* Utilisation du form-control par les pages login et register */
+.form-control {
+  background: #f7f9fc;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  margin-top: 20px;
+  color: inherit;
+  text-indent: 8px;
+  height: 42px;
+}
+
+/* logo présent dans login et register */
+.illustration {
+  width: 100%;
+  height: auto;
+}
+
+/* mise en forme des liens entre login et register */
+.registerlogin-link {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+
 .login-clean {
   background: #f1f7fc;
-  padding: 80px 0;
+  display: flex;
+  min-height: 100vh;
 }
 .login-clean .login-form {
   max-width: 320px;
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
+  margin: auto;
   background-color: #ffffff;
   padding: 40px;
+  padding-bottom: 10px;
   border-radius: 4px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 .login-clean .login-form .btn-primary {
   background: #f4476b;
-  border: none;
-  border-radius: 4px;
-  padding: 11px;
-  box-shadow: none;
-  margin-top: 25px;
-  text-shadow: none;
   outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: bold;
 }
-.login-clean .login-form .btn-primary:hover, .login-clean .login-form .btn-primary:active {
-  background: #eb3b60;
+.login-clean .login-form .btn-primary:hover,
+.login-clean .login-form .btn-primary:active {
+  background: #dd2950;
 }
 .login-clean .login-form .btn-primary:active {
   transform: translateY(1px);
@@ -107,54 +139,48 @@ a, .btn-link {
   opacity: 0.9;
   text-decoration: none;
 }
-.login-clean .login-form .forgot:hover, .login-clean .login-form .forgot:active {
+.login-clean .login-form .forgot:hover,
+.login-clean .login-form .forgot:active {
   opacity: 1;
   text-decoration: none;
-}
-.login-clean .illustration {
-  width: 100%;
-  height: auto;
-}
-
-.form-control {
-  background: #f7f9fc;
-  border: none;
-  border-bottom: 1px solid #dfe7f1;
-  border-radius: 0;
-  box-shadow: none;
-  margin-top: 25px;
-  outline: none;
-  color: inherit;
-  text-indent: 8px;
-  height: 42px;
 }
 
 .register-clean {
   background: #f1f7fc;
-  padding: 80px 0;
+  display: flex;
+  min-height: 100vh;
 }
 .register-clean .register-form {
   max-width: 500px;
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
   background-color: #ffffff;
   padding: 40px;
+  padding-bottom: 10px;
   border-radius: 4px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 .register-clean .register-form .btn-primary {
   background: #f4476b;
-  border: none;
-  border-radius: 4px;
-  padding: 11px;
-  box-shadow: none;
-  margin-top: 25px;
-  text-shadow: none;
   outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: bold;
 }
-.register-clean .register-form .btn-primary:hover, .register-clean .register-form .btn-primary:active {
-  background: #eb3b60;
+.register-clean .register-form .PasswordWarning {
+  font-size: 12px;
+  font-style: italic;
+  color: #c70000;
+}
+.register-clean .register-form p {
+  margin-top: 10px;
+}
+.register-clean .register-form .btn-primary:hover,
+.register-clean .register-form .btn-primary:active {
+  background: #dd2950;
 }
 .register-clean .register-form .btn-primary:active {
   transform: translateY(1px);
@@ -167,7 +193,8 @@ a, .btn-link {
   opacity: 0.9;
   text-decoration: none;
 }
-.register-clean .register-form .forgot:hover, .register-clean .register-form .forgot:active {
+.register-clean .register-form .forgot:hover,
+.register-clean .register-form .forgot:active {
   opacity: 1;
   text-decoration: none;
 }

@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using SqlKata.Compilers;
 using SqlKata.Execution;
+using System.Configuration;
 
 namespace HiddenLove.DataAccess.QueryFactories
 {
@@ -13,7 +14,7 @@ namespace HiddenLove.DataAccess.QueryFactories
 
         public ProductionDbQueryFactory()
         {
-            var connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
+            var connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
             var queryCompiler = new SqlServerCompiler();
 
             QueryFactory = new QueryFactory(connection, queryCompiler);

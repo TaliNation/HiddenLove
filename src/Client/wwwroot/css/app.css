@@ -105,7 +105,7 @@ a,
   min-height: 100vh;
 }
 .login-clean .login-form {
-  max-width: 320px;
+  max-width: 500px;
   width: 100%;
   margin: auto;
   background-color: #ffffff;
@@ -156,7 +156,7 @@ a,
   margin: auto;
   background-color: #ffffff;
   padding: 40px;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
   border-radius: 4px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);

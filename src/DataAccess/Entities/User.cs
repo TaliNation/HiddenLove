@@ -13,7 +13,5 @@ namespace HiddenLove.DataAccess.Entities
         public string FullUsername { get; set; }
         public string Passwordhash { get; set; }
         public int? IdPrivilege { get; set; }
-
-        public virtual Privilege IdPrivilegeNavigation { get; set; }
     }
 }

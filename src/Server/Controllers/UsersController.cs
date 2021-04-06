@@ -40,25 +40,9 @@ namespace HiddenLove.Server.Controllers
             var response = UserService.Register(model);
 
             if(response == null)
-                return BadRequest(new HttpError("Server error"));
+                return BadRequest(new HttpError("Invalid email address."));
                 
             return Ok(response);
-        }
-
-        [Authorize]
-        [HttpGet]
-        [Produces("application/json")]
-        public IActionResult GetAll()
-        {
-            return Ok(UserService.GetAll());
-        }
-
-        [Authorize]
-        [HttpGet("currentuser")]
-        [Produces("application/json")]
-        public IActionResult GetCurrentUser()
-        {
-            return Ok(((User)HttpContext.Items["User"]).FullUsername);
         }
     }
 }

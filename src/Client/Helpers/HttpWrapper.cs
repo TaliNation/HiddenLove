@@ -20,7 +20,7 @@ namespace HiddenLove.Client.Helpers
             Client = client;
         }
 
-        public async void Authenticate(JsHelper js, NavigationManager navManager)
+        public async Task Authenticate(JsHelper js, NavigationManager navManager)
         {
             string res = await js.ReadCookie(GlobalVariables.TokenCookieName);
             if(!AddJwtAuthentication(res))

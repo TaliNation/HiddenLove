@@ -20,11 +20,11 @@
             <p>@Message</p>
         </div>
 
-        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation."
-            @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
+        <a href="/login"> <i class="fa fa-question-circle"></i></a>
+        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies" id="Pp-Checkbox" />
 
-        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies"
-            id="Pp-Checkbox" />
+        <a href="/login"> <i class="fa fa-question-circle"></i></a>
+        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
 
         <div class="registerlogin-link">
             <p>Déjà inscrit ? <a href="/login">Connectez-vous</a></p>
@@ -40,15 +40,10 @@
     private string Password { get; set; } = "";
     private string ConfirmedPassword { get; set; } = "";
     private string Username { get; set; } = "";
-
     private string Message { get; set; } = "";
-
     private bool RegisterButtonDisabled { get; set; } = true;
-
     private bool _termsOfService = false;
-
     private bool _privacyPolicies = false;
-
     private bool TermsOfService
     {
         get

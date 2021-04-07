@@ -19,17 +19,25 @@
         <div class="PasswordWarning">
             <p>@Message</p>
         </div>
-
+        <div class="ReadMe">
+            <div class="Icon">
         <a href="/login"> <i class="fa fa-question-circle"></i></a>
-        <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies" id="Pp-Checkbox" />
-
+            </div>
+            <div class="Terms">
+                <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies" id="Pp-Checkbox" />
+            </div>
+        </div>
+         <div class="ReadMe">
+            <div class="Icon">
         <a href="/login"> <i class="fa fa-question-circle"></i></a>
-        <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
-
+            </div>
+            <div class="Terms">
+                 <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
+            </div>
+        </div>
         <div class="registerlogin-link">
             <p>Déjà inscrit ? <a href="/login">Connectez-vous</a></p>
         </div>
-
         <button class="btn btn-primary full-width" disabled="@RegisterButtonDisabled"
             @onclick="RegisterUser">Valider</button>
     </div>

@@ -190,6 +190,19 @@ a,
             margin-top: 10px;
         }
 
+        /* Flexbox afin d'aligner nos éléments */
+        .ReadMe{
+            display: flex;
+
+            .Icon{
+                margin-right: 5px;
+            }
+    
+            .Terms{
+                font-size: 14.5px;
+            }
+        }
+        
         .btn-primary:hover,
         .btn-primary:active {
             background: #dd2950;

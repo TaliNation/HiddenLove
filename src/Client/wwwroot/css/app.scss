@@ -191,18 +191,19 @@ a,
         }
 
         /* Flexbox afin d'aligner nos éléments */
-        .ReadMe{
+        .ReadMe {
             display: flex;
+            align-items: flex-end;
 
-            .Icon{
-                margin-right: 5px;
+            .Icon {
+                margin-left: 3px;
             }
-    
-            .Terms{
+
+            .Terms {
                 font-size: 14.5px;
             }
         }
-        
+
         .btn-primary:hover,
         .btn-primary:active {
             background: #dd2950;

@@ -181,9 +181,10 @@ a,
 }
 .register-clean .register-form .ReadMe {
   display: flex;
+  align-items: flex-end;
 }
 .register-clean .register-form .ReadMe .Icon {
-  margin-right: 5px;
+  margin-left: 3px;
 }
 .register-clean .register-form .ReadMe .Terms {
   font-size: 14.5px;

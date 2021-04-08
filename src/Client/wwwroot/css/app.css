@@ -181,14 +181,14 @@ a,
 .register-clean .register-form p {
   margin-top: 10px;
 }
-.register-clean .register-form .ReadMe {
+.register-clean .register-form .read-me {
   display: flex;
   align-items: flex-end;
 }
-.register-clean .register-form .ReadMe .Icon {
+.register-clean .register-form .read-me .icon {
   margin-left: 3px;
 }
-.register-clean .register-form .ReadMe .Terms {
+.register-clean .register-form .read-me .terms {
   font-size: 14.5px;
 }
 .register-clean .register-form .btn-primary:hover,

@@ -212,12 +212,12 @@ a,
   text-decoration: none;
 }
 
-.tos-clean {
+.tos-pp-clean {
   background: #f1f7fc;
   display: flex;
   min-height: 100vh;
 }
-.tos-clean .tos-form {
+.tos-pp-clean .tos-pp-form {
   max-width: 800px;
   width: 100%;
   margin: auto;
@@ -229,24 +229,24 @@ a,
   text-align: justify;
   /* gestion du logo */
 }
-.tos-clean .tos-form .tos-image {
+.tos-pp-clean .tos-pp-form .tos-pp-image {
   text-align: center;
   padding-bottom: 10px;
 }
-.tos-clean .tos-form .tos-image .tos-illustration {
+.tos-pp-clean .tos-pp-form .tos-pp-image .tos-pp-illustration {
   width: 100%;
   height: auto;
   max-width: 250px;
 }
-.tos-clean .tos-form h2 {
+.tos-pp-clean .tos-pp-form h2 {
   text-align: center;
   padding-bottom: 10px;
 }
-.tos-clean .tos-form h4 {
+.tos-pp-clean .tos-pp-form h4 {
   text-align: left;
   padding-bottom: 5px;
 }
-.tos-clean .tos-form h5 {
+.tos-pp-clean .tos-pp-form h5 {
   text-align: left;
   padding-bottom: 5px;
   font-style: italic;

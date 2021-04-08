@@ -14,7 +14,7 @@ namespace HiddenLove.DataAccess.QueryFactories
 
         public ProductionDbQueryFactory()
         {
-            var connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+            var connection = new SqlConnection("Server=51.83.76.180;Database=HiddenLove;User Id=SA;Password=Azerty58!;");
             var queryCompiler = new SqlServerCompiler();
 
             QueryFactory = new QueryFactory(connection, queryCompiler);

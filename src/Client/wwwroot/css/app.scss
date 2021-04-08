@@ -193,15 +193,15 @@ a,
         }
 
         /* Flexbox afin d'aligner nos éléments */
-        .ReadMe {
+        .read-me {
             display: flex;
             align-items: flex-end;
 
-            .Icon {
+            .icon {
                 margin-left: 3px;
             }
 
-            .Terms {
+            .terms {
                 font-size: 14.5px;
             }
         }

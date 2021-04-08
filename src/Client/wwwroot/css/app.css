@@ -216,6 +216,7 @@ a,
   background: #f1f7fc;
   display: flex;
   min-height: 100vh;
+  margin-top: 60px;
 }
 .tos-pp-clean .tos-pp-form {
   max-width: 800px;

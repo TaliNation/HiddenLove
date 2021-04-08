@@ -21,18 +21,21 @@
         </div>
         <div class="read-me">
             <div class="terms">
-                <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies" id="Pp-Checkbox" />
+                <Checkbox Label="J'ai lu et j'accepte la politique de vie privée." @bind-BindingValue="PrivacyPolicies"
+                    id="Pp-Checkbox" />
             </div>
             <div class="icon">
-        <a href="/about/pp" target="_blank" rel="noopener noreferrer"> <i class="fa fa-question-circle"></i></a>
-            </div>          
-        </div>
-         <div class="read-me">
-            <div class="terms">
-                 <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation." @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
+                <a href="/about/pp" target="_blank" rel="noopener noreferrer"> <i class="fa fa-question-circle"></i></a>
             </div>
-             <div class="icon">
-        <a href="/about/tos" target="_blank" rel="noopener noreferrer"> <i class="fa fa-question-circle"></i></a>
+        </div>
+        <div class="read-me">
+            <div class="terms">
+                <Checkbox Label="J'ai lu et j'accepte les conditions générales d'utilisation."
+                    @bind-BindingValue="TermsOfService" id="Tos-Checkbox" />
+            </div>
+            <div class="icon">
+                <a href="/about/tos" target="_blank" rel="noopener noreferrer"> <i
+                        class="fa fa-question-circle"></i></a>
             </div>
         </div>
         <div class="registerlogin-link">
@@ -44,14 +47,54 @@
 </div>
 
 @code {
-    private string EmailAddress { get; set; } = "";
-    private string Password { get; set; } = "";
-    private string ConfirmedPassword { get; set; } = "";
-    private string Username { get; set; } = "";
+    private string EmailAddress
+    {
+        get => _emailAddress;
+
+        set
+        {
+            _emailAddress = value;
+            EnableButton();
+        }
+    }
+    private string Password
+    {
+        get => _password;
+
+        set
+        {
+            _password = value;
+            EnableButton();
+        }
+    }
+    private string ConfirmedPassword
+    {
+        get => _confirmedPaswword;
+
+        set
+        {
+            _confirmedPaswword = value;
+            EnableButton();
+        }
+    }
+    private string Username
+    {
+        get => _username;
+
+        set
+        {
+            _username = value;
+            EnableButton();
+        }
+    }
     private string Message { get; set; } = "";
     private bool RegisterButtonDisabled { get; set; } = true;
     private bool _termsOfService = false;
     private bool _privacyPolicies = false;
+    private string _emailAddress = "";
+    private string _password = "";
+    private string _confirmedPaswword = "";
+    private string _username = "";
     private bool TermsOfService
     {
         get
@@ -65,7 +108,6 @@
             EnableButton();
         }
     }
-
     private bool PrivacyPolicies
     {
         get
@@ -79,14 +121,13 @@
             EnableButton();
         }
     }
+    private bool IsFormNotFilled => string.IsNullOrEmpty(EmailAddress) || string.IsNullOrEmpty(Username) ||
+        string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmedPassword) || !TermsOfService || !PrivacyPolicies;
 
     private void EnableButton()
     {
         Console.WriteLine(TermsOfService.ToString() + " " + PrivacyPolicies.ToString());
-        if (!TermsOfService || !PrivacyPolicies)
-            RegisterButtonDisabled = true;
-        else
-            RegisterButtonDisabled = false;
+        RegisterButtonDisabled = IsFormNotFilled;
     }
 
     private async void RegisterUser()
@@ -101,6 +142,8 @@
         if (Password != ConfirmedPassword)
         {
             Message = "Les mots de passes ne sont pas identiques.";
+            Password = "";
+            ConfirmedPassword = "";
             return;
         }
 

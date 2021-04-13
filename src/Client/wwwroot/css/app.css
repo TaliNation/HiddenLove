@@ -212,6 +212,7 @@ a,
   text-decoration: none;
 }
 
+/* Mise en forme des éléments des pages PP et TOS */
 .tos-pp-clean {
   background: #f1f7fc;
   display: flex;
@@ -251,6 +252,75 @@ a,
   text-align: left;
   padding-bottom: 5px;
   font-style: italic;
+}
+
+/* Mise en forme des éléments de la page login */
+.creation-clean {
+  background: #f1f7fc;
+  display: flex;
+}
+.creation-clean .creation-form {
+  max-width: 1600px;
+  width: 100%;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 40px;
+  padding-bottom: 0px;
+  border-radius: 4px;
+  color: #505e6c;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+  /* gestion du logo */
+}
+.creation-clean .creation-form .btn-validation {
+  text-align: center;
+  padding-top: 10px;
+}
+.creation-clean .creation-form .btn-validation .btn-primary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: auto;
+  font-size: 18px;
+}
+.creation-clean .creation-form .btn-validation .btn-primary:hover,
+.creation-clean .creation-form .btn-validation .btn-primary:active {
+  background: #dd2950;
+}
+.creation-clean .creation-form .btn-validation .btn-primary:active {
+  transform: translateY(1px);
+}
+.creation-clean .creation-form h2 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.creation-clean .creation-form .change-creation {
+  align-items: baseline;
+  margin: auto;
+  place-items: center;
+  display: flex;
+  font-size: 20px;
+}
+.creation-clean .creation-form span {
+  margin-left: 10px;
+}
+.creation-clean .creation-form .creation-image {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.creation-clean .creation-form .creation-image .creation-illustration {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+}
+.creation-clean .creation-form .error {
+  font-size: 18px;
+  font-style: italic;
+  color: #c70000;
+  padding-top: 5px;
 }
 
 /*# sourceMappingURL=app.css.map */

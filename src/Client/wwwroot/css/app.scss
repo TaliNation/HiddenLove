@@ -102,6 +102,7 @@ a,
     font-weight: bold;
 }
 
+/* Mise en forme des éléments de la page login */
 .login-clean {
     background: #f1f7fc;
     display: flex;
@@ -154,6 +155,7 @@ a,
     }
 }
 
+/* Mise en page des éléments de la page register */
 .register-clean {
     background: #f1f7fc;
     display: flex;
@@ -190,6 +192,20 @@ a,
             margin-top: 10px;
         }
 
+        /* Flexbox afin d'aligner nos éléments */
+        .read-me {
+            display: flex;
+            align-items: flex-end;
+
+            .icon {
+                margin-left: 3px;
+            }
+
+            .terms {
+                font-size: 14.5px;
+            }
+        }
+
         .btn-primary:hover,
         .btn-primary:active {
             background: #dd2950;
@@ -212,6 +228,53 @@ a,
         .forgot:active {
             opacity: 1;
             text-decoration: none;
+        }
+    }
+}
+
+.tos-pp-clean {
+    background: #f1f7fc;
+    display: flex;
+    min-height: 100vh;
+    margin-top: 60px;
+
+    .tos-pp-form {
+        max-width: 800px;
+        width: 100%;
+        margin: auto;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 4px;
+        color: #505e6c;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        text-align: justify;
+
+        /* gestion du logo */
+        .tos-pp-image {
+            text-align: center;
+            padding-bottom: 20px;
+
+            .tos-pp-illustration {
+                width: 100%;
+                height: auto;
+                max-width: 250px;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        h4 {
+            text-align: left;
+            padding-bottom: 5px;
+        }
+
+        h5 {
+            text-align: left;
+            padding-bottom: 5px;
+            font-style: italic;
         }
     }
 }

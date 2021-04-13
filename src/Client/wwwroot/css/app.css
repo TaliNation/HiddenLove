@@ -99,6 +99,7 @@ a,
   font-weight: bold;
 }
 
+/* Mise en forme des éléments de la page login */
 .login-clean {
   background: #f1f7fc;
   display: flex;
@@ -145,6 +146,7 @@ a,
   text-decoration: none;
 }
 
+/* Mise en page des éléments de la page register */
 .register-clean {
   background: #f1f7fc;
   display: flex;
@@ -160,6 +162,7 @@ a,
   border-radius: 4px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  /* Flexbox afin d'aligner nos éléments */
 }
 .register-clean .register-form .btn-primary {
   background: #f4476b;
@@ -177,6 +180,16 @@ a,
 }
 .register-clean .register-form p {
   margin-top: 10px;
+}
+.register-clean .register-form .read-me {
+  display: flex;
+  align-items: flex-end;
+}
+.register-clean .register-form .read-me .icon {
+  margin-left: 3px;
+}
+.register-clean .register-form .read-me .terms {
+  font-size: 14.5px;
 }
 .register-clean .register-form .btn-primary:hover,
 .register-clean .register-form .btn-primary:active {
@@ -197,6 +210,47 @@ a,
 .register-clean .register-form .forgot:active {
   opacity: 1;
   text-decoration: none;
+}
+
+.tos-pp-clean {
+  background: #f1f7fc;
+  display: flex;
+  min-height: 100vh;
+  margin-top: 60px;
+}
+.tos-pp-clean .tos-pp-form {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 4px;
+  color: #505e6c;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+  /* gestion du logo */
+}
+.tos-pp-clean .tos-pp-form .tos-pp-image {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.tos-pp-clean .tos-pp-form .tos-pp-image .tos-pp-illustration {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+}
+.tos-pp-clean .tos-pp-form h2 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.tos-pp-clean .tos-pp-form h4 {
+  text-align: left;
+  padding-bottom: 5px;
+}
+.tos-pp-clean .tos-pp-form h5 {
+  text-align: left;
+  padding-bottom: 5px;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=app.css.map */

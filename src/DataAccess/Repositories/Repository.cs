@@ -17,13 +17,13 @@ namespace HiddenLove.DataAccess.Repositories
         /// </summary>
         protected QueryFactory QueryFactory { get; private set; }
 
-        protected TableAccess TableAccess { get; set; }
+        protected ITableAccess TableAccess { get; set; }
 
         /// <summary>
         /// Par défaut, accès à la base de production en ligne
         /// </summary>
         /// <param name="tableAccess">Stratégie d'accès à la BDD</param>
-        public Repository(TableAccess tableAccess)
+        public Repository(ITableAccess tableAccess)
         {
             IQueryFactory queryFactory = new ProductionDbQueryFactory();
             QueryFactory = queryFactory.QueryFactory;
@@ -34,7 +34,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// <summary>Modification du QueryFactory</summary>
         /// <param name="tableAccess">Stratégie d'accès à la BDD</param>
         /// <param name="queryFactory">Constructeur et exécuteur des requêtes SQL</param>
-        public Repository(TableAccess tableAccess, IQueryFactory queryFactory)
+        public Repository(ITableAccess tableAccess, IQueryFactory queryFactory)
         {
             QueryFactory = queryFactory.QueryFactory;
             SetTableAccess(tableAccess);
@@ -52,7 +52,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// <summary>
         /// Changement de stratégie d'accès à la BDD (pour cibler une autre table)
         /// </summary>
-        public void SetTableAccess(TableAccess tableAccess)
+        public void SetTableAccess(ITableAccess tableAccess)
         {
             TableAccess = tableAccess;
             TableAccess.SetQueryFactory(QueryFactory);
@@ -64,7 +64,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// <param name="key">Valeur de la clef primaire</param>
         /// <typeparam name="TKey">Type de la clef primaire (généralement Int32)</typeparam>
         /// <typeparam name="TEntity">
-        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.TableAccess" />
+        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.ITableAccess" />
         /// </typeparam>
         public virtual TEntity GetById<TKey, TEntity>(TKey key) where TEntity : IEntity<TKey> =>
             TableAccess.GetById<TKey, TEntity>(key);
@@ -74,7 +74,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// </summary>
         /// <typeparam name="TKey">Type de la clef primaire (généralement Int32)</typeparam>
         /// <typeparam name="TEntity">
-        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.TableAccess" />
+        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.ITableAccess" />
         /// </typeparam>
         public virtual IEnumerable<TEntity> GetAll<TKey, TEntity>() where TEntity : IEntity<TKey> =>
             TableAccess.GetAll<TEntity>();
@@ -86,7 +86,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// <param name="columnValue">Valeur sur laquelle filtrer la colonne</param>
         /// <typeparam name="TKey">Type de la clef primaire (généralement Int32)</typeparam>
         /// <typeparam name="TEntity">
-        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.TableAccess" />
+        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.ITableAccess" />
         /// </typeparam>
         public virtual IEnumerable<TEntity> GetByColumn<TKey, TEntity>(string columnName, object columnValue) where TEntity : IEntity<TKey> =>
             TableAccess.GetByColumn<TEntity>(columnName, columnValue);
@@ -97,7 +97,7 @@ namespace HiddenLove.DataAccess.Repositories
         /// <param name="entity">Entité à insérer</param>
         /// <typeparam name="TKey">Type de la clef primaire (généralement Int32)</typeparam>
         /// <typeparam name="TEntity">
-        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.TableAccess" />
+        /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.ITableAccess" />
         /// </typeparam>
         public virtual TKey Insert<TKey, TEntity>(TEntity entity) where TEntity : IEntity<TKey> =>
             TableAccess.Insert<TKey>(entity);

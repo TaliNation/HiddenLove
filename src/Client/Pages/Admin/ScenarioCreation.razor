@@ -4,43 +4,53 @@
 @inject JsHelper Js
 @inject NavigationManager NavManager
 
-<div class="container">
-    <div class="row">
-        <div class="col-3">
-            <Textbox Placeholder="Titre" @bind-BindingValue="Title" />
+<div class="creation-clean">
+    <div class="creation-form">
+
+        <div class="creation-image">
+            <img src="img/logo.svg" class="creation-illustration" />
         </div>
-        <div class="col-9">
-            <Textarea Placeholder="Description" @bind-BindingValue="Description" />
-        </div>
-    </div>
-    @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
-    {
+
+        <h2>Création d'un scénario personnalisé</h2>
+
         <div class="row">
             <div class="col-3">
-                <SelectList Items="AvailableSteps" @bind-BindingValue="Steps[step.Index].StepIdAsString" />
+                <Textbox Placeholder="Titre du scénario" @bind-BindingValue="Title" />
             </div>
-            <div class="col-3">
-                <Timebox @bind-BindingValue="Steps[step.Index].StartTime" />
-            </div>
-            <div class="col-3">
-                <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
-            </div>
-            <div class="col-3">
-                <i class="fas fa-minus-circle" @onclick="@(x => RemoveStep(step.Index))"></i>
+            <div class="col-9">
+                <Textarea Placeholder="Description du scénario" @bind-BindingValue="Description" />
             </div>
         </div>
-    }
-    <div class="row">
-        <div class="col-10"></div>
-        <div class="col-2">
-            <i class="fas fa-plus-circle" @onclick="AddStep"></i>
+        @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
+        {
+            <div class="row">
+                <div class="col-3">
+                    <SelectList Items="AvailableSteps" @bind-BindingValue="Steps[step.Index].StepIdAsString" />
+                </div>
+                <div class="col-3">
+                    <Timebox @bind-BindingValue="Steps[step.Index].StartTime" />
+                </div>
+                <div class="col-3">
+                    <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
+                </div>
+                <div class="change-creation">
+                    <i class="fas fa-minus-circle" @onclick="@(x => RemoveStep(step.Index))"></i>
+                    <span>Supprimer une étape</span>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="change-creation">
+                <i class="fas fa-plus-circle" @onclick="AddStep"></i>
+                <span>Ajouter une étape</span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary" @onclick="SubmitScenario">J'ai Terminé !</button>
-    </div>
-    <div class="row">
-        <p>@Message</p>
+         <div class="btn-validation">
+        <button class="btn btn-primary" @onclick="SubmitScenario">Valider la création du scénario</button>
+         </div>
+        <div class="error">
+            <p>@Message</p>
+        </div>
     </div>
 </div>
 
@@ -62,18 +72,19 @@
 
     protected void AddStep()
     {
-        var newElement = new ScenarioCreationStep {
+        var newElement = new ScenarioCreationStep
+        {
             StepIdAsString = AvailableSteps.First().Key,
             StartTime = null,
             EndTime = null
         };
 
-        if(Steps.Count() > 0) 
-            newElement.StartTime = Steps[Steps.Count()-1].EndTime;
+        if (Steps.Count() > 0)
+            newElement.StartTime = Steps[Steps.Count() - 1].EndTime;
 
         Steps.Add(newElement);
     }
-    
+
     protected void RemoveStep(int index)
     {
         Steps.RemoveAt(index);
@@ -81,27 +92,27 @@
 
     protected async void SubmitScenario()
     {
-        if(Title == "" || Title == null)
+        if (Title == "" || Title == null)
         {
-            Message = "Le titre ne peut pas être vide.";
+            Message = "Un scénario nécessite un titre.";
             return;
         }
 
-        if(Steps.Count() < 2)
+        if (Steps.Count() < 2)
         {
             Message = "Un scénario doit au moins contenir 2 étapes.";
             return;
         }
 
-        foreach(ScenarioCreationStep step in Steps)
+        foreach (ScenarioCreationStep step in Steps)
         {
-            if(step.StartTime == null || step.EndTime == null)
+            if (step.StartTime == null || step.EndTime == null)
             {
-                Message = "Toutes les étapes doivent avoir une heure de début et de fin.";
+                Message = "Toutes les étapes doivent avoir une heure de début et une heure de fin.";
                 return;
             }
         }
-        
+
         var request = new HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation
         {
             Title = Title,
@@ -109,8 +120,9 @@
             Steps = Steps
         };
 
-        var res = await Http.PostAsync<HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation>("ScenarioCreation/NewScenario", request);
-        if(!res.IsSuccessStatusCode)
+        var res = await
+            Http.PostAsync<HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation>("ScenarioCreation/NewScenario", request);
+        if (!res.IsSuccessStatusCode)
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();
             Js.LogError(error);

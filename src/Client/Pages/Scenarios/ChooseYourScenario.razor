@@ -4,30 +4,36 @@
 @inject JsHelper Js
 @inject NavigationManager NavManager
 
-<h1>Selectionnez un scénario !</h1>
 
-@if(_isPageLoaded)
-{
-    <div class="row">
-        @foreach(ScenarioSelectionData scenario in _scenarios)
+<div class="choose-clean">
+    <div class="choose-form">
+
+        <h1>Selectionnez un scénario !</h1>
+
+        @if (_isPageLoaded)
         {
-            <div class="col-md-3 col-sm-6 padding-bottom">
-                <p @onclick="@(() => SelectScenarioTemplate(scenario.Id))">@scenario.Title</p>
+            <div class="row">
+                @foreach (ScenarioSelectionData scenario in _scenarios)
+                {
+                    <div class="col-md-3 col-sm-6 padding-bottom">
+                        <p @onclick="@(() => SelectScenarioTemplate(scenario.Id))">@scenario.Title</p>
+                    </div>
+                }
             </div>
         }
-    </div>
-}
-else
-{
-    <p>Chargement...</p>
-}
+        else
+        {
+            <p>En cours de chargement...</p>
+        }
 
-<div class="row">
-    <Datebox @bind-BindingValue="_eventDate" />
-    <Button OnClick="SelectScenario" Text="EE" />
-</div>
-<div class="row">
-    <p>@_message</p>
+        <div class="row">
+            <Datebox @bind-BindingValue="_eventDate" />
+            <Button OnClick="SelectScenario" Text="EE" />
+        </div>
+        <div class="row">
+            <p>@_message</p>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -54,19 +60,20 @@ else
 
     private async void SelectScenario()
     {
-        if(_scenarioTemplateId == null) 
+        if (_scenarioTemplateId == null)
         {
             _message = "Aucun scénario n'a été sélectionné.";
             return;
         }
 
-        if(_eventDate == null)
+        if (_eventDate == null)
         {
             _message = "Une date pour l'execution du scénario doit être planifiée.";
             return;
         }
 
-        var req = new SelectedScenarioData {
+        var req = new SelectedScenarioData
+        {
             IdScenario = _scenarioTemplateId.GetValueOrDefault(0),
             EventDate = _eventDate.GetValueOrDefault(DateTime.Now)
         };
@@ -74,10 +81,9 @@ else
         Js.Log(req);
 
         int idCreatedScenario = await Http.PostResultAsync<SelectedScenarioData, int>("ScenarioSelection/BookScenario", req);
-        
+
         NavManager.NavigateTo("/scenario/view/" + idCreatedScenario);
     }
 
 
 }
-

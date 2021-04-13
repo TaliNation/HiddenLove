@@ -18,7 +18,6 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// Récupération de tous les scénarios type pour laisser le choix à l'utilisateur
         /// </summary>
-        /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Route("AvailableScenarios")]

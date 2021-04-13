@@ -11,5 +11,6 @@ namespace HiddenLove.DataAccess.TableAccesses
 		IEnumerable<TEntity> GetAll<TEntity>();
 		IEnumerable<TEntity> GetByColumn<TEntity>(string columnName, object value);
 		TKey Insert<TKey>(IEntity<TKey> entity);
+		void Delete<TKey>(TKey key);
 	}
 }

@@ -100,6 +100,9 @@ namespace HiddenLove.DataAccess.Repositories
         /// Type de l'entité retournée par la requêtes. Doit correspondre au type spécifié dans le <see cref="TableAccesses.ITableAccess" />
         /// </typeparam>
         public virtual TKey Insert<TKey, TEntity>(TEntity entity) where TEntity : IEntity<TKey> =>
-            TableAccess.Insert<TKey>(entity);
+            TableAccess.Insert(entity);
+
+		public virtual void Delete<TKey, TEntity>(TKey key) where TEntity : IEntity<TKey> =>
+			TableAccess.Delete(key);
     }
 }

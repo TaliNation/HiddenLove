@@ -74,5 +74,18 @@ namespace HiddenLove.Server.Controllers
 
             return Ok(res);
         }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("Scenario/{id}")]
+        [Produces("application/json")]
+        public IActionResult DeleteScenario(int id)
+        {
+            var dbAccess = new Repository(new ScenariosTableAccess());
+            dbAccess.Delete<int, Scenario>(id);
+
+            return Ok();
+        }
+
     }
 }

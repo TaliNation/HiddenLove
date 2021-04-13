@@ -1,8 +1,8 @@
 namespace HiddenLove.DataAccess.TableAccesses
 {
-    public sealed class StepTemplatesTableAccess : TableAccess
+    public sealed class StepTemplatesTableAccess : SingleKeyDefaultTableAccess
     {
-        public override string TableName => "StepTemplates";
-        public override string PrimaryKeyName => "Id";
+        protected override string TableName => "StepTemplates";
+        protected override string PrimaryKeyName => "Id";
     }
 }

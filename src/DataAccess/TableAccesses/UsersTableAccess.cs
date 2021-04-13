@@ -4,15 +4,15 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.TableAccesses
 {
-    public sealed class UsersTableAccess : TableAccess
+    public sealed class UsersTableAccess : SingleKeyDefaultTableAccess
     {
-        public override string TableName => "Users";
-        public override string PrimaryKeyName => "Id";
+        protected override string TableName => "Users";
+        protected override string PrimaryKeyName => "Id";
 
         public override TKey Insert<TKey>(IEntity<TKey> entity)
         {
             User user = (User)entity;
-            return _queryFactory.Query(TableName).InsertGetId<TKey>(new {
+            return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
                 emailaddress = user.EmailAddress,
                 username = user.Username,
                 fullusername = user.FullUsername,

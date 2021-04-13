@@ -3,15 +3,15 @@ using SqlKata.Execution;
 
 namespace HiddenLove.DataAccess.TableAccesses
 {
-    public class ScenarioTemplatesTableAccess : TableAccess
+    public class ScenarioTemplatesTableAccess : SingleKeyDefaultTableAccess
     {
-        public override string TableName => "ScenarioTemplates";
-        public override string PrimaryKeyName => "Id";
+        protected override string TableName => "ScenarioTemplates";
+        protected override string PrimaryKeyName => "Id";
 
         public override TKey Insert<TKey>(IEntity<TKey> entity)
         {
             ScenarioTemplate obj = (ScenarioTemplate)entity;
-            return _queryFactory.Query(TableName).InsertGetId<TKey>(new {
+            return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
                 Title = obj.Title,
                 Description = obj.Description
             });

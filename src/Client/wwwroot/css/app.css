@@ -309,6 +309,7 @@ a,
   place-items: center;
   display: flex;
   font-size: 20px;
+  cursor: pointer;
 }
 .creation-clean .creation-form span {
   margin-left: 10px;

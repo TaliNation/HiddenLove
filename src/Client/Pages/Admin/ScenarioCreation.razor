@@ -33,16 +33,16 @@
                 <div class="col-3">
                     <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
                 </div>
-                <div class="change-creation">
-                    <i class="fas fa-minus-circle" @onclick="@(x => RemoveStep(step.Index))"></i>
+                <div class="change-creation" @onclick="@(x => RemoveStep(step.Index))">
+                    <i class="fas fa-minus-circle" ></i>
                     <span>Supprimer une étape</span>
                 </div>
             </div>
         }
         <div class="row">
-            <div class="change-creation">
-                <i class="fas fa-plus-circle" @onclick="AddStep"></i>
-                <span>Ajouter une étape</span>
+            <div class="change-creation" @onclick="AddStep">
+                <i class="fas fa-plus-circle" id="add" ></i>
+                <span> Ajouter une étape</span>
             </div>
         </div>
          <div class="btn-validation">

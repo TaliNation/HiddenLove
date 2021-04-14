@@ -6,45 +6,45 @@
 <div class="login-clean">
     <div class="login-form">
         <div class="illustration">
-            <img src="img/logo.svg" class="illustration"/>
+            <img src="img/logo.svg" class="illustration" />
         </div>
-            <Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
-            
-            <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />     
+        <Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
+
+        <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
         <div class="registerlogin-link">
+            <div class="field-warning">
+                <p>@Message</p>
+            </div>
             <p>Pas de compte ? <a href="/register">Inscrivez-vous</a></p>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" @onclick="LogUser">Valider</button>
         </div>
-        <p>@Message</p>
     </div>
 </div>
 
 @code {
     private string EmailAddress { get; set; } = "";
-    
     private string Password { get; set; } = "";
-
     private string Message { get; set; } = "";
 
     private async void LogUser()
     {
-        var request = new AuthenticationRequest 
-        { 
+        var request = new AuthenticationRequest
+        {
             EmailAddress = EmailAddress,
             Password = Password
         };
-        
+
         HttpResponseMessage res = await Http.PostAsync<AuthenticationRequest>("Users/authenticate", request);
-        if(!res.IsSuccessStatusCode)
+        if (!res.IsSuccessStatusCode)
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();
             Js.LogError(error);
             return;
         }
         AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
-        
+
         Js.WriteCookie("token", loginToken.Token, 60 * 60);
 
         NavManager.NavigateTo("/test");

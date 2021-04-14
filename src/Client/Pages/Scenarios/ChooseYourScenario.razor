@@ -8,16 +8,28 @@
 <div class="choose-clean">
     <div class="choose-form">
 
-        <h1>Selectionnez un scénario !</h1>
+        <div class="choose-image">
+            <img src="img/logo.svg" class="choose-illustration" />
+        </div>
+
+        <h2>Choix d'un scénario personnalisé</h2>
+
+        <div class="choose-date">
+            <span>Sélectionnez une date :</span>
+            <Datebox @bind-BindingValue="_eventDate" />
+        </div>
 
         @if (_isPageLoaded)
         {
-            <div class="row">
+            int i = 0;
+            <div class="choose-group">
                 @foreach (ScenarioSelectionData scenario in _scenarios)
                 {
-                    <div class="col-md-3 col-sm-6 padding-bottom">
-                        <p @onclick="@(() => SelectScenarioTemplate(scenario.Id))">@scenario.Title</p>
+                    <div class="choose-list">
+                        <input name="scenario" type="radio" id="@i" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
+                        <label for="@i">@scenario.Title</label>
                     </div>
+                    i ++;
                 }
             </div>
         }
@@ -26,12 +38,11 @@
             <p>En cours de chargement...</p>
         }
 
-        <div class="row">
-            <Datebox @bind-BindingValue="_eventDate" />
-            <Button OnClick="SelectScenario" Text="EE" />
+        <div class="btn-validation">
+            <button class="btn btn-primary" @onclick="SelectScenario">Valider le choix du scénario</button>
         </div>
-        <div class="row">
-            <p>@_message</p>
+        <div class="error">
+            <p>@Message</p>
         </div>
     </div>
 </div>
@@ -43,8 +54,7 @@
 
     private DateTime? _eventDate { get; set; } = null;
     private int? _scenarioTemplateId { get; set; } = null;
-    private string _message { get; set; } = "";
-
+    private string Message { get; set; } = "";
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate(Js, NavManager);
@@ -62,13 +72,13 @@
     {
         if (_scenarioTemplateId == null)
         {
-            _message = "Aucun scénario n'a été sélectionné.";
+            Message = "Aucun scénario n'a été sélectionné.";
             return;
         }
 
         if (_eventDate == null)
         {
-            _message = "Une date pour l'execution du scénario doit être planifiée.";
+            Message = "Une date pour l'execution du scénario doit être planifiée.";
             return;
         }
 

@@ -5,29 +5,46 @@
 @layout NavbarLayout
 
 <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a href="/scenario/select">
+                <button class="btn btn-success">
+                    <i class="fa fa-plus"></i> Nouveau scénario
+                </button>
+            </a>
+        </div>
+    </div>
+    <div style="padding-bottom: 10px;"></div>
     @if (IsPageLoaded)
     {
         <div class="row">
             <div class="col-12">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Horaires</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (UserScenarioData scenario in UsedScenarios)
-                        {
-                            <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
-                                <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
-                                <td>@scenario.EventDate</td>
-                                <td></td>
+                @if (UsedScenarios.Any())
+                {
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Horaires</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (UserScenarioData scenario in UsedScenarios)
+                            {
+                                <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
+                                    <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
+                                    <td>@scenario.EventDate.ToString("dd/MM/yyyy")</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Aucun scénario pour le moment. Mais rien n'est jamais trop tard !</p>
+                }
             </div>
         </div>
     }
@@ -42,15 +59,19 @@
     {
         await Http.Authenticate(Js, NavManager);
         UsedScenarios = await Http.GetResultAsync<List<UserScenarioData>>("ScenarioView/UserList");
+
+        UsedScenarios ??= new List<UserScenarioData>();
+        UsedScenarios = UsedScenarios.OrderByDescending(x => x.EventDate).ToList();
         IsPageLoaded = true;
     }
 
     private string RowColor(bool isFinished, bool isToday)
     {
+        if(isToday)
+            return "bg-light";
+
         if(isFinished)
             return "text-secondary";
-        else if(isToday)
-            return "bg-info";
         
         return "";
     }

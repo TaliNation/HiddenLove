@@ -5,7 +5,7 @@
 @layout NavbarLayout
 
 <div class="container">
-    @if (IsPageLoaded)
+    @if (ContentStatus == ContentStatus.Ok)
     {
         <div class="row">
             <div class="col-10">
@@ -40,9 +40,13 @@
             <div style="padding-bottom: 10px;"></div>
         }
     }
-    else
+    else if (ContentStatus == ContentStatus.Loading)
     {
         <p>Chargement...</p>
+    }
+    else 
+    {
+        <p>Aucun scénario trouvé. <a href="/">Retour à la page d'accueil.</a></p>
     }
 </div>
 
@@ -51,21 +55,21 @@
     public int IdScenario { get; set; }
 
     private ScenarioDetailsData ScenarioDetails { get; set; }
-    private bool IsPageLoaded { get; set; } = false;
+    private ContentStatus ContentStatus { get; set; } = ContentStatus.Loading;
 
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate(Js, NavManager);
-        
+
         ScenarioDetails = await Http.GetResultAsync<ScenarioDetailsData>("ScenarioView/Details/" + IdScenario);
         HttpResponseMessage res = await Http.GetAsync("ScenarioView/Details/" + IdScenario);
         if (!res.IsSuccessStatusCode)
         {
-            NavManager.NavigateTo("/not-found");
+            ContentStatus = ContentStatus.Error;
             return;
         }
 
         ScenarioDetails = await res.Content.ReadAsAsync<ScenarioDetailsData>();
-        IsPageLoaded = true;
+        ContentStatus = ContentStatus.Ok;
     }
 }

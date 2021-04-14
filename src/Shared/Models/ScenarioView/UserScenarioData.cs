@@ -1,6 +1,6 @@
 using System;
 
-namespace Shared.Models.ScenarioView
+namespace HiddenLove.Shared.Models
 {
     public class UserScenarioData
     {

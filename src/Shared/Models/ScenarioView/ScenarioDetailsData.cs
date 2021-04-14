@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Shared.Models.ScenarioView
+namespace HiddenLove.Shared.Models
 {
     public class ScenarioDetailsData
     {

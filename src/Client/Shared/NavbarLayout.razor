@@ -1,0 +1,23 @@
+@inherits LayoutComponentBase
+
+<div class="page">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">
+            <img src="/img/logo.svg" width="150" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-div" aria-controls="navbar-nav-div" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-nav-div">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes alibis</a>
+                    <a class="nav-link" href="#">Mon abonnement</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

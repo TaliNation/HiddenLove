@@ -1,0 +1,57 @@
+@page "/home"
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
+@layout NavbarLayout
+
+<div class="container">
+    @if (IsPageLoaded)
+    {
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Horaires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (UserScenarioData scenario in UsedScenarios)
+                        {
+                            <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
+                                <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
+                                <td>@scenario.EventDate</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<UserScenarioData> UsedScenarios { get; set; }
+
+    private bool IsPageLoaded { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Http.Authenticate(Js, NavManager);
+        UsedScenarios = await Http.GetResultAsync<List<UserScenarioData>>("ScenarioView/UserList");
+        IsPageLoaded = true;
+    }
+
+    private string RowColor(bool isFinished, bool isToday)
+    {
+        if(isFinished)
+            return "text-secondary";
+        else if(isToday)
+            return "bg-info";
+        
+        return "";
+    }
+}

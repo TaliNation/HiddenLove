@@ -18,20 +18,34 @@
             <span>Sélectionnez une date :</span>
             <Datebox @bind-BindingValue="EventDate" />
         </div>
+        <span>Sélectionnez un scénario :</span>
 
         @if (IsPageLoaded)
         {
-            int i = 0;
-            <div class="choose-group">
+            <div class="card-organisation">
                 @foreach (ScenarioSelectionData scenario in Scenarios)
                 {
-                    <div class="choose-list">
-                        <input type="radio" id="scenario-@i-input" @onclick="@(() => SelectScenarioTemplate(scenario.Id))" />
-                        <label for="scenario-@i-input">@scenario.Title</label>
+                    <div class="card" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
+                        <img class="card-img-top" src="img/logo.svg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@scenario.Title</h5>
+                            <p class="card-description">@scenario.Description</p>
+                        </div>
                     </div>
-                    i ++;
                 }
             </div>
+                    /*
+                    int i = 0;
+                    <div class="choose-group">
+                    @foreach (ScenarioSelectionData scenario in Scenarios)
+                    {
+                    <div class="choose-list">
+                    <input type="radio" id="scenario-@i-input" @onclick="@(() => SelectScenarioTemplate(scenario.Id))" />
+                    <label for="scenario-@i-input">@scenario.Title</label>
+                    </div>
+                    i++;
+                    }
+                    </div>*/
         }
         else
         {
@@ -55,6 +69,7 @@
     private DateTime? EventDate { get; set; } = null;
     private int? ScenarioTemplateId { get; set; } = null;
     private string Message { get; set; } = "";
+
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate(Js, NavManager);
@@ -95,5 +110,5 @@
         NavManager.NavigateTo("/scenario/view/" + idCreatedScenario);
     }
 
-
+    
 }

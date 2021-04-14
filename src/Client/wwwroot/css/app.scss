@@ -367,6 +367,7 @@ a,
         }
     }
 }
+
 .choose-clean {
     background: #f1f7fc;
     display: flex;
@@ -402,7 +403,7 @@ a,
 
         .btn-validation {
             text-align: center;
-            padding-top: 10px;
+            margin-top: 20px;
 
             .btn-primary {
                 background: #f4476b;
@@ -446,6 +447,10 @@ a,
             }
         }
 
+        span {
+            font-size: 20px;
+        }
+
         .choose-list {
             font-size: 18px;
             margin-right: 5%;
@@ -457,5 +462,53 @@ a,
             margin-right: -15px;
             margin-left: -15px;
         }
+
+        .card-organisation {
+            justify-content: space-around;
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+
+            .card {
+                width: 18rem;
+                margin-top: 15px;
+                cursor: pointer;
+
+                .card-title {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .card-description {
+                    text-align: justify;
+                    font-style: italic;
+                }
+            }
+            .card:hover{
+                background-color: #e1ecf7;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .isHidden {
+            display: none; /* hide radio buttons */
+          }
+          
+          .label {
+            display: inline-block;
+            background-color: red;
+            width: 120px;
+            height: 120px;
+            padding: 5px 10px;
+          }
+          
+          .radio:checked + .label {   /* target next sibling (+) label */
+            background-color: blue;
+          }
+
+          .radio:checked + .card {   /* target next sibling (+) label */
+            background-color: blue;
+          }
     }
 }

@@ -362,7 +362,7 @@ a,
 }
 .choose-clean .choose-form .btn-validation {
   text-align: center;
-  padding-top: 10px;
+  margin-top: 20px;
 }
 .choose-clean .choose-form .btn-validation .btn-primary {
   background: #f4476b;
@@ -399,6 +399,9 @@ a,
 .choose-clean .choose-form .choose-date span {
   margin-right: 6px;
 }
+.choose-clean .choose-form span {
+  font-size: 20px;
+}
 .choose-clean .choose-form .choose-list {
   font-size: 18px;
   margin-right: 5%;
@@ -408,6 +411,49 @@ a,
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+.choose-clean .choose-form .card-organisation {
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.choose-clean .choose-form .card-organisation .card {
+  width: 18rem;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.choose-clean .choose-form .card-organisation .card .card-title {
+  text-align: center;
+  font-weight: bold;
+}
+.choose-clean .choose-form .card-organisation .card .card-description {
+  text-align: justify;
+  font-style: italic;
+}
+.choose-clean .choose-form .card-organisation .card:hover {
+  background-color: #e1ecf7;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.choose-clean .choose-form .isHidden {
+  display: none;
+  /* hide radio buttons */
+}
+.choose-clean .choose-form .label {
+  display: inline-block;
+  background-color: red;
+  width: 120px;
+  height: 120px;
+  padding: 5px 10px;
+}
+.choose-clean .choose-form .radio:checked + .label {
+  /* target next sibling (+) label */
+  background-color: blue;
+}
+.choose-clean .choose-form .radio:checked + .card {
+  /* target next sibling (+) label */
+  background-color: blue;
 }
 
 /*# sourceMappingURL=app.css.map */

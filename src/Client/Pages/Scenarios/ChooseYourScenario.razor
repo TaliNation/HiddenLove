@@ -55,6 +55,7 @@
     private DateTime? EventDate { get; set; } = null;
     private int? ScenarioTemplateId { get; set; } = null;
     private string Message { get; set; } = "";
+    
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate(Js, NavManager);

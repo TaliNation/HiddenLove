@@ -7,7 +7,7 @@ using HiddenLove.Server.Helpers;
 using HiddenLove.Shared.Models.ScenarioSelection;
 using Microsoft.AspNetCore.Mvc;
 using MoreLinq.Extensions;
-using Shared.Models.ScenarioView;
+using HiddenLove.Shared.Models;
 
 namespace HiddenLove.Server.Controllers
 {

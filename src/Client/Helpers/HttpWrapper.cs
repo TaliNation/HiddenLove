@@ -55,9 +55,16 @@ namespace HiddenLove.Client.Helpers
 
         public async Task<TResult> GetResultAsync<TResult>(string uri, params string[] parameters)
         {
-            HttpResponseMessage	res = await GetAsync(uri, parameters);
-            return JsonConvert.DeserializeObject<TResult>(
-                await res.Content.ReadAsStringAsync());
+            try
+            {
+                HttpResponseMessage	res = await GetAsync(uri, parameters);
+                return JsonConvert.DeserializeObject<TResult>(
+                    await res.Content.ReadAsStringAsync());
+            }
+            catch
+            {
+                return default;
+            }
         }
 
         private static string ConcatUriAndParameters(string uri, params string[] parameters)

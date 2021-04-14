@@ -56,7 +56,16 @@
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate(Js, NavManager);
+        
         ScenarioDetails = await Http.GetResultAsync<ScenarioDetailsData>("ScenarioView/Details/" + IdScenario);
+        HttpResponseMessage res = await Http.GetAsync("ScenarioView/Details/" + IdScenario);
+        if (!res.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/not-found");
+            return;
+        }
+
+        ScenarioDetails = await res.Content.ReadAsAsync<ScenarioDetailsData>();
         IsPageLoaded = true;
     }
 }

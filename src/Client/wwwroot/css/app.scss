@@ -138,6 +138,13 @@ a,
             transform: translateY(1px);
         }
 
+        .field-warning {
+            font-size: 12px;
+            text-align: left;
+            font-style: italic;
+            color: rgb(199, 0, 0);
+        }
+
         .forgot {
             display: block;
             text-align: center;
@@ -182,7 +189,7 @@ a,
             font-weight: bold;
         }
 
-        .PasswordWarning {
+        .password-warning {
             font-size: 12px;
             font-style: italic;
             color: rgb(199, 0, 0);
@@ -374,5 +381,80 @@ a,
         color: #505e6c;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
         text-align: justify;
+
+        h2 {
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        /* gestion du logo */
+        .choose-image {
+            text-align: center;
+            padding-bottom: 20px;
+
+            .choose-illustration {
+                width: 100%;
+                height: auto;
+                max-width: 250px;
+            }
+        }
+
+        .btn-validation {
+            text-align: center;
+            padding-top: 10px;
+
+            .btn-primary {
+                background: #f4476b;
+                outline: none !important;
+                border: 1px solid #f4476b;
+                box-shadow: none;
+                border-radius: 20px;
+                font-weight: bold;
+                margin:auto;
+                font-size: 18px;
+            }
+
+            .btn-primary:hover,
+            .btn-primary:active {
+                background: #dd2950;
+            }
+
+            .btn-primary:active {
+                transform: translateY(1px);
+            }
+        }
+
+        .error {
+            font-size: 18px;
+            font-style: italic;
+            color: rgb(199, 0, 0);
+            padding-top: 5px;
+        }
+
+        .choose-date {
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin: auto;
+            place-items: center;
+            display: flex;
+            font-size: 20px;
+            align-items: baseline;
+
+            span {
+                margin-right: 6px;
+            }
+        }
+
+        .choose-list {
+            font-size: 18px;
+            margin-right: 5%;
+        }
+
+        .choose-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
     }
 }

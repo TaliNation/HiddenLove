@@ -5,6 +5,7 @@ namespace HiddenLove.DataAccess.Entities
 {
 	public partial class FullScenario : IEntity<int>
 	{
+		public string EmailAddress { get; set; }
 		public int Id_Scenario { get; set; }
 		public int Id_User { get; set; }
 		public int Id_ScenarioTemplate { get; set; }

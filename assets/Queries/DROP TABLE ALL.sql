@@ -1,4 +1,0 @@
-DROP TABLE offers CASCADE;
-DROP TABLE privileges CASCADE;
-DROP TABLE subscriptions CASCADE;
-DROP TABLE users CASCADE;

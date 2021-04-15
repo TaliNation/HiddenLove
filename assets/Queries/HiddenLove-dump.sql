@@ -21,7 +21,9 @@ CREATE TABLE Offers (
     Id INT IDENTITY NOT NULL PRIMARY KEY,
     Title VARCHAR(255) NOT NULL,
     Description VARCHAR(3000),
-    Image VARCHAR(255)
+    Image VARCHAR(255),
+    Id_fakespam INTEGER,
+    FOREIGN KEY (Id_fakespam) REFERENCES FakeSpams (id)
   );
 
 /*==============================================================*/
@@ -87,6 +89,16 @@ CREATE TABLE Subscriptions (
   FOREIGN KEY (id_offer) REFERENCES Offers (id),
   FOREIGN KEY (id_user) REFERENCES Users (id)
 );
+
+/*==============================================================*/
+  /* Table: FakesSpams                                    */
+  /*==============================================================*/
+  CREATE TABLE FakeSpams (
+    Id INT IDENTITY NOT NULL PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Subject VARCHAR(255),
+    Body VARCHAR
+  );
 
   /*==============================================================*/
   /* Views: UserScenarios                                         */

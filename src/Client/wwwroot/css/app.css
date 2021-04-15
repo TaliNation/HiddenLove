@@ -363,6 +363,7 @@ a,
 .choose-clean .choose-form .btn-validation {
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .choose-clean .choose-form .btn-validation .btn-primary {
   background: #f4476b;

@@ -485,11 +485,10 @@ a,
                     font-style: italic;
                 }
             }
-            .card:hover{
+            .card:hover, .selected-card{
                 background-color: #e1ecf7;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-            }
-            
+            }          
         }
     }
 }

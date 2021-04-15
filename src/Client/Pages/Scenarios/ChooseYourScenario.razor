@@ -25,7 +25,7 @@
             <div class="card-organisation">
                 @foreach (ScenarioSelectionData scenario in Scenarios)
                 {
-                    <div class="card" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
+                    <div class="card @HighlightScenarioCard(scenario.Id)" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
                         <img class="card-img-top" src="img/logo.svg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">@scenario.Title</h5>
@@ -69,6 +69,11 @@
     private DateTime? EventDate { get; set; } = null;
     private int? ScenarioTemplateId { get; set; } = null;
     private string Message { get; set; } = "";
+   
+    private string HighlightScenarioCard (int id)
+    {
+        return ScenarioTemplateId == id ?"selected-card":"";
+    }
 
     protected override async Task OnInitializedAsync()
     {

@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Shared\HiddenLove.Shared.csproj" />
+	  <ProjectReference Include="..\DataAccess\HiddenLove.DataAccess.csproj" />
 	</ItemGroup>
 
 </Project>

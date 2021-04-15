@@ -309,6 +309,7 @@ a,
   place-items: center;
   display: flex;
   font-size: 20px;
+  cursor: pointer;
 }
 .creation-clean .creation-form span {
   margin-left: 10px;
@@ -361,7 +362,7 @@ a,
 }
 .choose-clean .choose-form .btn-validation {
   text-align: center;
-  padding-top: 10px;
+  margin-top: 20px;
 }
 .choose-clean .choose-form .btn-validation .btn-primary {
   background: #f4476b;
@@ -398,6 +399,9 @@ a,
 .choose-clean .choose-form .choose-date span {
   margin-right: 6px;
 }
+.choose-clean .choose-form span {
+  font-size: 20px;
+}
 .choose-clean .choose-form .choose-list {
   font-size: 18px;
   margin-right: 5%;
@@ -407,6 +411,30 @@ a,
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+.choose-clean .choose-form .card-organisation {
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.choose-clean .choose-form .card-organisation .card {
+  width: 18rem;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.choose-clean .choose-form .card-organisation .card .card-title {
+  text-align: center;
+  font-weight: bold;
+}
+.choose-clean .choose-form .card-organisation .card .card-description {
+  text-align: justify;
+  font-style: italic;
+}
+.choose-clean .choose-form .card-organisation .card:hover, .choose-clean .choose-form .card-organisation .selected-card {
+  background-color: #e1ecf7;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 /*# sourceMappingURL=app.css.map */

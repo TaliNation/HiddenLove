@@ -7,6 +7,7 @@ namespace HiddenLove.MailService.Jobs
 {
 	public class MailSenderJob : IJob
 	{
+		#pragma warning disable CS1998
 		public async Task Execute(IJobExecutionContext context)
 		{
 			int mailIndex = context.JobDetail.JobDataMap.GetInt("mailIndex");

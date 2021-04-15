@@ -97,7 +97,7 @@ CREATE TABLE Subscriptions (
     Id INT IDENTITY NOT NULL PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Subject VARCHAR(255),
-    Body VARCHAR
+    Body VARCHAR(MAX)
   );
 
   /*==============================================================*/

@@ -22,8 +22,6 @@ CREATE TABLE Offers (
     Title VARCHAR(255) NOT NULL,
     Description VARCHAR(3000),
     Image VARCHAR(255),
-    Id_fakespam INTEGER,
-    FOREIGN KEY (Id_fakespam) REFERENCES FakeSpams (id)
   );
 
 /*==============================================================*/
@@ -33,6 +31,8 @@ CREATE TABLE StepTemplates (
   Id INT IDENTITY NOT NULL PRIMARY KEY,
   Title VARCHAR(255) NOT NULL,
   Description VARCHAR(3000)
+  Id_fakespam INTEGER,
+  FOREIGN KEY (Id_fakespam) REFERENCES FakeSpams (id)
 );
 
 /*==============================================================*/

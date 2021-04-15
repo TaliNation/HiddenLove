@@ -489,26 +489,7 @@ a,
                 background-color: #e1ecf7;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
             }
+            
         }
-
-        .isHidden {
-            display: none; /* hide radio buttons */
-          }
-          
-          .label {
-            display: inline-block;
-            background-color: red;
-            width: 120px;
-            height: 120px;
-            padding: 5px 10px;
-          }
-          
-          .radio:checked + .label {   /* target next sibling (+) label */
-            background-color: blue;
-          }
-
-          .radio:checked + .card {   /* target next sibling (+) label */
-            background-color: blue;
-          }
     }
 }

@@ -307,6 +307,7 @@ a,
 .creation-clean {
     background: #f1f7fc;
     display: flex;
+    padding-bottom: 20px;
 
     .creation-form {
         max-width: 1600px;
@@ -420,7 +421,7 @@ a,
 
         .btn-validation {
             text-align: center;
-            margin-top: 20px;
+            padding-bottom: 10px;
 
             .btn-primary {
                 background: #f4476b;

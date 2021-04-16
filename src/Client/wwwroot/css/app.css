@@ -273,6 +273,7 @@ a,
 .creation-clean {
   background: #f1f7fc;
   display: flex;
+  padding-bottom: 20px;
 }
 .creation-clean .creation-form {
   max-width: 1600px;
@@ -372,7 +373,7 @@ a,
 }
 .choose-clean .choose-form .btn-validation {
   text-align: center;
-  margin-top: 20px;
+  padding-bottom: 10px;
 }
 .choose-clean .choose-form .btn-validation .btn-primary {
   background: #f4476b;

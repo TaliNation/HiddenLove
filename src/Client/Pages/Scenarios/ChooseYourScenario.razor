@@ -23,6 +23,7 @@
 
         @if (IsPageLoaded)
         {
+            int i = 0;
             <div class="card-organisation">
                 @foreach (ScenarioSelectionData scenario in Scenarios)
                 {
@@ -34,26 +35,13 @@
                             <p class="card-description">@scenario.Description</p>
                         </div>
                         <div class="btn-validation">
-                            <button hidden="@HideButton" class="btn btn-primary" data-toggle="modal"  data-target="#ScenarioModal"
+                            <button hidden="@ToggleButton(scenario.Id)" class="btn btn-primary" data-toggle="modal"  data-target="#ScenarioModal"
                         @onclick="SelectScenario">Choisir</button>
                         </div>
                     </div>
-                }
-            </div>
-                    /*
-                    int i = 0;
-                    <div class="choose-group">
-                    @foreach (ScenarioSelectionData scenario in Scenarios)
-                    {
-                    <div class="choose-list">
-                    <input type="radio" id="scenario-@i-input" @onclick="@(() => SelectScenarioTemplate(scenario.Id))" />
-                    <label for="scenario-@i-input">@scenario.Title</label>
-                    </div>
                     i++;
-                    }
-                    </div> <div class="error">
-                    <p>@Message</p>
-                    </div>*/
+                }
+            </div>               
         }
         else
         {
@@ -85,10 +73,10 @@
 @code {
     private bool HideButton {get;set;} = true;
 
-   /* private void ToggleButton()
+    private bool ToggleButton(int id)
       {
-         HideButton =   !HideButton;
-      }    */
+         return ScenarioTemplateId != id;
+      }   
 
     private bool IsPageLoaded { get; set; } = false;
 
@@ -101,7 +89,6 @@
 
     private string HighlightScenarioCard(int id)
     {
-        HideButton =   !HideButton;
         return ScenarioTemplateId == id ? "selected-card" : "";
     }
 

@@ -26,15 +26,17 @@
             <div class="card-organisation">
                 @foreach (ScenarioSelectionData scenario in Scenarios)
                 {
-                    <div class="card @HighlightScenarioCard(scenario.Id)" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
+                    <div class="card @HighlightScenarioCard(scenario.Id)"
+                @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
                         <img class="card-img-top" src="img/logo.svg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">@scenario.Title</h5>
                             <p class="card-description">@scenario.Description</p>
                         </div>
                         <div class="btn-validation">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @onclick="SelectScenario">Valider le choix du scénario</button>
-        </div>
+                            <button hidden="@HideButton" class="btn btn-primary" data-toggle="modal"  data-target="#ScenarioModal"
+                        @onclick="SelectScenario">Choisir</button>
+                        </div>
                     </div>
                 }
             </div>
@@ -49,41 +51,31 @@
                     </div>
                     i++;
                     }
-                    </div>          <div class="error">
-            <p>@Message</p>
-        </div>*/
+                    </div> <div class="error">
+                    <p>@Message</p>
+                    </div>*/
         }
         else
         {
             <p>En cours de chargement...</p>
         }
 
-        <div class="btn-validation">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" @onclick="SelectScenario">Valider le choix du scénario</button>
+        <!-- Modal -->
+        <div class="modal fade" id="ScenarioModal" tabindex="-1" aria-labelledby="ScenarioModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ScenarioModalLabel">@Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Compris</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">@Message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
     </div>
 </div>
@@ -91,17 +83,26 @@
 
 
 @code {
+    private bool HideButton {get;set;} = true;
+
+   /* private void ToggleButton()
+      {
+         HideButton =   !HideButton;
+      }    */
+
     private bool IsPageLoaded { get; set; } = false;
 
     private List<ScenarioSelectionData> Scenarios = new List<ScenarioSelectionData>();
 
     private DateTime? EventDate { get; set; } = null;
     private int? ScenarioTemplateId { get; set; } = null;
+
     private string Message { get; set; } = "";
-   
-    private string HighlightScenarioCard (int id)
+
+    private string HighlightScenarioCard(int id)
     {
-        return ScenarioTemplateId == id ?"selected-card":"";
+        HideButton =   !HideButton;
+        return ScenarioTemplateId == id ? "selected-card" : "";
     }
 
     protected override async Task OnInitializedAsync()
@@ -127,7 +128,7 @@
 
         if (EventDate == null)
         {
-            Message = "Une date pour l'exécution du scénario doit être planifiée.";
+            Message = "Veuillez sélectionner une date.";
             return;
         }
 
@@ -144,5 +145,5 @@
         NavManager.NavigateTo("/scenario/view/" + idCreatedScenario);
     }
 
-    
+
 }

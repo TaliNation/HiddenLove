@@ -11,10 +11,19 @@ a,
   color: #007bff;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.container .row .col-12 .btn-primary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: bold;
+  margin: auto;
+}
+.container .row .col-12 .btn-primary:hover,
+.container .row .col-12 .btn-primary:active {
+  background: #dd2950;
 }
 
 .content {
@@ -271,7 +280,7 @@ a,
   margin: auto;
   background-color: #ffffff;
   padding: 40px;
-  padding-bottom: 0px;
+  padding-bottom: 20px;
   border-radius: 4px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
@@ -363,7 +372,6 @@ a,
 .choose-clean .choose-form .btn-validation {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 20px;
 }
 .choose-clean .choose-form .btn-validation .btn-primary {
   background: #f4476b;
@@ -433,7 +441,8 @@ a,
   text-align: justify;
   font-style: italic;
 }
-.choose-clean .choose-form .card-organisation .card:hover, .choose-clean .choose-form .card-organisation .selected-card {
+.choose-clean .choose-form .card-organisation .card:hover,
+.choose-clean .choose-form .card-organisation .selected-card {
   background-color: #e1ecf7;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }

@@ -11,10 +11,25 @@ a,
     color: #007bff;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+.container {
+    .row {
+        .col-12 {
+            .btn-primary {
+                background: #f4476b;
+                outline: none !important;
+                border: 1px solid #f4476b;
+                box-shadow: none;
+                border-radius: 20px;
+                padding: 10px;
+                font-weight: bold;
+                margin: auto;
+            }
+            .btn-primary:hover,
+            .btn-primary:active {
+                background: #dd2950;
+            }
+        }
+    }
 }
 
 .content {
@@ -77,6 +92,7 @@ a,
         max-width: 200px;
     }
 }
+
 /* Utilisation du form-control par les pages login et register */
 .form-control {
     background: #f7f9fc;
@@ -298,7 +314,7 @@ a,
         margin: auto;
         background-color: #ffffff;
         padding: 40px;
-        padding-bottom: 0px;
+        padding-bottom: 20px;
         border-radius: 4px;
         color: #505e6c;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
@@ -315,7 +331,7 @@ a,
                 box-shadow: none;
                 border-radius: 20px;
                 font-weight: bold;
-                margin:auto;
+                margin: auto;
                 font-size: 18px;
             }
 
@@ -404,7 +420,6 @@ a,
         .btn-validation {
             text-align: center;
             margin-top: 20px;
-            margin-bottom: 20px;
 
             .btn-primary {
                 background: #f4476b;
@@ -413,7 +428,7 @@ a,
                 box-shadow: none;
                 border-radius: 20px;
                 font-weight: bold;
-                margin:auto;
+                margin: auto;
                 font-size: 18px;
             }
 
@@ -486,10 +501,11 @@ a,
                     font-style: italic;
                 }
             }
-            .card:hover, .selected-card{
+            .card:hover,
+            .selected-card {
                 background-color: #e1ecf7;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-            }          
+            }
         }
     }
 }

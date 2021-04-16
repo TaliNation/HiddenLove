@@ -35,23 +35,38 @@
                     <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
                 </div>
                 <div class="change-creation" @onclick="@(x => RemoveStep(step.Index))">
-                    <i class="fas fa-minus-circle" ></i>
+                    <i class="fas fa-minus-circle"></i>
                     <span>Supprimer une étape</span>
                 </div>
             </div>
         }
         <div class="row">
             <div class="change-creation" @onclick="AddStep">
-                <i class="fas fa-plus-circle" id="add" ></i>
+                <i class="fas fa-plus-circle" id="add"></i>
                 <span> Ajouter une étape</span>
             </div>
         </div>
-         <div class="btn-validation">
-        <button class="btn btn-primary" @onclick="SubmitScenario">Valider la création du scénario</button>
-         </div>
-        <div class="error">
-            <p>@Message</p>
+        <div class="btn-validation">
+            <button class="btn btn-primary" data-toggle="modal"  data-target="#ScenarioModal" @onclick="SubmitScenario">Valider la création du scénario</button>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="ScenarioModal" tabindex="-1" aria-labelledby="ScenarioModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ScenarioModalLabel">@Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Compris</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -122,7 +137,7 @@
         };
 
         var res = await
-            Http.PostAsync<HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation>("ScenarioCreation/NewScenario", request);
+        Http.PostAsync<HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation>("ScenarioCreation/NewScenario", request);
         if (!res.IsSuccessStatusCode)
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();

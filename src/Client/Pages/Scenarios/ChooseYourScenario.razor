@@ -13,7 +13,10 @@
             <img src="img/logo.svg" class="choose-illustration" />
         </div>
 
-        <h2>Choix d'un scénario personnalisé</h2>
+        <h2>Choisissez le scénario qui vous correspond !</h2>
+        <div>
+            <Textbox Placeholder="Recherche..." @bind-BindingValue="Search" />
+        </div>
 
         <div class="choose-date">
             <span>Sélectionnez une date :</span>
@@ -24,7 +27,7 @@
         @if (IsPageLoaded)
         {
             <div class="card-organisation">
-                @foreach (ScenarioSelectionData scenario in Scenarios)
+                @foreach (ScenarioSelectionData scenario in FilteredScenarios)
                 {
                     <div class="card @HighlightScenarioCard(scenario.Id)" @onclick="@(() => SelectScenarioTemplate(scenario.Id))">
                         <img class="card-img-top" src="@scenario.Image" />
@@ -54,6 +57,10 @@
     private bool IsPageLoaded { get; set; } = false;
 
     private List<ScenarioSelectionData> Scenarios = new List<ScenarioSelectionData>();
+
+    private List<ScenarioSelectionData> FilteredScenarios => Scenarios.Where(x => x.Title.Contains(Search, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+    private string Search { get; set; } = "";
 
     private DateTime? EventDate { get; set; } = null;
     private int? ScenarioTemplateId { get; set; } = null;

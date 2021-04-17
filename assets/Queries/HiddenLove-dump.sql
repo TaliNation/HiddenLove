@@ -118,3 +118,13 @@ CREATE TABLE Subscriptions (
     INNER JOIN dbo.ScenarioTemplates ON dbo.Scenarios.Id_scenariotemplate = dbo.ScenarioTemplates.Id
     INNER JOIN dbo.ScenarioTemplates_StepTemplates ON dbo.ScenarioTemplates.Id = dbo.ScenarioTemplates_StepTemplates.Id_scenariotemplate
     INNER JOIN dbo.StepTemplates ON dbo.ScenarioTemplates_StepTemplates.Id_steptemplate = dbo.StepTemplates.Id
+
+  /*==============================================================*/
+  /* Views: ScenarioSchedule                                         */
+  /*==============================================================*/
+CREATE VIEW [dbo].[ScenarioSchedule]
+AS
+SELECT        Id_scenariotemplate, MIN(StartDate) AS Start, MAX(EndDate) AS [End]
+FROM            dbo.ScenarioTemplates_StepTemplates
+GROUP BY Id_scenariotemplate
+GO

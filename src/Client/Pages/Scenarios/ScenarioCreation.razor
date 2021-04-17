@@ -50,22 +50,20 @@
             </div>
         </div>
         <div class="btn-validation">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#ScenarioModal"
-                @onclick="SubmitScenario">Valider la création du scénario</button>
+            <button class="btn btn-primary" @onclick="SubmitScenario" data-toggle="modal" data-target="#ScenarioModal"
+               >Valider la création du scénario</button>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="ScenarioModal" tabindex="-1" aria-labelledby="ScenarioModal" aria-hidden="true">
+        <div class="modal fade" id="ScenarioModal" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="ScenarioModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ScenarioModalLabel">@Message</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button hidden="@HiddenHeader" type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Compris</button>
+                    <div hidden="@HiddenFooter" class="modal-footer">
+                        <button type="button"  @onclick="ConfirmScenario" class="btn btn-secondary" data-dismiss="modal">Compris</button>
                     </div>
                 </div>
             </div>
@@ -83,6 +81,10 @@
     private string Image { get; set; } = "";
 
     private string Message { get; set; } = "";
+
+    private bool HiddenFooter { get; set; } = true;
+
+    private bool HiddenHeader { get; set; } = !true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,7 +113,7 @@
         Steps.RemoveAt(index);
     }
 
-    protected async void SubmitScenario()
+    protected void SubmitScenario()
     {
         if (Title == "" || Title == null)
         {
@@ -121,7 +123,7 @@
 
         if (!Image.StartsWith("https://") && !Image.StartsWith("http://"))
         {
-            Message = "Le lien de l'image est invalide. Assurez-vous qu'ils commence bien par \"http\" ou \"https\".";
+            Message = "Le lien de l'image est invalide. Assurez-vous qu'il commence bien par \"http\" ou \"https\".";
             return;
         }
 
@@ -139,8 +141,15 @@
                 return;
             }
         }
+        HiddenHeader = !HiddenHeader;
+        HiddenFooter = !HiddenFooter;
+        Message = "La création du scénario est terminée.";
 
-        var request = new HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation
+    }
+
+    protected async void ConfirmScenario() 
+    {
+         var request = new HiddenLove.Shared.Models.ScenarioCreation.ScenarioCreation
         {
             Title = Title,
             Description = Description,

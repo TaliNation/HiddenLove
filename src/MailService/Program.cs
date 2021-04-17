@@ -67,17 +67,19 @@ namespace HiddenLove.MailService
 			var entities = dbAccess.GetAll<int, FullScenario>();
 			var mailInfos = entities.Where(x => x.StartDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Select(x => new MailInfo {
 				EmailAddress = x.EmailAddress,
-				SendTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + x.StartDate.ToString("HH:mm"))
+				SendTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + x.StartDate.ToString("HH:mm")),
+				MailSender = x.MailSender,
+				MailBody = x.MailBody,
+				MailSubject = x.MailSubject
 			});
 
 			int i = 0;
 			foreach(MailInfo mailInfo in mailInfos)
 			{
-				//! METTRE LE CONTENU DES MAILS ICI
 				mailInfo.MailAddress = "cassykat@mail.com";
-				mailInfo.MailSender = "Hidden Love";
-				mailInfo.MailSubject = "Hey guys";
-				mailInfo.MailBody = "Ceci est un faux spam";
+				mailInfo.MailSender ??= "";
+				mailInfo.MailBody ??= "";
+				mailInfo.MailSubject ??= "";
 
 				EmailsToSendToday.Add(new MailMessage(
 					new MailAddress(mailInfo.MailAddress, mailInfo.MailSender, Encoding.UTF8),
@@ -107,7 +109,9 @@ namespace HiddenLove.MailService
 				i++;
 			}
 
-			Console.WriteLine("Scheduler ready!");
+			Console.WriteLine("Scheduler ready! Mails to send today:");
+			foreach(MailInfo mailInfo in mailInfos)
+				Console.WriteLine($"{mailInfo.MailSubject}: {mailInfo.SendTime.ToString("HH:mm")}");
 		}
     }
 }

@@ -19,5 +19,8 @@ namespace HiddenLove.DataAccess.Entities
 		public DateTime EndDate { get; set; }
 		public string StepTitle { get; set; }
 		public string StepDescription { get; set; }
+		public string MailSender { get; set; }
+		public string MailSubject { get; set; }
+		public string MailBody { get; set; }
 	}
 }

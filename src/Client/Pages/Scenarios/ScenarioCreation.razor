@@ -21,7 +21,9 @@
             <div class="col-6">
                 <Textarea Placeholder="Description du scénario" @bind-BindingValue="Description" />
             </div>
-            <Textbox Placeholder="Lien de l'image" @bind-BindingValue="Image" />
+            <div class="col-3">
+                <Textbox Placeholder="Lien de l'image" @bind-BindingValue="Image" />
+            </div>
         </div>
         @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
         {
@@ -48,7 +50,8 @@
             </div>
         </div>
         <div class="btn-validation">
-            <button class="btn btn-primary" data-toggle="modal"  data-target="#ScenarioModal" @onclick="SubmitScenario">Valider la création du scénario</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#ScenarioModal"
+                @onclick="SubmitScenario">Valider la création du scénario</button>
         </div>
 
         <!-- Modal -->
@@ -118,7 +121,7 @@
 
         if (!Image.StartsWith("https://") && !Image.StartsWith("http://"))
         {
-            Message = "Le lien de l'image est invalide. Assurez-vous qu'ils commence bien par \"http\" ou \"https\"";
+            Message = "Le lien de l'image est invalide. Assurez-vous qu'ils commence bien par \"http\" ou \"https\".";
             return;
         }
 

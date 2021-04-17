@@ -6,6 +6,7 @@ namespace HiddenLove.Shared.Models.ScenarioCreation
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
         public List<ScenarioCreationStep> Steps { get; set; }
     }
 }

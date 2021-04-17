@@ -42,6 +42,7 @@ namespace HiddenLove.Server.Controllers
         {
             var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
             int scenarioTemplateId = dbAccess.Insert<int, ScenarioTemplate>(new ScenarioTemplate {
+                Image = model.Image,
                 Title = model.Title,
                 Description = model.Description
             });

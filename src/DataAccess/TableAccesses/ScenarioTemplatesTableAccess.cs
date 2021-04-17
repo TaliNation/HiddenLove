@@ -13,7 +13,8 @@ namespace HiddenLove.DataAccess.TableAccesses
             ScenarioTemplate obj = (ScenarioTemplate)entity;
             return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
                 Title = obj.Title,
-                Description = obj.Description
+                Description = obj.Description,
+				Image = obj.Image
             });
         }
     }

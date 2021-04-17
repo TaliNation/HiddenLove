@@ -30,8 +30,9 @@ namespace HiddenLove.Server.Controllers
             List<ScenarioSelectionData> res = entities.Select(x => new ScenarioSelectionData {
                 Id = x.Id,
                 Title = x.Title,
-                Description = x.Description
-            }).ToList<ScenarioSelectionData>();
+                Description = x.Description,
+                Image = x.Image
+            }).ToList();
 
             return Ok(res);
         }

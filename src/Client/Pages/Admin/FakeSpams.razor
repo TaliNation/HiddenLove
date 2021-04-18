@@ -10,55 +10,65 @@
     {
         <div class="row">
             <div class="col-6">
-                <SelectList Items="@StepTemplates" @bind-BindingValue="SelectedStepTemplateIdAsString" />
+                @if(FilteredStepTemplates.Any())
+                {
+                    <SelectList Items="@FilteredStepTemplates" @bind-BindingValue="SelectedStepTemplateIdAsString" />
+                }
+                else
+                {
+                    <p>Toutes les étapes ont leur faux-spam !</p>
+                }
             </div>
             <div class="col-6">
-                <Checkbox Label="Étapes sans spam uniquement ?" />
+                <Checkbox Id="filter-steps-checkbox" Label="Étapes sans spam uniquement ?" @bind-BindingValue="IsStepTemplatesListFiltered" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <h2>Définir un faux spam existant...</h2>
+        @if(FilteredStepTemplates.Any())
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h2>Définir un faux spam existant...</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-9">
-                <SelectList Items="@Spams" @bind-BindingValue="SelectedSpamIdAsString" />
+            <div class="row">
+                <div class="col-9">
+                    <SelectList Items="@Spams" @bind-BindingValue="SelectedSpamIdAsString" />
+                </div>
+                <div class="col-3">
+                    <HiddenLove.Client.Components.Button OnClick="ChangeStepFakeSpam" Text="Définir" />
+                </div>
             </div>
-            <div class="col-3">
-                <HiddenLove.Client.Components.Button OnClick="ChangeStepFakeSpam" Text="Définir" />
+            <div class="row">
+                <div class="col-12">
+                    <h2>...ou importez en un nouveau.</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h2>...ou importez en un nouveau.</h2>
+            <div class="row">
+                <div class="col-3">
+                    <Textbox Placeholder="Envoyeur" @bind-BindingValue="Sender" />
+                </div>
+                <div class="col-3">
+                    <Textbox Placeholder="Sujet" @bind-BindingValue="Subject" />
+                </div>
+                <div class="col-3">
+                    <InputFile OnChange="GetUploadedFileContentAsync" />
+                </div>
+                <div class="col-3">
+                    <HiddenLove.Client.Components.Button OnClick="CreateNewFakeSpam" Text="Définir" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <Textbox Placeholder="Envoyeur" @bind-BindingValue="Sender" />
+            <div class="row">
+                <div class="col-12">
+                    @Message
+                </div>
             </div>
-            <div class="col-3">
-                <Textbox Placeholder="Sujet" @bind-BindingValue="Subject" />
+            <div class="row">
+                <div class="col-12">
+                    <a href="" @onclick="(() => IsHelpImageHidden = !IsHelpImageHidden)" @onclick:preventDefault>Afficher l'aide</a>
+                    <img hidden="@IsHelpImageHidden" src="img/tutorialfakespams.png" style="width:100%;" />
+                </div>
             </div>
-            <div class="col-3">
-                <InputFile OnChange="GetUploadedFileContentAsync" />
-            </div>
-            <div class="col-3">
-                <HiddenLove.Client.Components.Button OnClick="CreateNewFakeSpam" Text="Définir" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                @Message
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="" @onclick="(() => IsHelpImageHidden = !IsHelpImageHidden)" @onclick:preventDefault>Afficher l'aide</a>
-                <img hidden="@IsHelpImageHidden" src="img/tutorialfakespams.png" style="width:100%;" />
-            </div>
-        </div>
+        }
     }
     else
     {
@@ -67,7 +77,13 @@
 </div>
 
 @code {
-    private List<KeyValuePair<string, string>> StepTemplates { get; set; } = new List<KeyValuePair<string, string>>();
+    private IEnumerable<dynamic> StepTemplates { get; set; } = new List<dynamic>();
+    private List<KeyValuePair<string, string>> FilteredStepTemplates => 
+        IsStepTemplatesListFiltered ? 
+            StepTemplates.Where(x => x.id_FakeSpam == null).Select(x => new KeyValuePair<string, string>(x.id.ToString(), x.title.ToString())).ToList() 
+            : 
+            StepTemplates.Select(x => new KeyValuePair<string, string>(x.id.ToString(), x.title.ToString())).ToList();
+
     private List<KeyValuePair<string, string>> Spams { get; set; } = new List<KeyValuePair<string, string>>();
 
     private string Sender { get; set; }
@@ -94,7 +110,10 @@
         Subject = "";
         Body = "";
 
-        StepTemplates = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("ScenarioCreation/Steps");
+        StepTemplates = await Http.GetResultAsync<List<object>>("ScenarioCreation/GetAllStepTemplates");
+        
+        Js.Log(StepTemplates.Select(x => x.title));
+
         Spams = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("FakeSpam/GetFakeAllSpams");
 
         IsPageLoaded = true;
@@ -121,8 +140,6 @@
             Body = "";
             return;
         }
-
-
 
         using(var reader = new StreamReader(e.File.OpenReadStream()))
         {

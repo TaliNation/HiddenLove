@@ -322,8 +322,8 @@ a,
         text-align: justify;
 
         .btn-validation {
-            text-align: center;
-            padding-top: 10px;
+            text-align: left;
+            /*padding-top: 10px;*/
 
             .btn-primary {
                 background: #f4476b;
@@ -350,7 +350,6 @@ a,
             .modal-dialog {
                 .modal-content {
                     .modal-header {
-
                         margin: auto;
                         place-items: center;
                         display: flex;
@@ -594,5 +593,110 @@ a,
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
             }
         }
+    }
+}
+
+.home-clean {
+    background: #f1f7fc;
+    display: flex;
+    padding-bottom: 20px;
+
+    .home-form {
+        max-width: 1600px;
+        width: 100%;
+        margin: auto;
+        background-color: #ffffff;
+        padding: 40px;
+        padding-bottom: 20px;
+        border-radius: 4px;
+        color: #505e6c;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        text-align: justify;
+
+        .row {
+            .btn-validation {
+                text-align: left;
+                padding-bottom: 10px;
+                margin-left: 15px;
+                .btn-primary {
+                    background: #f4476b;
+                    outline: none !important;
+                    border: 1px solid #f4476b;
+                    box-shadow: none;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    margin: auto;
+                    font-size: 18px;
+                }
+
+                .btn-primary:hover,
+                .btn-primary:active {
+                    background: #dd2950;
+                }
+
+                .btn-primary:active {
+                    transform: translateY(1px);
+                }
+            }
+        }
+
+        .home-image {
+            text-align: center;
+            padding-bottom: 20px;
+
+            .home-illustration {
+                width: 100%;
+                height: auto;
+                max-width: 250px;
+            }
+        }
+
+        h2 {
+            padding-top: 10px;
+        }
+
+        .row {
+
+            .col-12 {
+
+                .table {
+
+                    .bg-light {
+
+                        font-weight: bold;
+
+                        td {
+                            color :#ff0081;
+                        }
+
+                        a {
+                            color :#ff0081;
+                        }
+                    }
+
+                    tr {
+
+                        td {
+                            color :#000000;
+                        }
+
+                        a {
+                            color :#000000;
+                        }
+                    }
+    
+                    .text-secondary {
+                       
+                        td {
+                            color:#c7cbce;
+                        }
+
+                        a {
+                            color:#c7cbce;
+                        }
+                    }
+                }
+            }
+        } 
     }
 }

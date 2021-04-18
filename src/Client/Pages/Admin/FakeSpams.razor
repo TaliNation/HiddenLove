@@ -1,0 +1,196 @@
+@page "/admin/fake-spams"
+@using System.IO
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
+@layout NavbarLayout
+
+<div class="container">
+    @if(IsPageLoaded)
+    {
+        <div class="row">
+            <div class="col-6">
+                <SelectList Items="@StepTemplates" @bind-BindingValue="SelectedStepTemplateIdAsString" />
+            </div>
+            <div class="col-6">
+                <Checkbox Label="Étapes sans spam uniquement ?" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>Définir un faux spam existant...</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <SelectList Items="@Spams" @bind-BindingValue="SelectedSpamIdAsString" />
+            </div>
+            <div class="col-3">
+                <HiddenLove.Client.Components.Button OnClick="ChangeStepFakeSpam" Text="Définir" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>...ou importez en un nouveau.</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <Textbox Placeholder="Envoyeur" @bind-BindingValue="Sender" />
+            </div>
+            <div class="col-3">
+                <Textbox Placeholder="Sujet" @bind-BindingValue="Subject" />
+            </div>
+            <div class="col-3">
+                <InputFile OnChange="GetUploadedFileContentAsync" />
+            </div>
+            <div class="col-3">
+                <HiddenLove.Client.Components.Button OnClick="CreateNewFakeSpam" Text="Définir" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @Message
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="" @onclick="(() => IsHelpImageHidden = !IsHelpImageHidden)" @onclick:preventDefault>Afficher l'aide</a>
+                <img hidden="@IsHelpImageHidden" src="img/tutorialfakespams.png" style="width:100%;" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Chargement...</p>
+    }
+</div>
+
+@code {
+    private List<KeyValuePair<string, string>> StepTemplates { get; set; } = new List<KeyValuePair<string, string>>();
+    private List<KeyValuePair<string, string>> Spams { get; set; } = new List<KeyValuePair<string, string>>();
+
+    private string Sender { get; set; }
+    private string Subject { get; set; }
+    private string Body { get; set; }
+
+    private string SelectedStepTemplateIdAsString { get; set; } = "";
+    private int? SelectedStepTemplateId => SelectedStepTemplateIdAsString.ToNullableInt();
+    private string SelectedSpamIdAsString { get; set; } = "";
+    private int? SelectedSpamId => SelectedSpamIdAsString.ToNullableInt();
+
+    private bool IsStepTemplatesListFiltered { get; set; } = true;
+    private bool IsPageLoaded { get; set; } = false;
+    private bool IsHelpImageHidden { get; set; } = true; 
+
+
+    private string Message { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Http.Authenticate(Js, NavManager);
+
+        Sender = "";
+        Subject = "";
+        Body = "";
+
+        StepTemplates = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("ScenarioCreation/Steps");
+        Spams = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("FakeSpam/GetFakeAllSpams");
+
+        IsPageLoaded = true;
+    }
+
+    private async void GetUploadedFileContentAsync (InputFileChangeEventArgs e)
+    {
+        bool isValid = true;
+
+        if(e.File.ContentType != "text/plain" && e.File.ContentType != "text/html")
+        {
+            Message = "Les fichiers doivent être des fichiers texte ou HTML (recommandé)";
+            isValid = false;
+        }
+
+        if(e.File.Size > 512000)
+        {
+            Message = "Les fichiers ont une limite maximale de 512ko.";
+            isValid = false;
+        }
+
+        if(!isValid)
+        {
+            Body = "";
+            return;
+        }
+
+
+
+        using(var reader = new StreamReader(e.File.OpenReadStream()))
+        {
+            Body = await reader.ReadToEndAsync();
+            Console.WriteLine(Body);
+            Console.WriteLine(e.File.ContentType);  
+        }
+
+        Message = "";
+
+        StateHasChanged();
+    }
+
+    private async void ChangeStepFakeSpam()
+    {
+        if(!SelectedStepTemplateId.HasValue)
+        {
+            Message = "Il faut sélectionner une étape pour appliquer le faux spam.";
+            return;
+        }
+
+        if(!SelectedSpamId.HasValue)
+        {
+            Message = "Aucun faux spam n'a été sélectionné.";
+            return;
+        }
+        
+        IsPageLoaded = false;
+
+        await Http.PostAsync<object>("FakeSpam/ChangeFakeSpam", new {
+            StepTemplateId = SelectedStepTemplateId.Value,
+            FakeSpamId = SelectedSpamId.Value
+        });
+
+        Message = "Faux spam de l'étape modifié avec succès !";
+
+        await OnInitializedAsync();
+
+        StateHasChanged();
+    }
+
+    private async void CreateNewFakeSpam()
+    {
+        if(!SelectedStepTemplateId.HasValue)
+        {
+            Message = "Il faut sélectionner une étape pour appliquer le nouveau faux spam.";
+            return;
+        }
+
+        if(string.IsNullOrEmpty(Sender) || string.IsNullOrEmpty(Subject) || string.IsNullOrEmpty(Body))
+        {
+            Message = "Le spam doit impérativement avoir un envoyeur, un corps et une entête.";
+            return;
+        }
+
+        IsPageLoaded = false;
+
+        await Http.PostAsync<object>("FakeSpam/CreateNewFakeSpam", new {
+            StepTemplateId = SelectedStepTemplateId.Value,
+            Name = Sender,
+            Subject = Subject,
+            Body = Body
+        });
+
+        Message = "Faux spam ajouté avec succès !";
+
+        await OnInitializedAsync();
+
+        StateHasChanged();
+    }
+}

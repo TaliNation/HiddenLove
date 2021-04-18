@@ -37,7 +37,7 @@
         get => _value;
         set
         {
-            if (_value == value) return;
+			if(_value == value) return;
             _value = value;
             BindingValueChanged.InvokeAsync(value);
         }
@@ -45,13 +45,4 @@
 
     [Parameter]
     public EventCallback<string> BindingValueChanged { get; set; }   
-
-
-	[Parameter]
-	public EventCallback<int?> OnChange { get; set; }
-
-	private void OnChangeCallback(ChangeEventArgs e)
-	{
-		OnChange.InvokeAsync(e.Value.ToString().ToNullableInt());
-	}
 }

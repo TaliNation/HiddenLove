@@ -4,17 +4,21 @@
 @inject NavigationManager NavManager
 @layout NavbarLayout
 
-<div class="container">
+<div class="home-clean">
+    <div class="home-form">
+        <div class="home-image">
+            <img src="img/logo.svg" class="home-illustration" />
+        </div>
     <div class="row">
-        <div class="col-12">
+        <div class="btn-validation">
             <a href="/scenario/select">
                 <button class="btn btn-primary">
-                    <i class="fa fa-plus"></i> Nouveau scénario
+                    <i class="fa fa-plus"></i> Ajouter un scénario
                 </button>
             </a>
         </div>
     </div>
-    <div style="padding-bottom: 10px;"></div>
+    <h2>Mes scénarios</h2> 
     @if (IsPageLoaded)
     {
         <div class="row">
@@ -49,6 +53,7 @@
         </div>
     }
 </div>
+</div>
 
 @code {
     private List<UserScenarioData> UsedScenarios { get; set; }
@@ -67,12 +72,12 @@
 
     private string RowColor(bool isFinished, bool isToday)
     {
-        if(isToday)
+        if (isToday)
             return "bg-light";
 
-        if(isFinished)
+        if (isFinished)
             return "text-secondary";
-        
+
         return "";
     }
 }

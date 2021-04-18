@@ -21,12 +21,31 @@ namespace HiddenLove.Server.Controllers
         [HttpGet]
         [Route("Steps")]
         [Produces("application/json")]
-        public IActionResult GetAllStepTemplates()
+        public IActionResult GetAllStepTemplatesKeyValue()
         {
             var dbAccess = new Repository(new StepTemplatesTableAccess());
 
             IEnumerable<StepTemplate> entities =  dbAccess.GetAll<int, StepTemplate>();
             List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList();
+
+            return Ok(res);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("[action]")]
+        [Produces("application/json")]
+        public IActionResult GetAllStepTemplates()
+        {
+            var dbAccess = new Repository(new StepTemplatesTableAccess());
+
+            IEnumerable<StepTemplate> entities = dbAccess.GetAll<int, StepTemplate>();
+
+            var res = entities.Select(x => new {
+                x.Id,
+                x.Title,
+                x.Id_FakeSpam
+            });
 
             return Ok(res);
         }

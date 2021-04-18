@@ -39,6 +39,12 @@
             </div>
             <div style="padding-bottom: 10px;"></div>
         }
+        <div style="padding-bottom: 10px;"></div>
+        <div class="row">
+            <div class="col-12">
+                <Button Text="Annuler ce scénario ?" Type="danger" OnClick="DeleteScenarioAsync" />
+            </div>
+        </div>
     }
     else if (ContentStatus == ContentStatus.Loading)
     {
@@ -71,5 +77,11 @@
 
         ScenarioDetails = await res.Content.ReadAsAsync<ScenarioDetailsData>();
         ContentStatus = ContentStatus.Ok;
+    }
+
+    private async void DeleteScenarioAsync()
+    {
+        await Http.Client.DeleteAsync($"ScenarioView/Scenario/{IdScenario}");
+        NavManager.NavigateTo("/home");
     }
 }

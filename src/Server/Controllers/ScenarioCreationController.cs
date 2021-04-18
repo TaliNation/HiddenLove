@@ -26,7 +26,7 @@ namespace HiddenLove.Server.Controllers
             var dbAccess = new Repository(new StepTemplatesTableAccess());
 
             IEnumerable<StepTemplate> entities =  dbAccess.GetAll<int, StepTemplate>();
-            List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList<KeyValuePair<int, string>>();
+            List<KeyValuePair<int, string>> res = entities.Select(x => new KeyValuePair<int, string>(x.Id, x.Title)).ToList();
 
             return Ok(res);
         }

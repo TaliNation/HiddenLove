@@ -45,5 +45,8 @@ namespace HiddenLove.DataAccess.TableAccesses
 
 		public virtual void Delete<TKey>(TKey key) =>
 			throw new UnauthorizedQueryException("DELETE", TableName);
+
+		public virtual void Update<TKey>(TKey key, IEntity<TKey> entity) =>
+			throw new UnauthorizedQueryException("UPDATE", TableName);
     }
 }

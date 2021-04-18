@@ -104,5 +104,8 @@ namespace HiddenLove.DataAccess.Repositories
 
 		public virtual void Delete<TKey, TEntity>(TKey key) where TEntity : IEntity<TKey> =>
 			TableAccess.Delete(key);
+
+		public virtual void Update<TKey, TEntity>(TKey key, TEntity entity) where TEntity : IEntity<TKey> =>
+			TableAccess.Update(key, entity);
     }
 }

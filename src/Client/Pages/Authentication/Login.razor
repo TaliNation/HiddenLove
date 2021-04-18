@@ -8,9 +8,8 @@
         <div class="illustration">
             <img src="img/logo.svg" class="illustration" />
         </div>
-        <Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
-
-        <Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
+        <HiddenLove.Client.Components.Textbox Placeholder="Email" @bind-BindingValue="EmailAddress" />
+        <HiddenLove.Client.Components.Textbox Placeholder="Mot de passe" IsPassword @bind-BindingValue="Password" />
         <div class="registerlogin-link">
             <div class="field-warning">
                 <p>@Message</p>

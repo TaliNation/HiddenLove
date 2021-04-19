@@ -9,45 +9,41 @@
 
         @if (ContentStatus == ContentStatus.Ok)
         {
-            <div class="row">
-                <div class="col-10">
-                    <h1>@ScenarioDetails.Title</h1>
-                </div>
-                <div class="col-2">
-                    <p>@ScenarioDetails.EventDate.ToString("dd/MM/yyyy")</p>
-                </div>
+            <div class="view-titles">
+                <h1>@ScenarioDetails.Title</h1>
+            </div>
+            <div class="view-date">
+                <h3>@ScenarioDetails.EventDate.ToString("dddd dd MMMM yyyy")</h3>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <p>@ScenarioDetails.Description</p>
-                </div>
+            <div class="view-description">
+                <p>@ScenarioDetails.Description</p>
             </div>
-            <div style="padding-bottom: 20px;"></div>
-            <div class="row">
-                <div class="col-12">
-                    <h2>Étapes</h2>
-                </div>
+
+            <div class="view-step">
+                <h2>Étapes</h2>
             </div>
-            @foreach (StepDetailsData step in ScenarioDetails.Steps)
-            {
-                <div class="row">
-                    <div class="col-10">
-                        <p title="@step.Description">@step.Title</p>
-                    </div>
-                    <div class="col-2">
-                        <p>@step.StartDate.ToString("HH:mm") <i class="fa fa-long-arrow-alt-right"></i>
-                            @step.EndDate.ToString("HH:mm")</p>
-                    </div>
-                </div>
-                <div style="padding-bottom: 10px;"></div>
-            }
-            <div style="padding-bottom: 10px;"></div>
-            <div class="row">
-                <div class="col-12">
-                    <button class="btn btn-primary" data-toggle="modal"data-target="#delete-modal">Annuler le scénario ?</button>
-                </div>
-            </div>
+
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Étapes</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Horaires</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (StepDetailsData step in ScenarioDetails.Steps)
+                    {
+                        <tr class="testas">
+                            <td>@step.Title</td>
+                            <td>@step.Description</td>
+                            <td>@step.StartDate.ToString("HH:mm") <i class="fa fa-long-arrow-alt-right"></i>
+                                @step.EndDate.ToString("HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
         else if (ContentStatus == ContentStatus.Loading)
         {
@@ -57,6 +53,13 @@
         {
             <p>Aucun scénario trouvé. <a href="/">Retour à la page d'accueil.</a></p>
         }
+
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#delete-modal">Annuler le scénario
+                    ?</button>
+            </div>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">

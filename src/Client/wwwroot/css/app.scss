@@ -322,7 +322,7 @@ a,
         text-align: justify;
 
         .btn-validation {
-            text-align: left;
+            text-align: center;
             /*padding-top: 10px;*/
 
             .btn-primary {
@@ -414,6 +414,7 @@ a,
             display: flex;
             font-size: 20px;
             cursor: pointer;
+            padding-bottom: 10px;
         }
 
         span {
@@ -765,5 +766,29 @@ a,
                 }
             }
         }
+    }
+
+    .view-date {
+        h3 {
+            text-align: center;
+            font-style: italic;
+            padding-bottom: 15px;
+        }
+    }
+
+    .view-titles {
+        h1 {
+            text-align: center;
+        }
+    }
+
+    .view-step {
+        text-align: left;
+        padding-bottom: 15px;
+    }
+
+    .view-description {
+        text-align: justify;
+        padding-bottom: 5px;
     }
 }

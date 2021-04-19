@@ -289,7 +289,7 @@ a,
   /* gestion du logo */
 }
 .creation-clean .creation-form .btn-validation {
-  text-align: left;
+  text-align: center;
   /*padding-top: 10px;*/
 }
 .creation-clean .creation-form .btn-validation .btn-primary {
@@ -362,6 +362,7 @@ a,
   display: flex;
   font-size: 20px;
   cursor: pointer;
+  padding-bottom: 10px;
 }
 .creation-clean .creation-form span {
   margin-left: 10px;
@@ -636,6 +637,22 @@ a,
 }
 .view-clean .fade .modal-dialog .modal-content .modal-footer .btn-secondary:active {
   transform: translateY(1px);
+}
+.view-clean .view-date h3 {
+  text-align: center;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+.view-clean .view-titles h1 {
+  text-align: center;
+}
+.view-clean .view-step {
+  text-align: left;
+  padding-bottom: 15px;
+}
+.view-clean .view-description {
+  text-align: justify;
+  padding-bottom: 5px;
 }
 
 /*# sourceMappingURL=app.css.map */

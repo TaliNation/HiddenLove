@@ -9,50 +9,50 @@
         <div class="home-image">
             <img src="img/logo.svg" class="home-illustration" />
         </div>
-    <div class="row">
-        <div class="btn-validation">
-            <a href="/scenario/select">
-                <button class="btn btn-primary">
-                    <i class="fa fa-plus"></i> Ajouter un scénario
-                </button>
-            </a>
-        </div>
-    </div>
-    <h2>Mes scénarios</h2> 
-    @if (IsPageLoaded)
-    {
         <div class="row">
-            <div class="col-12">
-                @if (UsedScenarios.Any())
-                {
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Horaires</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (UserScenarioData scenario in UsedScenarios)
-                            {
-                                <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
-                                    <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
-                                    <td>@scenario.EventDate.ToString("dd/MM/yyyy")</td>
-                                    <td></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    <p>Aucun scénario pour le moment. Mais rien n'est jamais trop tard !</p>
-                }
+            <div class="btn-validation">
+                <a href="/scenario/select">
+                    <button class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Ajouter un scénario
+                    </button>
+                </a>
             </div>
         </div>
-    }
-</div>
+        <h2>Mes scénarios</h2>
+        @if (IsPageLoaded)
+        {
+            <div class="row">
+                <div class="col-12">
+                    @if (UsedScenarios.Any())
+                    {
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Horaires</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (UserScenarioData scenario in UsedScenarios)
+                                {
+                                    <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
+                                        <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
+                                        <td>@scenario.EventDate.ToString("dd/MM/yyyy")</td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Aucun scénario pour le moment. Mais rien n'est jamais trop tard !</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 @code {

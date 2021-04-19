@@ -582,4 +582,60 @@ a,
   color: #c7cbce;
 }
 
+.view-clean {
+  background: #f1f7fc;
+  display: flex;
+  padding-bottom: 20px;
+}
+.view-clean .view-form {
+  max-width: 1600px;
+  width: 100%;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 40px;
+  padding-bottom: 20px;
+  border-radius: 4px;
+  color: #505e6c;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  text-align: justify;
+}
+.view-clean .row .col-12 {
+  text-align: center;
+}
+.view-clean .row .col-12 .btn-primary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: auto;
+  font-size: 18px;
+}
+.view-clean .row .col-12 .btn-primary:hover,
+.view-clean .row .col-12 .btn-primary:active {
+  background: #dd2950;
+}
+.view-clean .row .col-12 .btn-primary:active {
+  transform: translateY(1px);
+}
+.view-clean .fade .modal-dialog .modal-content .modal-footer .btn-secondary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: auto;
+  padding-left: 85px;
+  padding-right: 85px;
+}
+.view-clean .fade .modal-dialog .modal-content .modal-footer .btn-secondary:hover,
+.view-clean .fade .modal-dialog .modal-content .modal-footer .btn-secondary:active {
+  background: #dd2950;
+}
+.view-clean .fade .modal-dialog .modal-content .modal-footer .btn-secondary:active {
+  transform: translateY(1px);
+}
+
 /*# sourceMappingURL=app.css.map */

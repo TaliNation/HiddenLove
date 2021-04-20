@@ -8,16 +8,17 @@ using HiddenLove.Shared.Models.ScenarioSelection;
 using Microsoft.AspNetCore.Mvc;
 using MoreLinq.Extensions;
 using HiddenLove.Shared.Models;
+using HiddenLove.Shared.Enums;
 
 namespace HiddenLove.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(CustomerTier.Basic)]
     public class ScenarioViewController : ControllerBase
     {
         private User CurrentUser => (User)HttpContext.Items["User"];
 
-        [Authorize]
         [HttpGet]
         [Route("Details/{id}")]
         [Produces("application/json")]
@@ -53,7 +54,6 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        [Authorize]
         [HttpGet]
         [Route("UserList")]
         [Produces("application/json")]
@@ -75,7 +75,6 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        [Authorize]
         [HttpDelete]
         [Route("Scenario/{id}")]
         [Produces("application/json")]

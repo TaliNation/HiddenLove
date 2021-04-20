@@ -7,6 +7,7 @@ using HiddenLove.Shared.Models;
 using HiddenLove.Shared.Models.ScenarioCreation;
 using HiddenLove.Server.Helpers;
 using HiddenLove.DataAccess.TableAccesses;
+using HiddenLove.Shared.Enums;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -17,7 +18,7 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// Récupération de tous les types d'étapes pour les assembler dans la création des scénarios
         /// </summary>
-        [Authorize]
+        [Authorize(CustomerTier.Normal)]
         [HttpGet]
         [Route("Steps")]
         [Produces("application/json")]
@@ -31,7 +32,7 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        [Authorize]
+        [Authorize(CustomerTier.Normal)]
         [HttpGet]
         [Route("[action]")]
         [Produces("application/json")]
@@ -53,7 +54,7 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// Création d'un nouveau scénario type
         /// </summary>
-        [Authorize]
+        [Authorize(CustomerTier.Normal)]
         [HttpPost]
         [Route("NewScenario")]
         [Produces("application/json")]

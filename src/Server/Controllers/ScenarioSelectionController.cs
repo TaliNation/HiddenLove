@@ -4,6 +4,7 @@ using HiddenLove.DataAccess.Entities;
 using HiddenLove.DataAccess.Repositories;
 using HiddenLove.DataAccess.TableAccesses;
 using HiddenLove.Server.Helpers;
+using HiddenLove.Shared.Enums;
 using HiddenLove.Shared.Models.ScenarioSelection;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace HiddenLove.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(CustomerTier.Basic)]
     public class ScenarioSelectionController : ControllerBase
     {
         private User CurrentUser => (User)HttpContext.Items["User"];
@@ -18,7 +20,6 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// Récupération de tous les scénarios type pour laisser le choix à l'utilisateur
         /// </summary>
-        [Authorize]
         [HttpGet]
         [Route("AvailableScenarios")]
         [Produces("application/json")]
@@ -40,7 +41,6 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// Réservation et planification d'un scénario par l'utilisateur
         /// </summary>
-        [Authorize]
         [HttpPost]
         [Route("BookScenario")]
         [Produces("application/json")]
@@ -60,7 +60,6 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// API de test
         /// </summary>
-        [Authorize]
         [HttpGet("CurrentUser")]
         [Produces("application/json")]
         public IActionResult GetCurrentUser()
@@ -71,7 +70,6 @@ namespace HiddenLove.Server.Controllers
         /// <summary>
         /// API de test
         /// </summary>
-        [Authorize]
         [HttpGet("CurrentUsername")]
         [Produces("application/json")]
         public IActionResult GetCurrentUsername()

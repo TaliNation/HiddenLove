@@ -7,6 +7,7 @@ using System.Diagnostics;
 using HiddenLove.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Net;
+using HiddenLove.Shared.Enums;
 
 namespace HiddenLove.Server.Controllers
 {

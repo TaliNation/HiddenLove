@@ -16,6 +16,9 @@ namespace HiddenLove.Client.Helpers
         public async Task<string> ReadCookie(string name)
             => await JsRuntime.InvokeAsync<string>("blazorCookies.readCookie", name);
 
+        public async void DeleteCookie(string name)
+            => await JsRuntime.InvokeVoidAsync("blazorCookies.deleteCookie", name);
+
         public async void Log(object obj)
             => await JsRuntime.InvokeVoidAsync("blazorLogger.log", obj);
 

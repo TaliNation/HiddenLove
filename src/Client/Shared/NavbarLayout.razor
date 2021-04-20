@@ -1,28 +1,79 @@
 @inherits LayoutComponentBase
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
 
 <div class="page">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="/home">
-            <img src="/img/logo.svg" width="150" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hidden-love-navbar" aria-controls="hidden-love-navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="hidden-love-navbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/scenario/select">Nouveau scénario</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/scenario/create">Scénario personnalisé</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home/subscription">Abonnement</a>
-                </li>
-            </ul>
+    @if(NavBarStatus == ContentStatus.Ok)
+    {
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="/home">
+                <img src="/img/logo.svg" width="150" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hidden-love-navbar" aria-controls="hidden-love-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="hidden-love-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/subscription">Abonnement</a>
+                    </li>
+                    @if(User.id_Privilege <= (int)CustomerTier.Basic)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/scenario/select">Nouveau scénario</a>
+                        </li>
+                    }
+                    @if(User.id_Privilege <= (int)CustomerTier.Normal)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/scenario/create">Scénario personnalisé</a>
+                        </li>
+                    }
+                    @if(User.id_Privilege <= (int)CustomerTier.Admin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/fake-spams">Modification des faux spams</a>
+                        </li>
+                    }
+                </ul>
+                <div style="margin-left:auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link">Bonjour @User.username</a>
+                        </li>
+                        <li class="nav-item">
+                            <Button Type="danger" OnClick="Disconnect" Text="Déconnexion" /> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content px-4">
+            @Body
         </div>
-    </nav>
-    <div class="content px-4">
-        @Body
-    </div>
+    }
 </div>
+
+@code {
+    private ContentStatus NavBarStatus { get; set; }
+    private dynamic User { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavBarStatus = ContentStatus.Loading;
+
+        await Http.Authenticate(Js, NavManager);
+
+        User = await Http.GetResultAsync<object>("Users/GetCurrentUser");
+        Js.Log(User);
+
+        NavBarStatus = ContentStatus.Ok;
+    }
+
+    private void Disconnect()
+    {
+        Js.DeleteCookie("token");
+        NavManager.NavigateTo("/login");
+    }
+}

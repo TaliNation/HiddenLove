@@ -15,6 +15,8 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        private User CurrentUser => (User)HttpContext.Items["User"];
+
         private readonly IUserService UserService;
 
         public UsersController(IUserService userService)
@@ -50,6 +52,14 @@ namespace HiddenLove.Server.Controllers
                 return BadRequest(new HttpError("Invalid email address."));
 
             return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("[action]")]
+        [Produces("application/json")]
+        public IActionResult GetCurrentUser()
+        {
+            return Ok(CurrentUser);
         }
     }
 }

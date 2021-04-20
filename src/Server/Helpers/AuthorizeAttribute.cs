@@ -33,7 +33,7 @@ namespace HiddenLove.Server.Helpers
             var user = (User)context.HttpContext.Items["User"];
             if (user == null || IsLackingPrivileges(user.Id_Privilege))
             {
-                context.Result = new JsonResult(new { Message = "Unauthorized", PrivilegeNeeded = (int?)MinimumTier, CurrentPrivilege = user.Id_Privilege }) { StatusCode = StatusCodes.Status401Unauthorized };
+                context.Result = new JsonResult(new { Message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }
 

@@ -3,11 +3,10 @@ using HiddenLove.DataAccess.Entities;
 using HiddenLove.DataAccess.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using HiddenLove.Shared.Models;
-using HiddenLove.Shared.Models.ScenarioCreation;
 using HiddenLove.Server.Helpers;
 using HiddenLove.DataAccess.TableAccesses;
 using HiddenLove.Shared.Models.SetFakeSpam;
+using HiddenLove.Shared.Enums;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -15,7 +14,7 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]/[action]")]
     public class FakeSpamController : ControllerBase
     {
-        [Authorize]
+        [Authorize(CustomerTier.Admin)]
         [HttpGet]
         [Produces("application/json")]
         public IActionResult GetFakeAllSpams()
@@ -29,7 +28,7 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        [Authorize]
+        [Authorize(CustomerTier.Admin)]
         [HttpPost]
         [Produces("application/json")]
         public IActionResult CreateNewFakeSpam(NewFakeSpamRequest model)
@@ -51,7 +50,7 @@ namespace HiddenLove.Server.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(CustomerTier.Admin)]
         [HttpPost]
         [Produces("application/json")]
         public IActionResult ChangeFakeSpam(UpdateStepTemplateFakeSpamRequest model)

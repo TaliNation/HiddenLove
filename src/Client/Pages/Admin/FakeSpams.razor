@@ -6,7 +6,7 @@
 @layout NavbarLayout
 
 <div class="container">
-    @if(IsPageLoaded)
+    @if(PageStatus == ContentStatus.Ok)
     {
         <div class="row">
             <div class="col-6">
@@ -70,9 +70,13 @@
             </div>
         }
     }
-    else
+    else if (PageStatus == ContentStatus.Loading)
     {
         <p>Chargement...</p>
+    }
+    else if(PageStatus == ContentStatus.Error)
+    {
+        <p>Une erreur est survenue.</p>
     }
 </div>
 
@@ -96,7 +100,7 @@
     private int? SelectedSpamId => SelectedSpamIdAsString.ToNullableInt();
 
     private bool IsStepTemplatesListFiltered { get; set; } = true;
-    private bool IsPageLoaded { get; set; } = false;
+    private ContentStatus PageStatus { get; set; } = ContentStatus.Loading;
     private bool IsHelpImageHidden { get; set; } = true; 
 
     private string Message { get; set; } = "";
@@ -109,13 +113,27 @@
         Subject = "";
         Body = "";
 
-        StepTemplates = await Http.GetResultAsync<List<object>>("ScenarioCreation/GetAllStepTemplates");
+        var res = await Http.GetAsync("ScenarioCreation/GetAllStepTemplates");
+        if(!res.IsSuccessStatusCode)
+        {
+            HttpError error = await res.Content.ReadAsAsync<HttpError>();
+            Js.LogError(error);
+            PageStatus = ContentStatus.Error;
+            return;
+        }
+        StepTemplates = await res.Content.ReadAsAsync<List<object>>(); 
         
-        Js.Log(StepTemplates.Select(x => x.title));
-
-        Spams = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("FakeSpam/GetFakeAllSpams");
-
-        IsPageLoaded = true;
+        res = await Http.GetAsync("FakeSpam/GetFakeAllSpams");
+        if(!res.IsSuccessStatusCode)
+        {
+            HttpError error = await res.Content.ReadAsAsync<HttpError>();
+            Js.LogError(error);
+            PageStatus = ContentStatus.Error;
+            return;
+        }
+        Spams = await res.Content.ReadAsAsync<List<KeyValuePair<string, string>>>();
+        
+        PageStatus = ContentStatus.Ok;
     }
 
     private async void GetUploadedFileContentAsync (InputFileChangeEventArgs e)
@@ -166,7 +184,7 @@
             return;
         }
         
-        IsPageLoaded = false;
+        PageStatus = ContentStatus.Loading;
 
         await Http.PostAsync<object>("FakeSpam/ChangeFakeSpam", new {
             StepTemplateId = SelectedStepTemplateId.Value,
@@ -194,7 +212,7 @@
             return;
         }
 
-        IsPageLoaded = false;
+        PageStatus = ContentStatus.Loading;
 
         await Http.PostAsync<object>("FakeSpam/CreateNewFakeSpam", new {
             StepTemplateId = SelectedStepTemplateId.Value,

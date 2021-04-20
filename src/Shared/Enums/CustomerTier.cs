@@ -6,7 +6,7 @@ namespace HiddenLove.Shared.Enums
         Pro = 2,
         Normal = 3,
         Basic = 4,
-        User = 5,
-        None = 6
+        User = 6,
+        None = 7
     }
 }

@@ -107,7 +107,8 @@ namespace HiddenLove.Server.Services
                 EmailAddress = model.EmailAddress,
                 Username = model.UserName,
                 FullUsername = model.UserName + "#" + random.Next(0, 10000),
-                Passwordhash = BCrypt.Net.BCrypt.HashPassword(model.Password)
+                Passwordhash = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                Id_Privilege = 6
             };
 
             if(UserExists(user.EmailAddress))

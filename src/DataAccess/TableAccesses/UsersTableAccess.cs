@@ -16,7 +16,8 @@ namespace HiddenLove.DataAccess.TableAccesses
                 emailaddress = user.EmailAddress,
                 username = user.Username,
                 fullusername = user.FullUsername,
-                passwordhash = user.Passwordhash
+                passwordhash = user.Passwordhash,
+				id_privilege = user.Id_Privilege
             });
         }
     }

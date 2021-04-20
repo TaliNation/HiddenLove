@@ -10,11 +10,11 @@ using HiddenLove.Shared.Enums;
 
 namespace HiddenLove.Server.Controllers
 {
+    [Authorize(CustomerTier.Admin)]
     [ApiController]
     [Route("[controller]/[action]")]
     public class FakeSpamController : ControllerBase
     {
-        [Authorize(CustomerTier.Admin)]
         [HttpGet]
         [Produces("application/json")]
         public IActionResult GetFakeAllSpams()
@@ -28,7 +28,6 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
-        [Authorize(CustomerTier.Admin)]
         [HttpPost]
         [Produces("application/json")]
         public IActionResult CreateNewFakeSpam(NewFakeSpamRequest model)
@@ -50,7 +49,6 @@ namespace HiddenLove.Server.Controllers
             return Ok();
         }
 
-        [Authorize(CustomerTier.Admin)]
         [HttpPost]
         [Produces("application/json")]
         public IActionResult ChangeFakeSpam(UpdateStepTemplateFakeSpamRequest model)

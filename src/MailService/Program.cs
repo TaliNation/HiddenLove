@@ -111,7 +111,7 @@ namespace HiddenLove.MailService
 
 			Console.WriteLine("Scheduler ready! Mails to send today:");
 			foreach(MailInfo mailInfo in mailInfos)
-				Console.WriteLine($"{mailInfo.MailSubject}: {mailInfo.SendTime.ToString("HH:mm")}");
+				Console.WriteLine($"{mailInfo.MailSubject}: {mailInfo.SendTime:HH:mm}");
 		}
     }
 }

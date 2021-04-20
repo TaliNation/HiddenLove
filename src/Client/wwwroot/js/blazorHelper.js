@@ -30,6 +30,10 @@ window.blazorCookies = {
         }
 
         return "";
+    },
+
+    deleteCookie: function(name) {
+        document.cookie = name + "=;";
     }
 }
 

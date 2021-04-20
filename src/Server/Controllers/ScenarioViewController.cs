@@ -14,7 +14,7 @@ namespace HiddenLove.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(CustomerTier.Basic)]
+    [Authorize(CustomerTier.Free)]
     public class ScenarioViewController : ControllerBase
     {
         private User CurrentUser => (User)HttpContext.Items["User"];

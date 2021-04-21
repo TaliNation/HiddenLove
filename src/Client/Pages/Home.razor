@@ -42,7 +42,14 @@
                                     <tr class="@RowColor(scenario.IsFinished, scenario.IsToday)">
                                         <td><a href="/scenario/view/@scenario.Id">@scenario.Title</a></td>
                                         <td>@scenario.EventDate.ToString("dd/MM/yyyy")</td>
-                                        <td></td>
+                                        <td>
+                                            @if(scenario.StartDate.HasValue && scenario.EndDate.HasValue)
+                                            {
+                                                <p>
+                                                    @scenario.StartDate.Value.ToString("HH:mm") ➔ @scenario.EndDate.Value.ToString("HH:mm")
+                                                </p>
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -63,6 +70,7 @@
 </div>
 
 @code {
+    #warning "Utiliser un type fort pour le foreach"
     private List<UserScenarioData> UsedScenarios { get; set; }
 
     private bool IsPageLoaded { get; set; } = false;

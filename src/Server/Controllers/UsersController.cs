@@ -8,6 +8,8 @@ using HiddenLove.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Net;
 using HiddenLove.Shared.Enums;
+using HiddenLove.DataAccess.Repositories;
+using HiddenLove.DataAccess.TableAccesses;
 
 namespace HiddenLove.Server.Controllers
 {
@@ -62,6 +64,17 @@ namespace HiddenLove.Server.Controllers
             return Ok(CurrentUser);
         }
 
-        
+        [Authorize]
+        [HttpPut("[action]")]
+        [Produces("application/json")]
+        public IActionResult ChangePrivilege([FromBody]int newPrivilege)
+        {
+            var dbAccess = new Repository(new UsersTableAccess());
+
+            CurrentUser.Id_Privilege = newPrivilege;
+            dbAccess.Update(CurrentUser.Id, CurrentUser);
+
+            return Ok();
+        }
     }
 }

@@ -20,5 +20,13 @@ namespace HiddenLove.DataAccess.TableAccesses
 				id_privilege = user.Id_Privilege
             });
         }
+
+		public override void Update<TKey>(TKey key, IEntity<TKey> entity)
+		{
+			var value = (User)entity;
+			QueryFactory.Query(TableName).Where($"{TableName}.{PrimaryKeyName}", "=", key).Update(new {
+				Id_privilege = value.Id_Privilege
+			});
+		}
     }
 }

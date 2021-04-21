@@ -9,17 +9,17 @@
         <div class="col-4">
             <p>Basique</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)"/>
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)" OnClick="(() => ChangePrivilege((int)CustomerTier.Basic))" />
         </div>
         <div class="col-4">
             <p>Sérieux</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)"/>
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)" OnClick="(() => ChangePrivilege((int)CustomerTier.Normal))" />
         </div>
         <div class="col-4">
             <p>Pro</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)"/>
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)" OnClick="(() => ChangePrivilege((int)CustomerTier.Pro))" />
         </div>
     </div>
 </div>
@@ -30,6 +30,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        PageStatus = ContentStatus.Loading;
+
         await Http.Authenticate(Js, NavManager);
         dynamic res = await Http.GetResultAsync<object>("Users/GetCurrentUser");
         Privilege = res.id_Privilege;
@@ -42,5 +44,10 @@
         return Privilege == privilegeNeeded ? "success" : "primary";
     }
 
+    private async void ChangePrivilege(int? newPrivilege)
+    {
+        await Http.Client.PutAsJsonAsync("Users/ChangePrivilege", newPrivilege);
+        NavManager.NavigateTo("/home", true);
+    }
     
 }

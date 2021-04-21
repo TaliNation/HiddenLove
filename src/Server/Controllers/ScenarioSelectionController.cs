@@ -38,6 +38,25 @@ namespace HiddenLove.Server.Controllers
             return Ok(res);
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        [Produces("application/json")]
+        [Authorize(CustomerTier.Normal)]
+        public IActionResult GetPersonalizedScenarios()
+        {
+            var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
+
+            IEnumerable<ScenarioTemplate> entities = dbAccess.GetAll<int , ScenarioTemplate>();
+            List<ScenarioSelectionData> res = entities.Where(x => x.Id_User == CurrentUser.Id).Select(x => new ScenarioSelectionData {
+                Id = x.Id,
+                Title = x.Title,
+                Description = x.Description,
+                Image = x.Image
+            }).ToList();
+
+            return Ok(res);
+        }
+
         /// <summary>
         /// Réservation et planification d'un scénario par l'utilisateur
         /// </summary>

@@ -99,7 +99,7 @@
 
     private bool IsPageLoaded { get; set; } = false;
 
-    private List<ScenarioSelectionData> Scenarios = new List<ScenarioSelectionData>();
+    private List<ScenarioSelectionData> Scenarios { get; set; } = new List<ScenarioSelectionData>();
 
     private List<ScenarioSelectionData> FilteredScenarios => Scenarios.Where(x => x.Title.Contains(Search,
     StringComparison.InvariantCultureIgnoreCase)).ToList();
@@ -118,7 +118,16 @@
     protected override async Task OnInitializedAsync()
     {
         await Http.Authenticate();
-        Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
+        
+        dynamic res = await Http.GetResultAsync<object>("Users/GetCurrentUser");
+        if((int)res.id_Privilege <= (int)CustomerTier.Normal)
+        {
+            Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/GetPersonalizedScenarios");
+        }
+
+        var genericScenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
+        Scenarios.AddRange(genericScenarios);
+
         IsPageLoaded = true;
     }
 

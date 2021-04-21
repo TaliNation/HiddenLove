@@ -18,11 +18,6 @@
             <Textbox Placeholder="Recherche..." @bind-BindingValue="Search" />
         </div>
 
-        <div class="choose-date">
-            <span>Sélectionnez une date :</span>
-            <Datebox @bind-BindingValue="EventDate" />
-            <strong>@Message</strong>
-        </div>
         <span>Sélectionnez un scénario :</span>
 
         @if (IsPageLoaded)
@@ -40,7 +35,7 @@
                         </div>
                         <div class="btn-validation">
                             <button hidden="@ToggleButton(scenario.Id)" class="btn btn-primary" data-toggle="modal"
-                        data-target="#scenario-modal">Choisir</button>
+                        data-target="#date-modal">Choisir</button>
                         </div>
                     </div>
                     i++;
@@ -53,6 +48,23 @@
         }
 
         <!-- Modal -->
+        <div class="modal fade" id="date-modal" tabindex="-1" aria-labelledby="date-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="choose-date">
+                            <span>Sélectionnez une date :</span>
+                            <Datebox @bind-BindingValue="EventDate" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" hidden="@IsConfirmedButtonHidden" data-toggle="modal" data-target="#scenario-modal"
+                            class="btn btn-secondary" data-dismiss="modal">Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="scenario-modal" tabindex="-1" aria-labelledby="scenario-modal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -76,6 +88,9 @@
 
 
 @code {
+
+    private bool IsConfirmedButtonHidden => !EventDate.HasValue;
+
     private bool HideButton { get; set; } = true;
 
     private bool ToggleButton(int id)
@@ -93,9 +108,8 @@
     private string Search { get; set; } = "";
 
     private DateTime? EventDate { get; set; } = null;
-    private int? ScenarioTemplateId { get; set; } = null;
 
-    private string Message { get; set; } = "";
+    private int? ScenarioTemplateId { get; set; } = null;
 
     private string HighlightScenarioCard(int id)
     {
@@ -111,12 +125,6 @@
 
     private void SelectScenarioTemplate(int id)
     {
-        if (EventDate == null)
-        {
-            Message = "Veuillez sélectionner une date avant de sélectionner un scénario.";
-            return;
-        }
-        Message = null;
         ScenarioTemplateId = id;
         Js.Log(id);
     }
@@ -125,13 +133,11 @@
     {
         if (ScenarioTemplateId == null)
         {
-            Message = "Veuillez sélectionner un scénario.";
             return;
         }
 
         if (EventDate == null)
         {
-            Message = "Veuillez sélectionner une date avant de sélectionner un scénario.";
             return;
         }
 

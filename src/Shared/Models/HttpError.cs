@@ -6,7 +6,7 @@ namespace HiddenLove.Shared.Models
     {
         public HttpStatusCode StatusCode { get; init; }
         public string Message { get; init; }
-        
+
         public HttpError(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
         {
             StatusCode = statusCode;

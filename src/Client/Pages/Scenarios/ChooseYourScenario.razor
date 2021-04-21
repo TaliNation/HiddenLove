@@ -126,7 +126,6 @@
     private void SelectScenarioTemplate(int id)
     {
         ScenarioTemplateId = id;
-        Js.Log(id);
     }
 
     private async void ConfirmScenario()
@@ -146,8 +145,6 @@
             IdScenario = ScenarioTemplateId.GetValueOrDefault(0),
             EventDate = EventDate.GetValueOrDefault(DateTime.Now)
         };
-
-        Js.Log(req);
 
         int idCreatedScenario = await Http.PostResultAsync<SelectedScenarioData, int>("ScenarioSelection/BookScenario", req);
 

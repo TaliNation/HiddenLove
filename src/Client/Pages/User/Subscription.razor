@@ -1,22 +1,46 @@
 @page "/home/subscription"
 @layout NavbarLayout
+@inject HttpWrapper Http
+@inject JsHelper Js
+@inject NavigationManager NavManager
 
 <div class="container">
     <div class="row">
         <div class="col-4">
             <p>Basique</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" />
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)"/>
         </div>
         <div class="col-4">
             <p>Sérieux</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" />
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)"/>
         </div>
         <div class="col-4">
             <p>Pro</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" />
+            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)"/>
         </div>
     </div>
 </div>
+
+@code {
+    private ContentStatus PageStatus { get; set; } = ContentStatus.Loading;
+    private int? Privilege { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Http.Authenticate(Js, NavManager);
+        dynamic res = await Http.GetResultAsync<object>("Users/GetCurrentUser");
+        Privilege = res.id_Privilege;
+
+        PageStatus = ContentStatus.Ok;
+    }
+
+    private string ColorButton(int? privilegeNeeded)
+    {
+        return Privilege == privilegeNeeded ? "success" : "primary";
+    }
+
+    
+}

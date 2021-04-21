@@ -44,7 +44,7 @@
         }
         AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();
 
-        Js.WriteCookie("token", loginToken.Token, 60 * 60);
+        Js.WriteCookie("token", loginToken.Token, 60 * 60 * 24);
 
         NavManager.NavigateTo("/home");
     }

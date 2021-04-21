@@ -61,5 +61,7 @@ namespace HiddenLove.Server.Controllers
         {
             return Ok(CurrentUser);
         }
+
+        
     }
 }

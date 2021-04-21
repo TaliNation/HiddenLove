@@ -28,7 +28,7 @@ namespace HiddenLove.Server.Controllers
             var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
 
             IEnumerable<ScenarioTemplate> entities = dbAccess.GetAll<int, ScenarioTemplate>();
-            List<ScenarioSelectionData> res = entities.Select(x => new ScenarioSelectionData {
+            List<ScenarioSelectionData> res = entities.Where(x => !x.Id_User.HasValue).Select(x => new ScenarioSelectionData {
                 Id = x.Id,
                 Title = x.Title,
                 Description = x.Description,

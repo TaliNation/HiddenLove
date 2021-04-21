@@ -11,5 +11,6 @@ namespace HiddenLove.DataAccess.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+		public int? Id_User { get; set; }
     }
 }

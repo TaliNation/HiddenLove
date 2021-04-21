@@ -15,6 +15,8 @@ namespace HiddenLove.Server.Controllers
     [Route("[controller]")]
     public class ScenarioCreationController : ControllerBase
     {
+        private User CurrentUser => (User)HttpContext.Items["User"];
+
         /// <summary>
         /// Récupération de tous les types d'étapes pour les assembler dans la création des scénarios
         /// </summary>
@@ -61,10 +63,14 @@ namespace HiddenLove.Server.Controllers
         public IActionResult NewScenario(ScenarioCreation model)
         {
             var dbAccess = new Repository(new ScenarioTemplatesTableAccess());
+
+            int? idUser = CurrentUser.Id_Privilege == (int)CustomerTier.Admin ? null : CurrentUser.Id;
+
             int scenarioTemplateId = dbAccess.Insert<int, ScenarioTemplate>(new ScenarioTemplate {
                 Image = model.Image,
                 Title = model.Title,
-                Description = model.Description
+                Description = model.Description,
+                Id_User = idUser
             });
 
             dbAccess.SetTableAccess(new ScenarioTemplatesStepTemplatesTableAccess());

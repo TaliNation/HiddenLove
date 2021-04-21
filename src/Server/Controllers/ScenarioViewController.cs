@@ -59,21 +59,6 @@ namespace HiddenLove.Server.Controllers
         [Produces("application/json")]
         public IActionResult GetUserList()
         {
-            // var dbAccess = new Repository(new FullScenarioTableAccess());
-
-            // IEnumerable<FullScenario> entities = dbAccess.GetByColumn<int, FullScenario>("Id_User", CurrentUser.Id);
-
-            // if(!entities.Any())
-            //     return NotFound();
-
-            // var res = entities.Select(x => new UserScenarioData {
-            //     Id = x.Id_Scenario,
-            //     Title = x.ScenarioTitle,
-            //     EventDate = x.ScenarioEventDate
-            // }).DistinctBy(x => x.Id);
-
-            // return Ok(res);
-
             var dbAccess = new Repository(new ScenarioScheduleTableAccess());
             IEnumerable<ScenarioSchedule> entities = dbAccess.GetByColumn<int, ScenarioSchedule>("IdUser", CurrentUser.Id);
 

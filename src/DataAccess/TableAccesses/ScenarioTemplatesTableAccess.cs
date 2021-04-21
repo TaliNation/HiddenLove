@@ -14,7 +14,8 @@ namespace HiddenLove.DataAccess.TableAccesses
             return QueryFactory.Query(TableName).InsertGetId<TKey>(new {
                 Title = obj.Title,
                 Description = obj.Description,
-				Image = obj.Image
+				Image = obj.Image,
+				Id_User = obj.Id_User
             });
         }
     }

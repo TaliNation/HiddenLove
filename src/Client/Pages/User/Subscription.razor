@@ -1,7 +1,6 @@
 @page "/home/subscription"
 @layout NavbarLayout
 @inject HttpWrapper Http
-@inject JsHelper Js
 @inject NavigationManager NavManager
 
 <div class="container">
@@ -32,7 +31,7 @@
     {
         PageStatus = ContentStatus.Loading;
 
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
         dynamic res = await Http.GetResultAsync<object>("Users/GetCurrentUser");
         Privilege = res.id_Privilege;
 

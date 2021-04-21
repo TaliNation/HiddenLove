@@ -1,6 +1,5 @@
 @page "/scenario/view/{IdScenario:int}"
 @inject HttpWrapper Http
-@inject JsHelper Js
 @inject NavigationManager NavManager
 @layout NavbarLayout
 
@@ -92,7 +91,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
 
         ScenarioDetails = await Http.GetResultAsync<ScenarioDetailsData>("ScenarioView/Details/" + IdScenario);
         HttpResponseMessage res = await Http.GetAsync("ScenarioView/Details/" + IdScenario);

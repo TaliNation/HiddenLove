@@ -2,6 +2,7 @@
 @inject HttpWrapper Http
 @inject JsHelper Js
 @inject NavigationManager NavManager
+@inject ILocalStorageService LocalStorage
 
 <div class="page">
     @if(NavBarStatus == ContentStatus.Ok)
@@ -63,17 +64,16 @@
     {
         NavBarStatus = ContentStatus.Loading;
 
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
 
         User = await Http.GetResultAsync<object>("Users/GetCurrentUser");
-        Js.Log(User);
 
         NavBarStatus = ContentStatus.Ok;
     }
 
     private void Disconnect()
     {
-        Js.DeleteCookie("token");
+        LocalStorage.RemoveItemAsync(GlobalVariables.TokenCookieName);
         NavManager.NavigateTo("/login");
     }
 }

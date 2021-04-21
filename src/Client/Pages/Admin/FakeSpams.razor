@@ -107,7 +107,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
 
         Sender = "";
         Subject = "";

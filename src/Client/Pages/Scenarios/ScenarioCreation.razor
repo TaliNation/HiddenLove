@@ -88,7 +88,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
         AvailableSteps = await Http.GetResultAsync<List<KeyValuePair<string, string>>>("ScenarioCreation/Steps");
         Console.WriteLine("App is ready to use");
     }

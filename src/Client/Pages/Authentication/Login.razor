@@ -33,7 +33,7 @@
         var request = new AuthenticationRequest
         {
             EmailAddress = EmailAddress,
-            Password = Password
+            Password = Password,
         };
 
         HttpResponseMessage res = await Http.PostAsync<AuthenticationRequest>("Users/authenticate", request);
@@ -41,6 +41,8 @@
         {
             HttpError error = await res.Content.ReadAsAsync<HttpError>();
             Js.LogError(error);
+            Message = "Mot de passe ou adresse mail incorrect.";
+            StateHasChanged();
             return;
         }
         AuthenticationResponse loginToken = await res.Content.ReadAsAsync<AuthenticationResponse>();

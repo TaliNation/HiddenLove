@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using HiddenLove.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -14,17 +15,21 @@ namespace HiddenLove.Client.Helpers
     public class HttpWrapper
     {
         public HttpClient Client;
+        private readonly NavigationManager NavManager;
+        private readonly ILocalStorageService LocalStorage;
 
-        public HttpWrapper(HttpClient client)
+        public HttpWrapper(HttpClient client, NavigationManager navManager, ILocalStorageService localStorage)
         {
             Client = client;
+            NavManager = navManager;
+            LocalStorage = localStorage;
         }
 
-        public async Task Authenticate(JsHelper js, NavigationManager navManager)
+        public async Task Authenticate()
         {
-            string res = await js.ReadCookie(GlobalVariables.TokenCookieName);
+            string res = await LocalStorage.GetItemAsync<string>(GlobalVariables.TokenCookieName);
             if(!AddJwtAuthentication(res))
-                navManager.NavigateTo("/login");
+                NavManager.NavigateTo("/login");
         }
 
         public bool AddJwtAuthentication(string token)

@@ -8,7 +8,7 @@ namespace HiddenLove.Shared.Models
         public string Title { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; } 
+        public DateTime? EndDate { get; set; }
         public bool IsFinished => EventDate < DateTime.Now.AddDays(1);
         public bool IsToday => EventDate == DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
     }

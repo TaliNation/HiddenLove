@@ -1,7 +1,6 @@
 @page "/scenario/select"
 @using HiddenLove.Shared.Models.ScenarioSelection
 @inject HttpWrapper Http
-@inject JsHelper Js
 @inject NavigationManager NavManager
 @layout NavbarLayout
 
@@ -118,7 +117,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
         Scenarios = await Http.GetResultAsync<List<ScenarioSelectionData>>("ScenarioSelection/AvailableScenarios");
         IsPageLoaded = true;
     }

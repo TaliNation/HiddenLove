@@ -1,7 +1,5 @@
 @page "/home"
 @inject HttpWrapper Http
-@inject JsHelper Js
-@inject NavigationManager NavManager
 @layout NavbarLayout
 
 <div class="home-clean">
@@ -78,7 +76,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Http.Authenticate(Js, NavManager);
+        await Http.Authenticate();
         UsedScenarios = await Http.GetResultAsync<List<UserScenarioData>>("ScenarioView/UserList");
 
         UsedScenarios ??= new List<UserScenarioData>();

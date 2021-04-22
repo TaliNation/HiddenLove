@@ -5,34 +5,37 @@
 @using HiddenLove.Client.Components.Subscription
 
 <div class="container sub-clean">
+    <div class="image">
+            <img src="img/logo.svg" class="illustration"/>
+    </div>
+    <h2>Choisissez l'abonnement qui vous correspond !</h2>
     <div class="row">
         <div class="col-md-4 col-12">
-            <SubscriptionCard Price="20d" OfferName="Simple" PrivilegeNeeded="CustomerTier.Basic" PrivilegeActual="@Privilege">
+            <SubscriptionCard Price="19.99d" OfferName="Simple" PrivilegeNeeded="CustomerTier.Basic" PrivilegeActual="@Privilege">
                 <ul>
                     <li>Scénarios génériques</li>
+                    <li>Agenda des excuses</li>
                     <li>Faux spams</li>
-                    <li>Calandrier des excuses</li>
+                </ul>
+            </SubscriptionCard>
+        </div>
+
+        <div class="col-md-4 col-12">
+            <SubscriptionCard Price="29.99d" OfferName="Complet" PrivilegeNeeded="CustomerTier.Normal" PrivilegeActual="@Privilege">
+                <ul>
+                    <li>Tous les avantages de l'offre "Simple"</li>
+                    <li>Scénarios personnalisés</li>
                     <li>Chat textuel</li>
                 </ul>
             </SubscriptionCard>
         </div>
 
         <div class="col-md-4 col-12">
-            <SubscriptionCard Price="30d" OfferName="Complete" PrivilegeNeeded="CustomerTier.Normal" PrivilegeActual="@Privilege">
+            <SubscriptionCard Price="44.99d" OfferName="Pro" PrivilegeNeeded="CustomerTier.Pro" PrivilegeActual="@Privilege">
                 <ul>
-                    <li>Tous les avantages de l'offre "Simple"</li>
-                    <li>Scénarios personnalisés</li>
-                </ul>
-            </SubscriptionCard>
-        </div>
-
-        <div class="col-md-4 col-12">
-            <SubscriptionCard Price="50d" OfferName="Pro" PrivilegeNeeded="CustomerTier.Pro" PrivilegeActual="@Privilege">
-                <ul>
-                    <li>Tous les avantages de l'offre "Complete"</li>
-                    <li>Scénarios précis</li>
-                    <li>Faux acteurs</li>
-                    <li>Appels téléphoniques</li>
+                    <li>Tous les avantages de l'offre "Complet"</li>
+                    <li>Scénarios sur mesure</li>
+                    <li>Implication de personnes tiers</li>
                 </ul>
             </SubscriptionCard>
         </div>

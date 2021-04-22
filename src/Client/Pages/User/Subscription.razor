@@ -3,22 +3,70 @@
 @inject HttpWrapper Http
 @inject NavigationManager NavManager
 
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <p>Basique</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)" OnClick="(() => ChangePrivilege((int)CustomerTier.Basic))" />
+<div class="sub-clean">
+    <div class="sub-cards">
+        <div class="sub-card">
+            <div class="sub-card-container">
+                <div class="sub-card-name"><p>Abonnement simple</p></div>
+                <div class="sub-card-desc">
+                    <p>
+                        <p><br></p>
+                        Appels téléphoniques<br>
+                        Achats discrets<br>
+                        Scénario simple<br>
+                        <br>
+                    </p>
+                </div>
+                <div class="sub-card-price"><p><sup>€</sup>20 /mois</p></div>
+                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
+            </div>
+
+            <footer>
+                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)" OnClick="(() => ChangePrivilege((int)CustomerTier.Basic))" />
+                <div class="sub-button"><a  class="sub-card-button">Buy</a></div>
+            </footer>
         </div>
-        <div class="col-4">
-            <p>Sérieux</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)" OnClick="(() => ChangePrivilege((int)CustomerTier.Normal))" />
+
+        <div class="sub-card">
+            <div class="sub-card-container">
+                <div class="sub-card-name"><p>Abonnement simple+</p></div>
+                <div class="sub-card-desc">
+                    <p>
+                        <p style="font-style:bold;">Abonnement simple :</p><br>
+                        + convocation personnalisée <br>
+                        + invitation personalisé<br>
+                        + Scénario plus élaboré<br>
+                    </p>
+                </div>
+                <div class="sub-card-price"><p><sup>€</sup>30 /mois</p></div>
+                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
+            </div>
+
+            <footer>
+                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)" OnClick="(() => ChangePrivilege((int)CustomerTier.Normal))" />
+                <div class="sub-button"><a  class="sub-card-button">Buy</a></div>
+            </footer>
         </div>
-        <div class="col-4">
-            <p>Pro</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)" OnClick="(() => ChangePrivilege((int)CustomerTier.Pro))" />
+
+        <div class="sub-card">
+            <div class="sub-card-container">
+                <div class="sub-card-name"><p>Abonnement + +</p></div>
+                <div class="sub-card-desc">
+                    <p>
+                         <p style="font-style:bold;">Abonnement simple + :</p><br>
+                        + pack concours <br>
+                        + affichage de la carte<br>
+                        + Scénario complet<br>
+                    </p>
+                </div>
+                <div class="sub-card-price"><p><sup>€</sup>50 /mois</p></div>
+                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
+            </div>
+
+            <footer>
+                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)" OnClick="(() => ChangePrivilege((int)CustomerTier.Pro))" />
+                <div class="sub-button"><a href="" class="sub-card-button">Buy</a></div>
+            </footer>
         </div>
     </div>
 </div>

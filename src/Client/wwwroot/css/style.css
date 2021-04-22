@@ -1,0 +1,102 @@
+/* Mise en forme des éléments de la page subscription */
+.sub-clean {
+    background: white;
+    display: flex;
+    padding-bottom: 20px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+.sub-cards{
+    /* display: flex;
+    flex-direction: row;
+	background-color: teal;
+	width: 100em;
+	height: 40em;*/
+	justify-content: space-around;
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 15%;
+	margin-left: 15%;
+} 
+
+.sub-card {
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+	margin-left: 5%;
+	width: 20em;
+	height: 20em ;
+	background-color: #ffffff; */
+	margin-right: 50px;
+	margin-left: 50px;
+	width: 18rem;
+	margin-top: 15px;
+	cursor: pointer;
+	background-color: white;
+	border-radius: 10px;
+	border-color: #f4476b;
+	border-style:solid;
+}
+
+.sub-card:hover {
+	background-color: #e1ecf7;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+	border-color: #dd2950;
+}
+
+.sub-card-container{
+    padding: 2px 16px;
+}
+
+/*  TODO : retirer quand bouton remplacer   */
+.sub-card-button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f4476b;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f4476b;
+	box-shadow:inset 0px 1px 0px 0px #f4476b;
+	background-color:#f4476b;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dd2950;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #dd2950;
+}
+.sub-card-button:hover {
+	background-color:#dd2950;
+}
+.sub-card-button:active {
+	position:relative;
+	top:1px;
+}
+/************************************************************/
+.sub-card-container{
+	flex-direction: row;
+}
+
+.sub-card-name{
+	text-align: center;
+    font-weight: bold;
+}
+.sub-card-desc{
+	text-align: justify;
+	font-style: italic;
+}
+.sub-card-price{
+	text-align: center;
+}
+.sub-card-renew{
+	text-align: center;
+	font-size: xx-small;
+}
+
+.sub-card-button{
+	margin-left: 37%;
+}

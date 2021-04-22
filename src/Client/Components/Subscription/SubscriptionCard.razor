@@ -1,0 +1,43 @@
+@inject HttpWrapper Http
+@inject NavigationManager NavManager
+
+<div class="sub-card">
+    <div class="sub-card-name">
+        <h1>@OfferName</h1>
+    </div>
+    <div class="sub-card-desc">
+        @ChildContent
+    </div>
+    <div class="sub-card-price">
+        <h3>@(Price)€/mois TTC</h3>
+    </div>
+    <div class="sub-button">
+        <Button 
+            Text="@((int)PrivilegeNeeded == PrivilegeActual ? "Déjà membre" : "Choisir")" 
+            OnClick="(() => ChangePrivilege((int)CustomerTier.Pro))" 
+            Disabled="@((int)PrivilegeNeeded == PrivilegeActual || PrivilegeActual == (int)CustomerTier.Admin)" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public double Price { get; set; } = 0d;
+
+    [Parameter]
+    public string OfferName { get; set; } = "";
+
+    [Parameter]
+    public CustomerTier PrivilegeNeeded { get; set; } = CustomerTier.None;
+
+    [Parameter]
+    public int? PrivilegeActual { get; set; } = null;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null;
+
+    private async void ChangePrivilege(int? newPrivilege)
+    {
+        await Http.Client.PutAsJsonAsync("Users/ChangePrivilege", newPrivilege);
+        NavManager.NavigateTo("/home", true);
+    }
+}

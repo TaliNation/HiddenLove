@@ -1,4 +1,4 @@
-<button class="btn btn-@Type" @onclick="OnClickCallback">@Text</button>
+<button class="btn btn-@Type" @onclick="OnClickCallback" disabled="@Disabled" >@Text</button>
 
 @code {
     [Parameter]
@@ -6,6 +6,9 @@
 
     [Parameter]
     public string Type { get; set; } = "primary";
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
 
     [Parameter]
     public EventCallback OnClick { get; set; }

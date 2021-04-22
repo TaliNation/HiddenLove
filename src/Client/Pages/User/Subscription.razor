@@ -2,74 +2,44 @@
 @layout NavbarLayout
 @inject HttpWrapper Http
 @inject NavigationManager NavManager
+@using HiddenLove.Client.Components.Subscription
 
-<div class="sub-clean">
-    <div class="sub-cards">
-        <div class="sub-card">
-            <div class="sub-card-container">
-                <div class="sub-card-name"><p>Abonnement simple</p></div>
-                <div class="sub-card-desc">
-                    <p>
-                        <p><br></p>
-                        Appels téléphoniques<br>
-                        Achats discrets<br>
-                        Scénario simple<br>
-                        <br>
-                    </p>
-                </div>
-                <div class="sub-card-price"><p><sup>€</sup>20 /mois</p></div>
-                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
-            </div>
-
-            <footer>
-                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Basic)" OnClick="(() => ChangePrivilege((int)CustomerTier.Basic))" />
-                <div class="sub-button"><a  class="sub-card-button">Buy</a></div>
-            </footer>
+<div class="container sub-clean">
+    <div class="row">
+        <div class="col-md-4 col-12">
+            <SubscriptionCard Price="20d" OfferName="Simple" PrivilegeNeeded="CustomerTier.Basic" PrivilegeActual="@Privilege">
+                <ul>
+                    <li>Scénarios génériques</li>
+                    <li>Faux spams</li>
+                    <li>Calandrier des excuses</li>
+                    <li>Chat textuel</li>
+                </ul>
+            </SubscriptionCard>
         </div>
 
-        <div class="sub-card">
-            <div class="sub-card-container">
-                <div class="sub-card-name"><p>Abonnement simple+</p></div>
-                <div class="sub-card-desc">
-                    <p>
-                        <p style="font-style:bold;">Abonnement simple :</p><br>
-                        + convocation personnalisée <br>
-                        + invitation personalisé<br>
-                        + Scénario plus élaboré<br>
-                    </p>
-                </div>
-                <div class="sub-card-price"><p><sup>€</sup>30 /mois</p></div>
-                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
-            </div>
-
-            <footer>
-                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Normal)" OnClick="(() => ChangePrivilege((int)CustomerTier.Normal))" />
-                <div class="sub-button"><a  class="sub-card-button">Buy</a></div>
-            </footer>
+        <div class="col-md-4 col-12">
+            <SubscriptionCard Price="30d" OfferName="Complete" PrivilegeNeeded="CustomerTier.Normal" PrivilegeActual="@Privilege">
+                <ul>
+                    <li>Tous les avantages de l'offre "Simple"</li>
+                    <li>Scénarios personnalisés</li>
+                </ul>
+            </SubscriptionCard>
         </div>
 
-        <div class="sub-card">
-            <div class="sub-card-container">
-                <div class="sub-card-name"><p>Abonnement + +</p></div>
-                <div class="sub-card-desc">
-                    <p>
-                         <p style="font-style:bold;">Abonnement simple + :</p><br>
-                        + pack concours <br>
-                        + affichage de la carte<br>
-                        + Scénario complet<br>
-                    </p>
-                </div>
-                <div class="sub-card-price"><p><sup>€</sup>50 /mois</p></div>
-                <div class="sub-card-renew"><p>Facturé chaque mois</p></div>
-            </div>
-
-            <footer>
-                <Button Text="Choisir" Type="@ColorButton((int)CustomerTier.Pro)" OnClick="(() => ChangePrivilege((int)CustomerTier.Pro))" />
-                <div class="sub-button"><a href="" class="sub-card-button">Buy</a></div>
-            </footer>
+        <div class="col-md-4 col-12">
+            <SubscriptionCard Price="50d" OfferName="Pro" PrivilegeNeeded="CustomerTier.Pro" PrivilegeActual="@Privilege">
+                <ul>
+                    <li>Tous les avantages de l'offre "Complete"</li>
+                    <li>Scénarios précis</li>
+                    <li>Faux acteurs</li>
+                    <li>Appels téléphoniques</li>
+                </ul>
+            </SubscriptionCard>
         </div>
     </div>
 </div>
+
+
 
 @code {
     private ContentStatus PageStatus { get; set; } = ContentStatus.Loading;
@@ -86,9 +56,9 @@
         PageStatus = ContentStatus.Ok;
     }
 
-    private string ColorButton(int? privilegeNeeded)
+    private bool IsActualSubscription(int? privilegeNeeded)
     {
-        return Privilege == privilegeNeeded ? "success" : "primary";
+        return Privilege == privilegeNeeded;
     }
 
     private async void ChangePrivilege(int? newPrivilege)

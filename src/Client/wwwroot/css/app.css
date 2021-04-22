@@ -179,15 +179,6 @@ a,
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   /* Flexbox afin d'aligner nos éléments */
 }
-.register-clean .register-form .btn-primary {
-  background: #f4476b;
-  outline: none !important;
-  border: 1px solid #f4476b;
-  box-shadow: none;
-  border-radius: 20px;
-  padding: 10px;
-  font-weight: bold;
-}
 .register-clean .register-form .password-warning {
   font-size: 12px;
   font-style: italic;
@@ -464,10 +455,6 @@ a,
   padding-left: 85px;
   padding-right: 85px;
 }
-.choose-clean .choose-form .fade .modal-dialog .modal-content .modal-footer .btn-secondary:hover,
-.choose-clean .choose-form .fade .modal-dialog .modal-content .modal-footer .btn-secondary:active {
-  background: #dd2950;
-}
 .choose-clean .choose-form .fade .modal-dialog .modal-content .modal-footer .btn-secondary:active {
   transform: translateY(1px);
 }
@@ -653,6 +640,18 @@ a,
 .view-clean .view-description {
   text-align: justify;
   padding-bottom: 5px;
+}
+
+.btn-primary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  padding: 10px;
+  font-weight: bold;
+}
+.btn-primary:hover, .btn-primary:active {
+  background: #dd2950;
 }
 
 /*# sourceMappingURL=app.css.map */

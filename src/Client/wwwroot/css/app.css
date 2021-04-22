@@ -668,6 +668,9 @@ a,
   text-align: center;
   padding-bottom: 10px;
 }
+.container .row .col-12 {
+  padding: 15px;
+}
 .container .row .col-12 .btn-primary {
   padding-left: 12%;
   padding-right: 12%;

@@ -4,7 +4,6 @@
 @inject JsHelper Js
 @inject NavigationManager NavManager
 @layout NavbarLayout
-<p> PA test</p>
 
 <div class="creation-clean">
     <div class="creation-form">
@@ -16,26 +15,29 @@
         <h2>Création d'un scénario personnalisé</h2>
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-6">
                 <Textbox Placeholder="Titre du scénario" @bind-BindingValue="Title" />
             </div>
-            <div class="col-6">
-                <Textarea Placeholder="Description du scénario" @bind-BindingValue="Description" />
-            </div>
-            <div class="col-3">
+            <div class="col-md-6">
                 <Textbox Placeholder="Lien de l'image" @bind-BindingValue="Image" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <Textarea Placeholder="Description du scénario" @bind-BindingValue="Description" Rows="5" />
             </div>
         </div>
         @foreach (var step in Steps.Select((e, i) => new { Step = e, Index = i }))
         {
-            <div class="row">
-                <div class="col-3">
+            <div class="border p-1 row">
+                <div class="col-md-3">
                     <SelectList Items="AvailableSteps" @bind-BindingValue="Steps[step.Index].StepIdAsString" />
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                     <Timebox @bind-BindingValue="Steps[step.Index].StartTime" />
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                     <Timebox @bind-BindingValue="Steps[step.Index].EndTime" />
                 </div>
                 <div class="change-creation" @onclick="@(x => RemoveStep(step.Index))">

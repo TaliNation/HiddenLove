@@ -11,6 +11,16 @@ a,
   color: #007bff;
 }
 
+.image {
+  text-align: center;
+  padding-bottom: 20px;
+}
+.image .illustration {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+}
+
 .container .row .col-12 .btn-primary {
   background: #f4476b;
   outline: none !important;
@@ -652,6 +662,18 @@ a,
 }
 .btn-primary:hover, .btn-primary:active {
   background: #dd2950;
+}
+
+.container h2 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.container .row .col-12 {
+  padding: 15px;
+}
+.container .row .col-12 .btn-primary {
+  padding-left: 12%;
+  padding-right: 12%;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -17,6 +17,7 @@ using HiddenLove.DataAccess.Entities;
 using System.Linq;
 using HiddenLove.Shared.Models.MailService;
 using HiddenLove.MailService.Jobs;
+using System.ComponentModel.DataAnnotations;
 
 namespace HiddenLove.MailService
 {
@@ -65,7 +66,11 @@ namespace HiddenLove.MailService
 
 			var dbAccess = new Repository(new FullScenarioTableAccess());
 			var entities = dbAccess.GetAll<int, FullScenario>();
-			var mailInfos = entities.Where(x => x.StartDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")).Select(x => new MailInfo {
+			var mailInfos = entities.Where(
+				x => x.StartDate.ToString("yyyy-MM-dd") == DateTime.Now.ToString("yyyy-MM-dd")
+				&& x.StartDate > DateTime.Now.AddMinutes(5)
+				&& new EmailAddressAttribute().IsValid(x.EmailAddress)
+			).Select(x => new MailInfo {
 				EmailAddress = x.EmailAddress,
 				SendTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd") + " " + x.StartDate.ToString("HH:mm")),
 				MailSender = x.MailSender,
@@ -104,14 +109,12 @@ namespace HiddenLove.MailService
 
 				await scheduler.ScheduleJob(job, trigger);
 
-				Console.WriteLine($"{mailInfo.EmailAddress} {mailInfo.SendTime}");
-
 				i++;
 			}
 
 			Console.WriteLine("Scheduler ready! Mails to send today:");
 			foreach(MailInfo mailInfo in mailInfos)
-				Console.WriteLine($"{mailInfo.MailSubject}: {mailInfo.SendTime:HH:mm}");
+				Console.WriteLine($"{mailInfo.EmailAddress} {mailInfo.SendTime}");
 		}
     }
 }

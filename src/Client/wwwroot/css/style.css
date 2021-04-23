@@ -43,68 +43,25 @@
 .acc-clean{
     background-color: #ffffff;
 }
-/***********************************************/
-/*              bouton a replace               */
-/***********************************************/
-.acc-button-connexion {
-	box-shadow:inset 0px 1px 0px 0px #fbafe3;
-	background:linear-gradient(to bottom, #ff5bb0 5%, #ef027d 100%);
-	background-color:#ff5bb0;
-	border-radius:42px;
-	border:1px solid #ee1eb5;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:10px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #c70067;
-    margin-left: 25%;
-    margin-top: 1%;
-}
-.acc-button-connexion:hover {
-	background:linear-gradient(to bottom, #ef027d 5%, #ff5bb0 100%);
-	background-color:#ef027d;
-}
-.acc-button-connexion:active {
-	position:relative;
-	top:1px;
+
+/**********************/
+/*		btn navbar    */
+/**********************/
+.navbtn{
+	margin-left: 8%;
+	margin-top: 1%;
+	font-size: 20px;
 }
 
-.acc-button-signin {
-	box-shadow:inset 0px 1px 0px 0px #fbafe3;
-	background:linear-gradient(to bottom, #ff5bb0 5%, #ef027d 100%);
-	background-color:#ff5bb0;
-	border-radius:42px;
-	border:1px solid #ee1eb5;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:10px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #c70067;
-    margin-left: 42%;
-}
-.acc-button-signin:hover {
-	background:linear-gradient(to bottom, #ef027d 5%, #ff5bb0 100%);
-	background-color:#ef027d;
-}
-.acc-button-signin:active {
-	position:relative;
-	top:1px;
-}
-/***********************************************/
-/***********************************************/
-.acc-hiddenLove{
-	width: 600px;
-	margin-left: 20%;
+.navbtn:hover{
+	text-decoration: underline;
+	cursor: pointer;
 }
 
+
+/*********************/
+/* 	slogan et bg 	 */
+/*********************/
 
 
 .acc-bg-image {
@@ -145,239 +102,92 @@
 }
 .acc-haut-slogan{
     
-    margin : 0;
+    /* margin : 0; */
     padding:  0;
-    font-size: 55px;
+    font-size:3vw;
     font-family: "Eras ITC";
     font-weight: medium;
-    margin-left: 0%;
-    margin-top: 2%;
+    /* margin-left: 0%;
+    margin-top: 2%; */
 }
 
 .acc-bas-slogan{
-    margin : 0;
+    /* margin : 0; */
     padding:  0;
-    font-size: 80px;
+    font-size:5vw;
     font-family: "Eras ITC";
     font-weight: bold;
-    margin-left: 0%;
+    /* margin-left: 0%; */
 }
 
-.acc-descriptif-1{
-	margin : 0;
-    padding:  0;
-    font-size: 25px;
-    font-family: "Helvetica Neue";
-    margin-left: 25%;
-    margin-top: 2%;
+/***************************/
+/*		txt description    */
+/***************************/
+
+
+@media screen and (min-width: 601px) {
+	.acc-descriptif-1{
+		margin : 0;
+		padding:  0;
+		font-size: 25px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		margin-left: 25%;
+		margin-top: 2%;
+	}
+  }
+  
+@media screen and (max-width: 600px) {
+	.acc-descriptif-1{
+		margin : 0;
+		padding:  0;
+		font-size: 15px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		margin-left: 25%;
+		margin-top: 2%;
+	}
 }
 
-.acc-title-desc-div{
+/************************/
+/*		txt et img		*/
+/************************/
+
+.acc-img{
+	max-width: 50%;
+}
+
+.acc-tab{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.acc-title .acc-descriptif{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #323742;
 }
 
-.acc-title{
-	margin : 0;
-    padding:  0;
-    font-size: 40px;
-    margin-top: 4%;
+@media screen and (min-width: 601px) {
+	.acc-title{
+		font-size: 45px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+  }
+  
+@media screen and (max-width: 600px) {
+	.acc-title{
+		font-size: 35px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
 }
 
-.acc-descriptif{
-	margin : 0;
-    padding:  0;
-    font-size: 25px;
-    margin-top: 2%;
-}
-
-.acc-img-1{
-	width: 40%;
-	height: auto;
-	margin-left: 50%;
-}
-
-.acc-img-2{
-	width: 90%;
-	height: auto;
-}
-
-.acc-img-3{
-	width: 45%;
-	height: auto;
-	margin-left: 40%;
-}
-
-.acc-img-4{
-	width: 60%;
-	height: auto;
-}
-
-.acc-tab-1{
-	display: flex;
-	flex-direction: row;
-	margin-left: 10%;
-	margin-top: 8%;
-}
-
-.acc-tab-2{
-	display: flex;
-	flex-direction: row;
-	margin-left: 10%;
-	margin-top: 8%;
-}
-
-.acc-tab-3{
-	display: flex;
-	flex-direction: row;
-	margin-left: 10%;
-	margin-top: 8%;
-}
-
-.acc-tab-4{
-	display: flex;
-	flex-direction: row;
-	margin-left: 10%;
-	margin-top: 8%;
-}
-
-.acc-sous-tab-1{
-	display: flex;
-	flex-direction: column;
-	
-}
-
-.acc-sous-tab-2{
-	display: flex;
-	flex-direction: column;
-	margin-right: 10%;
-	width: 100%;
-	margin-left: 20%;
-	margin-top: 5%;
-}
-
-.acc-sous-tab-3{
-	display: flex;
-	flex-direction: column;
-}
-
-.acc-sous-tab-4{
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 100px;
-}
-
-.acc-nav{
-	display: flex;
-	flex-direction: row;
-	margin-left: 15%;
-	position: relative;
-	/* height: 40px; */
-	width: 80%;
-
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #323742;
-
-	font: bold;
-	font-size: 20px;
-	
-}
-
-.acc-inscrire{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-
-
-.acc-apropos{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-
-
-.acc-abonnement{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-contact{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-twitter{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-facebook{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-cgu{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-politiques-vie-privee{
-	margin-left: 8%;
-	margin-top: 1%;
-}
-
-.acc-inscrire:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-apropos:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-abonnement:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-contact:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-twitter:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-facebook:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-cgu:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-politiques-vie-privee:hover{
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.acc-footer{
-	display: flex;
-	flex-direction: row;
-	margin-left: 4%;
-	position: relative;
-	/* height: 40px; */
-	width: 80%;
-
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #323742;
-
-	font: bold;
-	font-size: 15px;
+@media screen and (min-width: 601px) {
+	.acc-descriptif{
+		font-size: 25px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+  }
+  
+@media screen and (max-width: 600px) {
+	.acc-descriptif{
+		font-size: 15px;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
 }

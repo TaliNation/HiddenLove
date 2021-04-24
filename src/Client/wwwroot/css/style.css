@@ -1,8 +1,5 @@
 .sub-clean {
 	background-color: #ffffff;
-	max-width: 1400px;
-	padding-top: 1%;
-    padding-bottom: 1%;
 }
 
 .sub-card {
@@ -10,10 +7,8 @@
 	border-color: #f4476b;
 	border-style:solid;
 	padding: 10px;
-	height: 100%;
-	padding-top: 20px;
-	padding-bottom: 20px;
 }
+
 
 /************************************************************/
 .sub-card-container{
@@ -40,34 +35,138 @@
 .sub-button {
 	text-align: center;
 	width: 100%;
-	padding-left: 8%;
-    padding-right: 8%;
 }
 
-/****** FENETRE MODALE ******/
 
-dialog{ 
-	border-radius: 5px; 
-	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-	border : 1px;
-	padding: 0px;
-} 
-dialog::backdrop{ 
-	background-color: rgba(0, 0, 0, 0.6); 
-} 
-.btn-close{
-position : absolute;
-right:2px;
-top: 2px;
-
-color: #fff;
-font-weight: 300;
-font-family: Arial, sans-serif;
-
-background-color:red;
-border:1px solid black;
+/* page accueil : */
+.welcome-clean{
+    background-color: #ffffff;
 }
 
-.btn-close:hover{
-	box-shadow: 0px 0px 10px 7px rgba(0, 0, 255, .2);
+
+/**********************/
+/*		btn navbar    */
+/**********************/
+.navbtn{
+	margin-left: 8%;
+	margin-top: 1%;
+	font-size: 20px;
+}
+.navbtn:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/**********************/
+/*		footer        */
+/**********************/
+.footer-btn:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/*********************/
+/* 	slogan et bg 	 */
+/*********************/
+.welcome-bg-image {
+	background-image: url("../img/love.png");
+	filter: blur(8px);
+	-webkit-filter: blur(8px);
+	height: 500px;
+	margin-top: 50px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+  }
+
+  
+.welcome-slogan
+{
+	width: 90%;
+    /* height: 60%; */
+    flex-wrap: wrap;
+    color : white ;
+    align-items: center;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0, 0.4);
+	font-weight: bold;
+	border: 3px solid #f1f1f1;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	padding: 20px;
+	text-align: center;
+}
+.welcome-haut-slogan{
+    padding:  0;
+    font-size:3vw;
+    font-family: "Eras ITC";
+    font-weight: medium;
+}
+
+.welcome-bas-slogan{
+    padding:  0;
+    font-size:5vw;
+    font-family: "Eras ITC";
+    font-weight: bold;
+}
+
+/***************************/
+/*		txt description    */
+/***************************/
+
+.welcome-message{
+	margin : 0;
+	padding:  0;
+	font-size: 25px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 2%;
+}
+@media screen and (max-width: 600px) {
+	.welcome-message{
+		font-size: 15px;
+	}
+}
+
+/************************/
+/*		txt et img		*/
+/************************/
+
+.welcome-img{
+	margin-bottom: 20px !important;
+  	min-height: 310px;
+	max-width: 460px;
+	
+}
+
+.welcome-tab{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.welcome-title .welcome-descriptif{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+@media screen and (min-width: 601px) {
+	.welcome-title{
+		font-size: 45px;
+	}
+	.welcome-descriptif{
+		font-size: 25px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.welcome-title{
+		font-size: 35px;
+	}
+	.welcome-descriptif{
+		font-size: 15px;
+	}
 }

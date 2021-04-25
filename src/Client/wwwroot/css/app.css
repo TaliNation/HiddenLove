@@ -207,6 +207,15 @@ a,
 .register-clean .register-form .read-me .terms {
   font-size: 14.5px;
 }
+.register-clean .register-form .btn-primary {
+  background: #f4476b;
+  outline: none !important;
+  border: 1px solid #f4476b;
+  box-shadow: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: bold;
+}
 .register-clean .register-form .btn-primary:hover,
 .register-clean .register-form .btn-primary:active {
   background: #dd2950;
@@ -291,7 +300,6 @@ a,
 }
 .creation-clean .creation-form .btn-validation {
   text-align: center;
-  /*padding-top: 10px;*/
 }
 .creation-clean .creation-form .btn-validation .btn-primary {
   background: #f4476b;

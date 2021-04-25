@@ -230,6 +230,16 @@ a,
             }
         }
 
+        .btn-primary{
+            background: #f4476b;
+            outline: none !important;
+            border: 1px solid #f4476b;
+            box-shadow: none;
+            border-radius: 20px;
+            padding: 10px;
+            font-weight: bold;
+        }
+
         .btn-primary:hover,
         .btn-primary:active {
             background: #dd2950;
@@ -324,7 +334,6 @@ a,
 
         .btn-validation {
             text-align: center;
-            /*padding-top: 10px;*/
 
             .btn-primary {
                 background: #f4476b;
